@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="R9Q-S6-WUP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="R9Q-S6-WUP">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,12 +20,27 @@
                     <view key="view" contentMode="scaleToFill" id="LiO-ZE-2Pd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCi-1V-rRv" customClass="CustomView" customModule="PxSwiftExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="GCi-1V-rRv" firstAttribute="leading" secondItem="LiO-ZE-2Pd" secondAttribute="leading" id="4oc-FS-PLN"/>
+                            <constraint firstItem="Zdh-Lp-VJT" firstAttribute="top" secondItem="GCi-1V-rRv" secondAttribute="bottom" id="S7R-lH-gpX"/>
+                            <constraint firstAttribute="trailing" secondItem="GCi-1V-rRv" secondAttribute="trailing" id="eVk-bm-mo7"/>
+                            <constraint firstItem="GCi-1V-rRv" firstAttribute="top" secondItem="LiO-ZE-2Pd" secondAttribute="top" id="x0J-X6-5Pf"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="customView" destination="GCi-1V-rRv" id="vaD-vB-l1n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PaG-ez-Ted" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="165"/>
+            <point key="canvasLocation" x="72.799999999999997" y="163.26836581709148"/>
         </scene>
     </scenes>
 </document>

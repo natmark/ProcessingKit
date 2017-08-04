@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E7054AD71F34D36200EA0C0F /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD61F34D36200EA0C0F /* CustomView.swift */; };
 		E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E743310A1F34C6AB00D20482 /* AppDelegate.swift */; };
 		E743310D1F34C6AB00D20482 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E743310C1F34C6AB00D20482 /* ViewController.swift */; };
 		E74331101F34C6AB00D20482 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E743310E1F34C6AB00D20482 /* Main.storyboard */; };
@@ -55,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E7054ACF1F34CA9D00EA0C0F /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		E7054AD61F34D36200EA0C0F /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		E74331071F34C6AB00D20482 /* PxSwiftExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PxSwiftExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E743310A1F34C6AB00D20482 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E743310C1F34C6AB00D20482 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,12 +80,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E7054ACD1F34CA9D00EA0C0F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7054ACF1F34CA9D00EA0C0F /* SpriteKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E74330FE1F34C6AB00D20482 = {
 			isa = PBXGroup;
 			children = (
 				E743311C1F34C72100D20482 /* PxSwift.xcodeproj */,
 				E74331091F34C6AB00D20482 /* PxSwiftExample */,
 				E74331081F34C6AB00D20482 /* Products */,
+				E7054ACD1F34CA9D00EA0C0F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +111,7 @@
 			children = (
 				E743310A1F34C6AB00D20482 /* AppDelegate.swift */,
 				E743310C1F34C6AB00D20482 /* ViewController.swift */,
+				E7054AD61F34D36200EA0C0F /* CustomView.swift */,
 				E743310E1F34C6AB00D20482 /* Main.storyboard */,
 				E74331111F34C6AB00D20482 /* Assets.xcassets */,
 				E74331131F34C6AB00D20482 /* LaunchScreen.storyboard */,
@@ -214,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7054AD71F34D36200EA0C0F /* CustomView.swift in Sources */,
 				E743310D1F34C6AB00D20482 /* ViewController.swift in Sources */,
 				E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */,
 			);
@@ -290,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -334,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -348,7 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DEQGLB9PU4;
 				INFOPLIST_FILE = PxSwiftExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.PxSwiftExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -362,7 +376,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DEQGLB9PU4;
 				INFOPLIST_FILE = PxSwiftExample/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.PxSwiftExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
