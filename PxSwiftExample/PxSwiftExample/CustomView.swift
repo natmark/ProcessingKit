@@ -10,7 +10,7 @@ import Foundation
 import PxSwift
 
 class CustomView : PxView {
-    public var x = 10;
+    var x = 0
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setup(delegate: self)
@@ -29,12 +29,17 @@ extension CustomView : PxViewDelegate {
         rect(x: 200, y: 200, width: 100, height: 100)
         fill(UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.4))
         ellipse(x: 200, y: 200, width: 100, height: 100)
+        rect(x: 100, y: 300, width: 100, height: 100)
+        ellipse(x: 300, y: 400, width: 150, height: 100)
         noStroke()
-        fill(UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.8))
+        fill(UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0))
         ellipse(x: 300, y: 300, width: 100, height: 100)
+        rect(x: 10, y: 10, width: 100, height: 100)
     }
     func draw(){
-        x = x + 5
-        rect(x: CGFloat(x), y: 200, width: 10, height: 10)
+        print("draw")
+        x += 1
+        fill(UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0))
+        ellipse(x: CGFloat(x), y: 300, width: 100, height: 100)
     }
 }

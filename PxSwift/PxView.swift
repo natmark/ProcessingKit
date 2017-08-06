@@ -13,42 +13,34 @@ public protocol PxViewDelegate {
     func setup()
     func draw()
 }
-
-open class PxView : SKView {
+open class PxView : UIView {
     fileprivate var fill_ = UIColor.white
     fileprivate var stroke_ = UIColor.white
     fileprivate var strokeWeight_: CGFloat = 1.0
 
     public var pxViewDelegate : PxViewDelegate? = nil
-    lazy fileprivate var pxScene : SKScene = {
-        let pxScene = SKScene(size: self.frame.size)
-        pxScene.scaleMode = SKSceneScaleMode.aspectFit
-        pxScene.delegate = self
-        return pxScene
-    }()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        prepareScene()
     }
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        prepareScene()
     }
-    private func prepareScene(){
-        self.presentScene(pxScene)
-    }
+
     public func setup(delegate : PxViewDelegate){
         pxViewDelegate = delegate
-        pxViewDelegate?.setup()
-        self.showsFPS = true
-        self.showsNodeCount = true
+        _ = Timer.scheduledTimer(timeInterval: 1.0 / 60 , target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 }
 // udpate
-extension PxView: SKSceneDelegate {
-    public func update(_ currentTime: TimeInterval, for scene: SKScene) {
-        pxViewDelegate?.draw()
+extension PxView {
+    public func update(timer: Timer){
+        self.setNeedsDisplay()
+    }
+    fileprivate func setup(){
+        fill_ = UIColor.white
+        stroke_ = UIColor.white
+        strokeWeight_ = 1.0
     }
 }
 // readonly properties
@@ -85,25 +77,29 @@ extension PxView {
 }
 // drawing functions
 extension PxView {
+    open override func draw(_ rect: CGRect) {
+        setup()
+        pxViewDelegate?.setup()
+        pxViewDelegate?.draw()
+    }
     public func rect(x:CGFloat, y:CGFloat, width:CGFloat, height:CGFloat){
-        let position = self.convert(CGPoint(x: x , y: y + height), from: pxScene)
-
-        let square = SKShapeNode(rect: CGRect(x: position.x, y: position.y, width: width, height: height))
-        square.fillColor = fill_
-        square.strokeColor = stroke_
-        square.lineWidth = strokeWeight_
-        pxScene.addChild(square)
+        let g = UIGraphicsGetCurrentContext()
+        g?.setFillColor(fill_.cgColor)
+        g?.setStrokeColor(stroke_.cgColor)
+        g?.setLineWidth(strokeWeight_)
+        g?.stroke(CGRect(x: x, y: y, width: width, height: height))
+        g?.fill(CGRect(x: x, y: y, width: width, height: height))
     }
     public func ellipse(x:CGFloat, y:CGFloat, width:CGFloat, height:CGFloat){
-        let circle = SKShapeNode(ellipseOf: CGSize(width: width, height: height))
-        let position = self.convert(CGPoint(x: x, y: y), from: pxScene)
-        circle.position = position
-        circle.fillColor = fill_
-        circle.strokeColor = stroke_
-        circle.lineWidth = strokeWeight_
-        pxScene.addChild(circle)
+        let g = UIGraphicsGetCurrentContext()
+        g?.setFillColor(fill_.cgColor)
+        g?.setStrokeColor(stroke_.cgColor)
+        g?.setLineWidth(strokeWeight_)
+
+        g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+        g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
     }
     public func background(_ color: UIColor){
-        pxScene.backgroundColor = color
+        self.backgroundColor = color
     }
 }
