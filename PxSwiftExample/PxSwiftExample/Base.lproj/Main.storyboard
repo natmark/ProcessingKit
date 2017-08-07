@@ -21,21 +21,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GCi-1V-rRv" customClass="CustomView" customModule="PxSwiftExample" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TP6-nR-kyN" customClass="CustomView" customModule="PxSwiftExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="GCi-1V-rRv" firstAttribute="leading" secondItem="LiO-ZE-2Pd" secondAttribute="leading" id="4oc-FS-PLN"/>
-                            <constraint firstItem="Zdh-Lp-VJT" firstAttribute="top" secondItem="GCi-1V-rRv" secondAttribute="bottom" id="S7R-lH-gpX"/>
-                            <constraint firstAttribute="trailing" secondItem="GCi-1V-rRv" secondAttribute="trailing" id="eVk-bm-mo7"/>
-                            <constraint firstItem="GCi-1V-rRv" firstAttribute="top" secondItem="LiO-ZE-2Pd" secondAttribute="top" id="x0J-X6-5Pf"/>
+                            <constraint firstAttribute="trailing" secondItem="TP6-nR-kyN" secondAttribute="trailing" id="QOg-Gn-uT7"/>
+                            <constraint firstItem="TP6-nR-kyN" firstAttribute="leading" secondItem="LiO-ZE-2Pd" secondAttribute="leading" id="hfg-rh-sRo"/>
+                            <constraint firstItem="Zdh-Lp-VJT" firstAttribute="top" secondItem="TP6-nR-kyN" secondAttribute="bottom" id="hyR-yE-rX4"/>
+                            <constraint firstItem="TP6-nR-kyN" firstAttribute="top" secondItem="LiO-ZE-2Pd" secondAttribute="top" id="jN4-z0-2LM"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="customView" destination="GCi-1V-rRv" id="vaD-vB-l1n"/>
+                        <outlet property="customView" destination="TP6-nR-kyN" id="g17-HU-XGM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PaG-ez-Ted" userLabel="First Responder" sceneMemberID="firstResponder"/>

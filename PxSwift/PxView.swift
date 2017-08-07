@@ -13,34 +13,35 @@ public protocol PxViewDelegate {
     func setup()
     func draw()
 }
-open class PxView : UIView {
+open class PxView : UIImageView {
     fileprivate var fill_ = UIColor.white
     fileprivate var stroke_ = UIColor.white
     fileprivate var strokeWeight_: CGFloat = 1.0
-
+    fileprivate var firstcall : Bool = true
+    
     public var pxViewDelegate : PxViewDelegate? = nil
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
+    public init() {
+        super.init(frame: CGRect.zero)
     }
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
 
     public func setup(delegate : PxViewDelegate){
         pxViewDelegate = delegate
+        draw(self.frame)
+        firstcall = false
         _ = Timer.scheduledTimer(timeInterval: 1.0 / 60 , target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 }
 // udpate
 extension PxView {
     public func update(timer: Timer){
-        self.setNeedsDisplay()
-    }
-    fileprivate func setup(){
-        fill_ = UIColor.white
-        stroke_ = UIColor.white
-        strokeWeight_ = 1.0
+        self.draw(self.frame)
     }
 }
 // readonly properties
@@ -75,12 +76,28 @@ extension PxView {
         strokeWeight_ = 0.0
     }
 }
+//touch
+extension PxView {
+    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+    }
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+    }
+    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+    }
+}
 // drawing functions
 extension PxView {
     open override func draw(_ rect: CGRect) {
-        setup()
-        pxViewDelegate?.setup()
+        UIGraphicsBeginImageContext(rect.size)
+        self.image?.draw(at: CGPoint(x: 0, y: 0))
+        if(firstcall) { pxViewDelegate?.setup() }
+        
         pxViewDelegate?.draw()
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        self.image = drawnImage
     }
     public func rect(x:CGFloat, y:CGFloat, width:CGFloat, height:CGFloat){
         let g = UIGraphicsGetCurrentContext()
