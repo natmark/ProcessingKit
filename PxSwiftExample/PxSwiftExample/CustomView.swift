@@ -9,21 +9,11 @@
 import Foundation
 import PxSwift
 
-class CustomView : PxView {
+class CustomView : PxView, PxViewDelegate {
     var x = 0
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setup(delegate: self)
-    }
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.setup(delegate: self)
-    }
-}
-extension CustomView : PxViewDelegate {
     func setup() {
         print("setup")
-
+        
         background(UIColor.darkGray)
         stroke(UIColor.white)
         rect(x: 200, y: 200, width: 100, height: 100)
@@ -36,10 +26,23 @@ extension CustomView : PxViewDelegate {
         ellipse(x: 300, y: 300, width: 100, height: 100)
         rect(x: 10, y: 10, width: 100, height: 100)
     }
+    
     func draw(){
         print("draw")
         x += 1
         fill(UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0))
         ellipse(x: CGFloat(x), y: 300, width: 100, height: 100)
     }
+    
+    // Initializer
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.delegate = self
+    }
+    
+    public required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.delegate = self
+    }
+    
 }
