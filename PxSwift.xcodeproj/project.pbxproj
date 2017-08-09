@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E7054AD41F34CCB200EA0C0F /* PxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* PxView.swift */; };
+		E7054AE01F3A0A7E00EA0C0F /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054ADF1F3A0A7E00EA0C0F /* Graphics.swift */; };
+		E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AE11F3A0C8800EA0C0F /* Event.swift */; };
 		E7212F4A1F34B5A600173CD8 /* PxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7212F401F34B5A600173CD8 /* PxSwift.framework */; };
 		E7212F4F1F34B5A600173CD8 /* PxSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7212F4E1F34B5A600173CD8 /* PxSwiftTests.swift */; };
 		E7212F511F34B5A600173CD8 /* PxSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E7212F431F34B5A600173CD8 /* PxSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +26,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E7054AD31F34CCB200EA0C0F /* PxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxView.swift; sourceTree = "<group>"; };
+		E7054ADF1F3A0A7E00EA0C0F /* Graphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphics.swift; sourceTree = "<group>"; };
+		E7054AE11F3A0C8800EA0C0F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E7212F401F34B5A600173CD8 /* PxSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PxSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7212F431F34B5A600173CD8 /* PxSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PxSwift.h; sourceTree = "<group>"; };
 		E7212F441F34B5A600173CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -72,6 +78,9 @@
 			isa = PBXGroup;
 			children = (
 				E7212F431F34B5A600173CD8 /* PxSwift.h */,
+				E7054AD31F34CCB200EA0C0F /* PxView.swift */,
+				E7054ADF1F3A0A7E00EA0C0F /* Graphics.swift */,
+				E7054AE11F3A0C8800EA0C0F /* Event.swift */,
 				E7212F441F34B5A600173CD8 /* Info.plist */,
 			);
 			path = PxSwift;
@@ -148,6 +157,7 @@
 				TargetAttributes = {
 					E7212F3F1F34B5A600173CD8 = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					E7212F481F34B5A600173CD8 = {
@@ -196,6 +206,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7054AE01F3A0A7E00EA0C0F /* Graphics.swift in Sources */,
+				E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */,
+				E7054AD41F34CCB200EA0C0F /* PxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,7 +273,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -308,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -322,6 +335,7 @@
 		E7212F551F34B5A600173CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -330,11 +344,12 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PxSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.PxSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -342,6 +357,7 @@
 		E7212F561F34B5A600173CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = "";
@@ -350,7 +366,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = PxSwift/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.natmark.PxSwift;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -362,6 +378,7 @@
 		E7212F581F34B5A600173CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PxSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -374,6 +391,7 @@
 		E7212F591F34B5A600173CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PxSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -402,6 +420,7 @@
 				E7212F561F34B5A600173CD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E7212F571F34B5A600173CD8 /* Build configuration list for PBXNativeTarget "PxSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +429,7 @@
 				E7212F591F34B5A600173CD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
