@@ -42,27 +42,29 @@ extension PxView: Graphics {
     }
     
     public func background(_ color: UIColor) {
+        let g = UIGraphicsGetCurrentContext()
+        g!.clear(self.bounds);
         self.backgroundColor = color
     }
     
     public func fill(_ color: UIColor) {
-        fill_ = color
+        self.fill_ = color
     }
     
     public func stroke(_ color: UIColor) {
-        stroke_ = color
+        self.stroke_ = color
     }
     
     public func strokeWeight(_ weight: CGFloat) {
-        strokeWeight_ = weight
+        self.strokeWeight_ = weight
     }
     
     public func noFill() {
-        fill_ = UIColor.clear
+        self.fill_ = UIColor.clear
     }
     
     public func noStroke() {
-        stroke_ = UIColor.clear
-        strokeWeight_ = 0.0
+        self.stroke_ = UIColor.clear
+        self.strokeWeight_ = 0.0
     }
 }
