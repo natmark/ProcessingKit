@@ -17,12 +17,6 @@
 
 open class PxView: UIImageView {
     // MARK: public properties
-    public var width: CGFloat {
-        return self.frame.size.width
-    }
-    public var height: CGFloat {
-        return self.frame.size.height
-    }
     public var touchX: CGFloat = 0.0
     public var touchY: CGFloat = 0.0
     public var fingerPressed: Bool = false
@@ -30,9 +24,11 @@ open class PxView: UIImageView {
     public var delegate: PxViewDelegate? = nil
 
     // MARK: internal properties
-    var graphicsComponents = GraphicsComponents()
+    var colorComponents = ColorComponents()
     var eventComponents = EventComponents()
     var textComponents = TextComponents()
+    var frameComponents = FrameComponents()
+    var timer: Timer? = nil
 
     // Flag for setup function (setup function execute only once)
     fileprivate var firstcall: Bool = true
@@ -42,25 +38,31 @@ open class PxView: UIImageView {
         self.configuration()
         self.run()
     }
+
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.configuration()
         self.run()
     }
+
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.configuration()
         self.run()
     }
+
     private func configuration() {
         self.isUserInteractionEnabled = true
     }
+
     private func run() {
-        _ = Timer.scheduledTimer(timeInterval: 1.0 / 60, target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate_), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
-    @objc private func update(timer: Timer) {
+
+    func update(timer: Timer) {
         self.draw(self.frame)
     }
+
     open override func draw(_ rect: CGRect) {
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
