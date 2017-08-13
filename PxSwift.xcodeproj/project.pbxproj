@@ -13,6 +13,7 @@
 		E7212F4A1F34B5A600173CD8 /* PxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7212F401F34B5A600173CD8 /* PxSwift.framework */; };
 		E7212F4F1F34B5A600173CD8 /* PxSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7212F4E1F34B5A600173CD8 /* PxSwiftTests.swift */; };
 		E7212F511F34B5A600173CD8 /* PxSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = E7212F431F34B5A600173CD8 /* PxSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E76046B41F403B1400921B1A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046B31F403B1400921B1A /* Text.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		E7212F491F34B5A600173CD8 /* PxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7212F4E1F34B5A600173CD8 /* PxSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxSwiftTests.swift; sourceTree = "<group>"; };
 		E7212F501F34B5A600173CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E76046B31F403B1400921B1A /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				E7212F431F34B5A600173CD8 /* PxSwift.h */,
 				E7054AD31F34CCB200EA0C0F /* PxView.swift */,
+				E76046B31F403B1400921B1A /* Text.swift */,
 				E7054ADF1F3A0A7E00EA0C0F /* Graphics.swift */,
 				E7054AE11F3A0C8800EA0C0F /* Event.swift */,
 				E7212F441F34B5A600173CD8 /* Info.plist */,
@@ -208,6 +211,7 @@
 			files = (
 				E7054AE01F3A0A7E00EA0C0F /* Graphics.swift in Sources */,
 				E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */,
+				E76046B41F403B1400921B1A /* Text.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* PxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
