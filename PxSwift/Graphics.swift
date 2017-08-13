@@ -15,11 +15,12 @@ struct GraphicsComponents {
 }
 
 public protocol Graphics {
+    func line(_ x1: CGFloat, _ y1: CGFloat, _ x2:CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func background(_ color: UIColor)
 
-    // func fill(_ color: UIColor)
+    func fill(_ color: UIColor)
     func stroke(_ color: UIColor)
     func strokeWeight(_ weight: CGFloat)
     func noFill()
@@ -33,6 +34,17 @@ extension PxView: Graphics {
         context?.setLineWidth(self.graphicsComponents.strokeWeight_)
     }
 
+    public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+        g?.saveGState()
+
+        setGraphicsConfiguration(context: g)
+        g?.move(to: CGPoint(x: x1, y: y1))
+        g?.addLine(to: CGPoint(x: x2, y: y2))
+        g?.strokePath()
+        
+        g?.restoreGState()
+    }
     public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
@@ -73,6 +85,5 @@ extension PxView: Graphics {
 
     public func noStroke() {
         self.graphicsComponents.stroke_ = UIColor.clear
-        self.graphicsComponents.strokeWeight_ = 0.0
     }
 }
