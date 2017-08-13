@@ -20,6 +20,7 @@ public protocol Text {
     func textSize(_ size: CGFloat)
     func textFont(_ font: UIFont)
     func textAlign(_ allignX: NSTextAlignment)
+    func textWidth(_ str: String) -> CGSize
 }
 
 extension PxView: Text {
@@ -64,7 +65,7 @@ extension PxView: Text {
         // set font
         CFAttributedStringSetAttribute(attrString, CFRangeMake(0, attrString.length), kCTFontAttributeName, textComponents.textFont_)
 
-        CFAttributedStringSetAttribute(attrString, CFRangeMake(0, attrString.length), kCTForegroundColorAttributeName, graphicsComponents.fill_.cgColor)
+        CFAttributedStringSetAttribute(attrString, CFRangeMake(0, attrString.length), kCTForegroundColorAttributeName, colorComponents.fill_.cgColor)
 
         let framesetter: CTFramesetter = CTFramesetterCreateWithAttributedString(attrString)
 
@@ -74,5 +75,9 @@ extension PxView: Text {
         CTFrameDraw(frame, g!)
 
         g?.restoreGState()
+    }
+    public func textWidth(_ str: String) -> CGSize {
+        let width = str.size(attributes: [NSFontAttributeName : textComponents.textFont_])
+        return width
     }
 }
