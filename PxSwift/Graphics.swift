@@ -15,6 +15,7 @@ struct GraphicsComponents {
 }
 
 public protocol Graphics {
+    func point(_ x: CGFloat, _ y:CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2:CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
@@ -32,6 +33,13 @@ extension PxView: Graphics {
         context?.setFillColor(self.graphicsComponents.fill_.cgColor)
         context?.setStrokeColor(self.graphicsComponents.stroke_.cgColor)
         context?.setLineWidth(self.graphicsComponents.strokeWeight_)
+    }
+
+    public func point(_ x: CGFloat, _ y: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+
+        g?.setStrokeColor(self.graphicsComponents.stroke_.cgColor)
+        g?.fill(CGRect(x: x, y: y, width: 1.0, height: 1.0))
     }
 
     public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
