@@ -33,7 +33,6 @@ class Ball {
 
 }
 
-
 class CustomView : PxView, PxViewDelegate {
     
     var ripples: [Ripple] = []
@@ -47,22 +46,28 @@ class CustomView : PxView, PxViewDelegate {
 
     func draw(){
         background(UIColor.white)
+        
+        fill(UIColor.red)
+        textSize(30)
+        text("hello world",100,100)
+
         noStroke()
         fill(UIColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 1.0))
         for ball in balls {
             ball.y += ball.speed
-            ellipse(x: ball.x, y: ball.y, width: ball.size, height: ball.size)
+            ellipse(ball.x, ball.y, ball.size, ball.size)
             if ball.y > height + 100 {
                 ball.y = -CGFloat(arc4random() % 500)
             }
         }
-        
+
         noFill()
         stroke(UIColor(red:1.0, green: 0.0, blue: 0.0, alpha: 1.0))
         strokeWeight(1.0)
+
         for ripple in ripples {
             ripple.size = ripple.size + 5
-            ellipse(x: ripple.x, y: ripple.y, width: ripple.size, height: ripple.size)
+            ellipse(ripple.x, ripple.y, ripple.size, ripple.size)
         }
         ripples = ripples.filter { $0.size < 1_500 }
     }
