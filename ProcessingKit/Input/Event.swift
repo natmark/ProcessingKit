@@ -12,32 +12,53 @@ struct EventComponents {
     var fingerTapped = false
     var fingerMoved = false
     var fingerReleased = false
+    var fingerPressed = true
+    var touchX: CGFloat = 0.0
+    var touchY: CGFloat = 0.0
 }
 
-extension PxView {
+public protocol Event {
+    var fingerPressed: Bool { get }
+    var touchX: CGFloat { get }
+    var touchY: CGFloat { get }
+}
+
+extension PxView: Event {
+    public var fingerPressed: Bool {
+        return self.eventComponents.fingerPressed
+    }
+
+    public var touchX: CGFloat {
+        return self.eventComponents.touchX
+    }
+
+    public var touchY: CGFloat {
+        return self.eventComponents.touchY
+    }
+
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            self.touchX = touch.location(in: self).x
-            self.touchY = touch.location(in: self).y
+            self.eventComponents.touchX = touch.location(in: self).x
+            self.eventComponents.touchY = touch.location(in: self).y
         }
-        self.fingerPressed = true
+        self.eventComponents.fingerPressed = true
         self.eventComponents.fingerTapped = true
     }
 
     open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            self.touchX = touch.location(in: self).x
-            self.touchY = touch.location(in: self).y
+            self.eventComponents.touchX = touch.location(in: self).x
+            self.eventComponents.touchY = touch.location(in: self).y
         }
         self.eventComponents.fingerMoved = true
     }
 
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            self.touchX = touch.location(in: self).x
-            self.touchY = touch.location(in: self).y
+            self.eventComponents.touchX = touch.location(in: self).x
+            self.eventComponents.touchY = touch.location(in: self).y
         }
-        self.fingerPressed = false
+        self.eventComponents.fingerTapped = false
         self.eventComponents.fingerReleased = true
     }
 }

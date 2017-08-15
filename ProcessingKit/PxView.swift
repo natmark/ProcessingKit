@@ -17,9 +17,9 @@
 
 open class PxView: UIImageView {
     // MARK: public properties
-    public var touchX: CGFloat = 0.0
-    public var touchY: CGFloat = 0.0
-    public var fingerPressed: Bool = false
+//    public var touchX: CGFloat = 0.0
+//    public var touchY: CGFloat = 0.0
+//    public var fingerPressed: Bool = false
 
     public var delegate: PxViewDelegate? = nil
 
