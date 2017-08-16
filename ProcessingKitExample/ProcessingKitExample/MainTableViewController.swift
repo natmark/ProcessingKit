@@ -33,9 +33,11 @@ class MainTableViewController: UITableViewController {
             return
         case IndexPath(row: 0, section: 1): //Simple Tap
             transition(viewController: TouchSampleViewController.create())
-        case IndexPath(row: 1, section: 1): //Clock Sample
+        case IndexPath(row: 0, section: 2): //Particles
+            transition(viewController: ParticlesSampleViewController.create())
+        case IndexPath(row: 1, section: 2): //Clock Sample
             return
-        case IndexPath(row: 0, section: 2): //Physics
+        case IndexPath(row: 2, section: 2): //Physics
             return
         default:
             return

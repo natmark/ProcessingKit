@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RXN-cL-ovE">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Particles Sample View Controller-->
+        <scene sceneID="5yR-gn-QvT">
+            <objects>
+                <viewController id="RXN-cL-ovE" customClass="ParticlesSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gq4-4j-zPl">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="osp-oo-PLB" customClass="ParticlesSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="osp-oo-PLB" firstAttribute="top" secondItem="gq4-4j-zPl" secondAttribute="top" id="Fai-Lt-ewg"/>
+                            <constraint firstItem="osp-oo-PLB" firstAttribute="trailing" secondItem="Tud-Xu-ny5" secondAttribute="trailing" id="LjE-JU-azO"/>
+                            <constraint firstItem="osp-oo-PLB" firstAttribute="bottom" secondItem="Tud-Xu-ny5" secondAttribute="bottom" id="hEk-Dh-Slc"/>
+                            <constraint firstItem="osp-oo-PLB" firstAttribute="leading" secondItem="Tud-Xu-ny5" secondAttribute="leading" id="m9Y-Or-w4K"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tud-Xu-ny5"/>
+                    </view>
+                    <connections>
+                        <outlet property="particlesSampleView" destination="osp-oo-PLB" id="Xnn-V7-M4d"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lWX-yY-GaP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-15.199999999999999" y="160.56971514242881"/>
+        </scene>
+    </scenes>
+</document>
