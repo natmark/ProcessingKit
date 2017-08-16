@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		E7054AD71F34D36200EA0C0F /* TouchSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD61F34D36200EA0C0F /* TouchSampleView.swift */; };
+		E705951A1F4488D8005C8856 /* EllipseSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70595191F4488D8005C8856 /* EllipseSampleViewController.storyboard */; };
+		E705951D1F4488F4005C8856 /* TextSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E705951C1F4488F4005C8856 /* TextSampleViewController.storyboard */; };
+		E705951F1F44892C005C8856 /* RectSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E705951E1F44892C005C8856 /* RectSampleViewController.storyboard */; };
+		E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595201F44899E005C8856 /* EllipseSampleView.swift */; };
+		E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595221F4489AA005C8856 /* TextSampleView.swift */; };
+		E70595251F4489B8005C8856 /* RectSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595241F4489B8005C8856 /* RectSampleView.swift */; };
 		E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E743310A1F34C6AB00D20482 /* AppDelegate.swift */; };
 		E74331101F34C6AB00D20482 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E743310E1F34C6AB00D20482 /* Main.storyboard */; };
 		E74331121F34C6AB00D20482 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74331111F34C6AB00D20482 /* Assets.xcassets */; };
@@ -18,6 +24,9 @@
 		E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E747DDB41F447322006BAC6A /* TouchSampleViewController.storyboard */; };
 		E747DDB71F447335006BAC6A /* TouchSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDB61F447335006BAC6A /* TouchSampleViewController.swift */; };
 		E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDB81F4473E8006BAC6A /* ViewController.swift */; };
+		E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */; };
+		E7F3BA7F1F44880F00EFB169 /* RectSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3BA7E1F44880F00EFB169 /* RectSampleViewController.swift */; };
+		E7F3BA811F44881A00EFB169 /* EllipseSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3BA801F44881A00EFB169 /* EllipseSampleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +70,12 @@
 /* Begin PBXFileReference section */
 		E7054ACF1F34CA9D00EA0C0F /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
 		E7054AD61F34D36200EA0C0F /* TouchSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchSampleView.swift; sourceTree = "<group>"; };
+		E70595191F4488D8005C8856 /* EllipseSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EllipseSampleViewController.storyboard; sourceTree = "<group>"; };
+		E705951C1F4488F4005C8856 /* TextSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TextSampleViewController.storyboard; sourceTree = "<group>"; };
+		E705951E1F44892C005C8856 /* RectSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RectSampleViewController.storyboard; sourceTree = "<group>"; };
+		E70595201F44899E005C8856 /* EllipseSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseSampleView.swift; sourceTree = "<group>"; };
+		E70595221F4489AA005C8856 /* TextSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSampleView.swift; sourceTree = "<group>"; };
+		E70595241F4489B8005C8856 /* RectSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectSampleView.swift; sourceTree = "<group>"; };
 		E74331071F34C6AB00D20482 /* ProcessingKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProcessingKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E743310A1F34C6AB00D20482 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E743310F1F34C6AB00D20482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -72,6 +87,9 @@
 		E747DDB41F447322006BAC6A /* TouchSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TouchSampleViewController.storyboard; sourceTree = "<group>"; };
 		E747DDB61F447335006BAC6A /* TouchSampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchSampleViewController.swift; sourceTree = "<group>"; };
 		E747DDB81F4473E8006BAC6A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSampleViewController.swift; sourceTree = "<group>"; };
+		E7F3BA7E1F44880F00EFB169 /* RectSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectSampleViewController.swift; sourceTree = "<group>"; };
+		E7F3BA801F44881A00EFB169 /* EllipseSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseSampleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,14 +133,15 @@
 		E74331091F34C6AB00D20482 /* ProcessingKitExample */ = {
 			isa = PBXGroup;
 			children = (
-				E743310A1F34C6AB00D20482 /* AppDelegate.swift */,
 				E747DDBA1F447D68006BAC6A /* Extensions */,
+				E7F3BA7A1F4487A500EFB169 /* BasicFunctions */,
 				E747DDB31F44730D006BAC6A /* TouchSample */,
-				E747DDB11F446A81006BAC6A /* MainTableViewController.swift */,
-				E743310E1F34C6AB00D20482 /* Main.storyboard */,
+				E743310A1F34C6AB00D20482 /* AppDelegate.swift */,
 				E74331111F34C6AB00D20482 /* Assets.xcassets */,
-				E74331131F34C6AB00D20482 /* LaunchScreen.storyboard */,
 				E74331161F34C6AB00D20482 /* Info.plist */,
+				E74331131F34C6AB00D20482 /* LaunchScreen.storyboard */,
+				E743310E1F34C6AB00D20482 /* Main.storyboard */,
+				E747DDB11F446A81006BAC6A /* MainTableViewController.swift */,
 			);
 			path = ProcessingKitExample;
 			sourceTree = "<group>";
@@ -139,11 +158,11 @@
 		E747DDB31F44730D006BAC6A /* TouchSample */ = {
 			isa = PBXGroup;
 			children = (
+				E7054AD61F34D36200EA0C0F /* TouchSampleView.swift */,
 				E747DDB41F447322006BAC6A /* TouchSampleViewController.storyboard */,
 				E747DDB61F447335006BAC6A /* TouchSampleViewController.swift */,
-				E7054AD61F34D36200EA0C0F /* TouchSampleView.swift */,
 			);
-			name = TouchSample;
+			path = TouchSample;
 			sourceTree = "<group>";
 		};
 		E747DDBA1F447D68006BAC6A /* Extensions */ = {
@@ -151,7 +170,23 @@
 			children = (
 				E747DDB81F4473E8006BAC6A /* ViewController.swift */,
 			);
-			name = Extensions;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E7F3BA7A1F4487A500EFB169 /* BasicFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				E7F3BA801F44881A00EFB169 /* EllipseSampleViewController.swift */,
+				E70595191F4488D8005C8856 /* EllipseSampleViewController.storyboard */,
+				E70595201F44899E005C8856 /* EllipseSampleView.swift */,
+				E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */,
+				E705951C1F4488F4005C8856 /* TextSampleViewController.storyboard */,
+				E70595221F4489AA005C8856 /* TextSampleView.swift */,
+				E7F3BA7E1F44880F00EFB169 /* RectSampleViewController.swift */,
+				E705951E1F44892C005C8856 /* RectSampleViewController.storyboard */,
+				E70595241F4489B8005C8856 /* RectSampleView.swift */,
+			);
+			path = BasicFunctions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,9 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E74331151F34C6AB00D20482 /* LaunchScreen.storyboard in Resources */,
+				E705951A1F4488D8005C8856 /* EllipseSampleViewController.storyboard in Resources */,
 				E74331121F34C6AB00D20482 /* Assets.xcassets in Resources */,
 				E74331101F34C6AB00D20482 /* Main.storyboard in Resources */,
+				E705951F1F44892C005C8856 /* RectSampleViewController.storyboard in Resources */,
 				E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */,
+				E705951D1F4488F4005C8856 /* TextSampleViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,9 +292,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E747DDB21F446A81006BAC6A /* MainTableViewController.swift in Sources */,
+				E7F3BA811F44881A00EFB169 /* EllipseSampleViewController.swift in Sources */,
 				E7054AD71F34D36200EA0C0F /* TouchSampleView.swift in Sources */,
+				E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */,
+				E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */,
 				E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */,
+				E7F3BA7F1F44880F00EFB169 /* RectSampleViewController.swift in Sources */,
 				E747DDB71F447335006BAC6A /* TouchSampleViewController.swift in Sources */,
+				E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */,
+				E70595251F4489B8005C8856 /* RectSampleView.swift in Sources */,
 				E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,6 +322,7 @@
 				E743310F1F34C6AB00D20482 /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		E74331131F34C6AB00D20482 /* LaunchScreen.storyboard */ = {
@@ -286,6 +331,7 @@
 				E74331141F34C6AB00D20482 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

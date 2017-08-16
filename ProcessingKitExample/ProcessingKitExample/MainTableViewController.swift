@@ -22,15 +22,17 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath {
-        case IndexPath(row: 0, section: 0): //Line
+        case IndexPath(row: 0, section: 0): //Text
+            transition(viewController: TextSampleViewController.create())
             return
         case IndexPath(row: 1, section: 0): //Rect
+            transition(viewController: RectSampleViewController.create())
             return
         case IndexPath(row: 2, section: 0): //Ellipse
+            transition(viewController: EllipseSampleViewController.create())
             return
         case IndexPath(row: 0, section: 1): //Simple Tap
-            let touchSampleViewController = TouchSampleViewController.create()
-            self.navigationController?.pushViewController(touchSampleViewController, animated: true)
+            transition(viewController: TouchSampleViewController.create())
         case IndexPath(row: 1, section: 1): //Clock Sample
             return
         case IndexPath(row: 0, section: 2): //Physics
@@ -39,5 +41,7 @@ class MainTableViewController: UITableViewController {
             return
         }
     }
-
+    func transition(viewController: UIViewController){
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
 }

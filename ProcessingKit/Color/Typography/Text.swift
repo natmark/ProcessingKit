@@ -24,6 +24,7 @@ public protocol Text {
 }
 
 extension ProcessingView: Text {
+
     public func textAlign(_ allignX: NSTextAlignment) {
         textComponents.textAlignX_ = allignX
     }
@@ -35,7 +36,7 @@ extension ProcessingView: Text {
 
     public func textSize(_ size: CGFloat) {
         textComponents.textSize_ = size
-        textComponents.textFont_ = UIFont(name: textComponents.textFont_.fontName, size: size) ?? UIFont.systemFont(ofSize: 20.0)
+        textComponents.textFont_ = UIFont.systemFont(ofSize: size)
     }
 
     public func text(_ str: String, _ x: CGFloat, _ y: CGFloat) {
@@ -82,6 +83,7 @@ extension ProcessingView: Text {
 
         g?.restoreGState()
     }
+
     public func textWidth(_ str: String) -> CGFloat {
         let size = str.size(attributes: [NSFontAttributeName : textComponents.textFont_])
         return size.width
