@@ -1,12 +1,12 @@
 //
-//  PxView.swift
+//  ProcessingView.swift
 //  ProcessingKit
 //
 //  Created by AtsuyaSato on 2017/08/05.
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-@objc public protocol PxViewDelegate {
+@objc public protocol ProcessingViewDelegate {
     @objc optional func setup()
     @objc optional func draw()
 
@@ -15,13 +15,9 @@
     @objc optional func fingerReleased()
 }
 
-open class PxView: UIImageView {
-    // MARK: public properties
-//    public var touchX: CGFloat = 0.0
-//    public var touchY: CGFloat = 0.0
-//    public var fingerPressed: Bool = false
+open class ProcessingView: UIImageView {
 
-    public var delegate: PxViewDelegate? = nil
+    public var delegate: ProcessingViewDelegate? = nil
 
     // MARK: internal properties
     var colorComponents = ColorComponents()

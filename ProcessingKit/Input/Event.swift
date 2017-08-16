@@ -23,7 +23,7 @@ public protocol Event {
     var touchY: CGFloat { get }
 }
 
-extension PxView: Event {
+extension ProcessingView: Event {
     public var fingerPressed: Bool {
         return self.eventComponents.fingerPressed
     }

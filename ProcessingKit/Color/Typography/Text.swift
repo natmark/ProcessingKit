@@ -23,7 +23,7 @@ public protocol Text {
     func textWidth(_ str: String) -> CGSize
 }
 
-extension PxView: Text {
+extension ProcessingView: Text {
     public func textAlign(_ allignX: NSTextAlignment) {
         textComponents.textAlignX_ = allignX
     }

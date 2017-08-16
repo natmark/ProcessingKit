@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E7054AD41F34CCB200EA0C0F /* PxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* PxView.swift */; };
+		E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */; };
 		E7054AE01F3A0A7E00EA0C0F /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054ADF1F3A0A7E00EA0C0F /* Shape.swift */; };
 		E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AE11F3A0C8800EA0C0F /* Event.swift */; };
 		E70BB6891F408FB000E0372D /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BB6881F408FAB00E0372D /* Text.swift */; };
@@ -31,7 +31,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E7054AD31F34CCB200EA0C0F /* PxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PxView.swift; sourceTree = "<group>"; };
+		E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingView.swift; sourceTree = "<group>"; };
 		E7054ADF1F3A0A7E00EA0C0F /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
 		E7054AE11F3A0C8800EA0C0F /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		E70BB6881F408FAB00E0372D /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 				E76046BE1F408A1200921B1A /* Image */,
 				E76046BF1F408A3E00921B1A /* Constants */,
 				E7212F431F34B5A600173CD8 /* ProcessingKit.h */,
-				E7054AD31F34CCB200EA0C0F /* PxView.swift */,
+				E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */,
 				E7212F441F34B5A600173CD8 /* Info.plist */,
 			);
 			path = ProcessingKit;
@@ -291,7 +291,7 @@
 				E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */,
 				E70BB68C1F40902A00E0372D /* Color.swift in Sources */,
 				E76046B81F4088FB00921B1A /* Loop.swift in Sources */,
-				E7054AD41F34CCB200EA0C0F /* PxView.swift in Sources */,
+				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,
 				E70BB6891F408FB000E0372D /* Text.swift in Sources */,
 				E76046C11F408B2E00921B1A /* Constants.swift in Sources */,
 			);
