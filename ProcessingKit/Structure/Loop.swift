@@ -10,7 +10,7 @@ import Foundation
 
 public protocol Loop {
     func loop()
-    func noloop()
+    func noLoop()
 }
 
 extension ProcessingView: Loop {
@@ -18,7 +18,7 @@ extension ProcessingView: Loop {
         self.timer?.fire()
     }
 
-    public func noloop() {
+    public func noLoop() {
         self.timer?.invalidate()
     }
 }
