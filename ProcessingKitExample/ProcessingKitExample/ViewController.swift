@@ -2,24 +2,22 @@
 //  ViewController.swift
 //  ProcessingKitExample
 //
-//  Created by AtsuyaSato on 2017/08/05.
+//  Created by AtsuyaSato on 2017/08/16.
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+public extension UIViewController {
 
-    @IBOutlet weak var customView: CustomView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-         customView.isUserInteractionEnabled = true
+    static func create() -> Self {
+        let name: String = "\(type(of: self))".components(separatedBy: ".").first!
+        return instantiate(storyboardName: name)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private static func instantiate<T>(storyboardName: String) -> T {
+        let storyboard: UIStoryboard = UIStoryboard(name: storyboardName, bundle: nil)
+        let vc: UIViewController? = storyboard.instantiateInitialViewController()
+        return vc as! T
     }
 }
-
