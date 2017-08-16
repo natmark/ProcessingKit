@@ -16,11 +16,11 @@ struct TextComponents {
 
 public protocol Text {
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat)
-    func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _height: CGFloat)
+    func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func textSize(_ size: CGFloat)
     func textFont(_ font: UIFont)
     func textAlign(_ allignX: NSTextAlignment)
-    func textWidth(_ str: String) -> CGSize
+    func textWidth(_ str: String) -> CGFloat
 }
 
 extension ProcessingView: Text {
@@ -39,10 +39,16 @@ extension ProcessingView: Text {
     }
 
     public func text(_ str: String, _ x: CGFloat, _ y: CGFloat) {
-        self.text(str, x, y, self.frame.size.width, _height: self.frame.size.height)
+        let width = textWidth(str)
+        let height = str.height(withConstrainedWidth: width, font: textComponents.textFont_)
+        if textComponents.textAlignX_ == .center {
+            self.text(str, x - width / 2, y, width, height)
+            return
+        }
+        self.text(str, x, y, width, height)
     }
 
-    public func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _height: CGFloat) {
+    public func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
 
         g?.saveGState()
@@ -52,7 +58,7 @@ extension ProcessingView: Text {
         g?.textMatrix = CGAffineTransform.identity
 
         let path: CGMutablePath = CGMutablePath()
-        let bounds: CGRect = CGRect(x: x, y: -y, width: width, height: height)
+        let bounds: CGRect = CGRect(x: x, y: -y + self.frame.size.height, width: width, height: height)
         path.addRect(bounds)
 
         let paragraph = NSMutableParagraphStyle()
@@ -76,8 +82,8 @@ extension ProcessingView: Text {
 
         g?.restoreGState()
     }
-    public func textWidth(_ str: String) -> CGSize {
-        let width = str.size(attributes: [NSFontAttributeName : textComponents.textFont_])
-        return width
+    public func textWidth(_ str: String) -> CGFloat {
+        let size = str.size(attributes: [NSFontAttributeName : textComponents.textFont_])
+        return size.width
     }
 }

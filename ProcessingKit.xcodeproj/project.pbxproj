@@ -17,6 +17,7 @@
 		E7212F4F1F34B5A600173CD8 /* ProcessingKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7212F4E1F34B5A600173CD8 /* ProcessingKit.swift */; };
 		E7212F511F34B5A600173CD8 /* ProcessingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E7212F431F34B5A600173CD8 /* ProcessingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E747DDA91F44656E006BAC6A /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDA81F44656E006BAC6A /* Image.swift */; };
+		E7387A491F44828F00C3B35C /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7387A481F44828F00C3B35C /* String.swift */; };
 		E76046B81F4088FB00921B1A /* Loop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046B71F4088FB00921B1A /* Loop.swift */; };
 		E76046C11F408B2E00921B1A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -45,6 +46,7 @@
 		E7212F4E1F34B5A600173CD8 /* ProcessingKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingKit.swift; sourceTree = "<group>"; };
 		E7212F501F34B5A600173CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E747DDA81F44656E006BAC6A /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E7387A481F44828F00C3B35C /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		E76046B71F4088FB00921B1A /* Loop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loop.swift; sourceTree = "<group>"; };
 		E76046C01F408B2E00921B1A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,6 +100,7 @@
 		E7212F421F34B5A600173CD8 /* ProcessingKit */ = {
 			isa = PBXGroup;
 			children = (
+				E7387A4A1F44829C00C3B35C /* Extensions */,
 				E76046B91F40894700921B1A /* Structure */,
 				E76046BA1F40895100921B1A /* Environment */,
 				E76046BB1F4089AF00921B1A /* Shape */,
@@ -120,6 +123,14 @@
 				E7212F501F34B5A600173CD8 /* Info.plist */,
 			);
 			path = ProcessingKitTests;
+			sourceTree = "<group>";
+		};
+		E7387A4A1F44829C00C3B35C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7387A481F44828F00C3B35C /* String.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		E76046B91F40894700921B1A /* Structure */ = {
@@ -293,6 +304,7 @@
 				E747DDA91F44656E006BAC6A /* Image.swift in Sources */,
 				E70BB6901F40937100E0372D /* Frame.swift in Sources */,
 				E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */,
+				E7387A491F44828F00C3B35C /* String.swift in Sources */,
 				E70BB68C1F40902A00E0372D /* Color.swift in Sources */,
 				E76046B81F4088FB00921B1A /* Loop.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,

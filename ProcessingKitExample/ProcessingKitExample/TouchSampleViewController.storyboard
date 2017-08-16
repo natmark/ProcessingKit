@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="0df-qt-alm">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Touch Sample View Controller-->
+        <scene sceneID="Mzp-Pr-DrP">
+            <objects>
+                <viewController storyboardIdentifier="TouchSampleViewController" id="0df-qt-alm" customClass="TouchSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="heC-P1-Jaq"/>
+                        <viewControllerLayoutGuide type="bottom" id="Grp-Ba-seN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jV5-0x-VtQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HdC-yy-MHT" customClass="TouchSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="HdC-yy-MHT" secondAttribute="trailing" id="CbG-sN-FAy"/>
+                            <constraint firstItem="Grp-Ba-seN" firstAttribute="top" secondItem="HdC-yy-MHT" secondAttribute="bottom" id="K33-WL-kIY"/>
+                            <constraint firstItem="HdC-yy-MHT" firstAttribute="leading" secondItem="jV5-0x-VtQ" secondAttribute="leading" id="SfC-vg-KcJ"/>
+                            <constraint firstItem="HdC-yy-MHT" firstAttribute="top" secondItem="jV5-0x-VtQ" secondAttribute="top" id="oKC-tV-W1a"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="touchSampleView" destination="HdC-yy-MHT" id="oqX-3V-qop"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Vf-xP-yzO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="169.56521739130437"/>
+        </scene>
+    </scenes>
+</document>
