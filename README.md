@@ -25,6 +25,9 @@
 ProcessingKit is a Visual Programming library for iOS.  
 ProcessingKit written in Swift🐧 and you can write like [processing](https://github.com/processing/processing).
 
+## Demo
+![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
+
 ## Usage
 1. Create a class that inherits ProcessingView & conform to ProcessingViewDelegate
 
