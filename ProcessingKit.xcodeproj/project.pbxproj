@@ -16,6 +16,7 @@
 		E7212F4A1F34B5A600173CD8 /* ProcessingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7212F401F34B5A600173CD8 /* ProcessingKit.framework */; };
 		E7212F4F1F34B5A600173CD8 /* ProcessingKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7212F4E1F34B5A600173CD8 /* ProcessingKit.swift */; };
 		E7212F511F34B5A600173CD8 /* ProcessingKit.h in Headers */ = {isa = PBXBuildFile; fileRef = E7212F431F34B5A600173CD8 /* ProcessingKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E747DDA91F44656E006BAC6A /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDA81F44656E006BAC6A /* Image.swift */; };
 		E76046B81F4088FB00921B1A /* Loop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046B71F4088FB00921B1A /* Loop.swift */; };
 		E76046C11F408B2E00921B1A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
 /* End PBXBuildFile section */
@@ -43,6 +44,7 @@
 		E7212F491F34B5A600173CD8 /* ProcessingKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProcessingKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7212F4E1F34B5A600173CD8 /* ProcessingKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingKit.swift; sourceTree = "<group>"; };
 		E7212F501F34B5A600173CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E747DDA81F44656E006BAC6A /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E76046B71F4088FB00921B1A /* Loop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loop.swift; sourceTree = "<group>"; };
 		E76046C01F408B2E00921B1A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,6 +165,7 @@
 		E76046BE1F408A1200921B1A /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				E747DDA81F44656E006BAC6A /* Image.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7054AE01F3A0A7E00EA0C0F /* Shape.swift in Sources */,
+				E747DDA91F44656E006BAC6A /* Image.swift in Sources */,
 				E70BB6901F40937100E0372D /* Frame.swift in Sources */,
 				E7054AE21F3A0C8800EA0C0F /* Event.swift in Sources */,
 				E70BB68C1F40902A00E0372D /* Color.swift in Sources */,
