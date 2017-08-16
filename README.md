@@ -25,6 +25,45 @@
 ProcessingKit is a Visual Programming library for iOS.  
 ProcessingKit written in Swift🐧 and you can write like [processing](https://github.com/processing/processing).
 
+## Usage
+1. Create a class that inherits ProcessingView & conform to ProcessingViewDelegate
+
+```Swift
+import ProcessingKit
+
+class SampleView: ProcessingView, ProcessingViewDelegate {
+    func setup() {
+    }
+    func draw() {
+    }
+}
+```
+
+2. Create a SampleView instance
+### Create programmatically
+```Swift
+    lazy var sampleView:SampleView = {
+        let sampleView = SampleView(frame: frame)
+        sampleView.delegate = sampleView
+        sampleView.isUserInteractionEnabled = true // If you want to use touch events
+        return sampleView
+    }()
+```
+
+### Use StoryBoard
+Connect the UIImageView to SampleView Class 
+![](https://github.com/natmark/ProcessingKit/blob/master/Resources/Storyboard-Usage.png?raw=true)
+```Swift
+ @IBOutlet weak var sampleView: SampleView!
+ 
+ override func viewDidLoad() {
+     super.viewDidLoad()
+     
+     sampleView.delegate = sampleView
+     sampleView.isUserInteractionEnabled = true // If you want to use touch events
+ }
+```
+
 ## Instration
 ### [Carthage](https://github.com/Carthage/Carthage)
 Add this to `Cartfile`
