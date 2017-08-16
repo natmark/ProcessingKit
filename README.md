@@ -25,5 +25,12 @@
 ProcessingKit is a Visual Programming library for iOS.  
 ProcessingKit written in Swift🐧 and you can write like [processing](https://github.com/processing/processing).
 
+## Instration
+### [Carthage](https://github.com/Carthage/Carthage)
+Add this to `Cartfile`
+```
+  github "natmark/NATagTextView" ~> 0.1
+```
+
 ## License
 ProcessingKit is available under the MIT license. See the LICENSE file for more info.
