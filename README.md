@@ -29,7 +29,7 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ### [Carthage](https://github.com/Carthage/Carthage)
 Add this to `Cartfile`
 ```
-  github "natmark/NATagTextView" ~> 0.1
+  github "natmark/ProcessingKit"
 ```
 
 ## License
