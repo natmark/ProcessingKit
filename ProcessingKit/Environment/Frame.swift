@@ -19,7 +19,7 @@ public protocol Frame {
     var height: CGFloat { get }
 }
 
-extension PxView: Frame {
+extension ProcessingView: Frame {
     public func frameRate(_ fps: CGFloat) {
         frameComponents.frameRate_ = fps
         timer?.invalidate()

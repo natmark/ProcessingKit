@@ -33,7 +33,7 @@ class Ball {
 
 }
 
-class CustomView : PxView, PxViewDelegate {
+class CustomView : ProcessingView, ProcessingViewDelegate {
     
     var ripples: [Ripple] = []
     var balls: [Ball] = []

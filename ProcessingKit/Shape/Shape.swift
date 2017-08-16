@@ -15,7 +15,7 @@ public protocol Shape {
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
 }
 
-extension PxView: Shape {
+extension ProcessingView: Shape {
     func setGraphicsConfiguration(context: CGContext?) {
         context?.setFillColor(self.colorComponents.fill_.cgColor)
         context?.setStrokeColor(self.colorComponents.stroke_.cgColor)

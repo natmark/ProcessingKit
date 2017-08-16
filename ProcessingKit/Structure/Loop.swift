@@ -13,7 +13,7 @@ public protocol Loop {
     func noloop()
 }
 
-extension PxView: Loop {
+extension ProcessingView: Loop {
     public func loop() {
         self.timer?.fire()
     }

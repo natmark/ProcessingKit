@@ -25,7 +25,7 @@ public protocol Color {
     func noStroke()
 }
 
-extension PxView: Color {
+extension ProcessingView: Color {
     public func background(_ color: UIColor) {
         let g = UIGraphicsGetCurrentContext()
         g!.clear(self.bounds)
