@@ -51,8 +51,10 @@ class SampleView: ProcessingView, ProcessingViewDelegate {
 ```
 
 ### Use StoryBoard
+
 Connect the UIImageView to SampleView Class 
-![](https://github.com/natmark/ProcessingKit/blob/master/Resources/Storyboard-Usage.png?raw=true)
+
+![ScreenShot](https://github.com/natmark/ProcessingKit/blob/master/Resources/Storyboard-Usage.png?raw=true)
 
 ```Swift
  @IBOutlet weak var sampleView: SampleView!
