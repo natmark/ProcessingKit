@@ -71,8 +71,15 @@ Connect the UIImageView to SampleView Class
 ```
 
 ## Instration
+
+### [CocoaPods](http://cocoadocs.org/docsets/ProcessingKit/)
+Add the following to your `Podfile`:
+```
+  pod "ProcessingKit"
+```
+
 ### [Carthage](https://github.com/Carthage/Carthage)
-Add this to `Cartfile`
+Add the following to your `Cartfile`:
 ```
   github "natmark/ProcessingKit"
 ```
