@@ -9,7 +9,7 @@
         <img src="https://img.shields.io/cocoapods/v/ProcessingKit.svg?style=flat"
              alt="Pods Version">
     </a>
-    <a href="https://github.com/ProcessingKit/">
+    <a href="https://github.com/natmark/ProcessingKit/">
         <img src="https://img.shields.io/cocoapods/p/ProcessingKit.svg?style=flat"
              alt="Platforms">
     </a>
