@@ -1,5 +1,8 @@
 osx_image: xcode8.3
 language: objective-c
+branches:
+  only:
+    - master
 before_install:
     - gem install xcpretty
 before_script:
