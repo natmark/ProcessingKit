@@ -1,8 +1,8 @@
 ![Header](https://github.com/natmark/ProcessingKit/blob/master/Resources/ProcessingKit-Header.png?raw=true)
 
 <p align="center">
-    <a href="https://travis-ci.com/natmark/ProcessingKit">
-        <img src="https://travis-ci.com/natmark/ProcessingKit.svg?token=nzmukddH8XeX8xpNA4qP&branch=master"
+    <a href="https://travis-ci.org/natmark/ProcessingKit">
+        <img src="https://travis-ci.org/natmark/ProcessingKit.svg?branch=master"
              alt="Build Status">
     </a>
     <a href="https://cocoapods.org/pods/ProcessingKit">
