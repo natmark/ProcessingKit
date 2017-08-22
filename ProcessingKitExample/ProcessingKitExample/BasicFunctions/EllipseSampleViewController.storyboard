@@ -1,44 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UJ4-ub-kBG">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SEC-GA-SGT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Ellipse Sample View Controller-->
-        <scene sceneID="M0k-Sb-cAC">
+        <scene sceneID="9l1-T5-Kvo">
             <objects>
-                <viewController id="UJ4-ub-kBG" customClass="EllipseSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="9pL-jk-bTW">
+                <viewController id="SEC-GA-SGT" customClass="EllipseSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uIX-TG-Jlw"/>
+                        <viewControllerLayoutGuide type="bottom" id="o6k-F3-Ob3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zaR-1p-pjV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Arj-5f-aHk" customClass="EllipseSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="djM-U0-qnF" customClass="EllipseSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Arj-5f-aHk" firstAttribute="top" secondItem="9pL-jk-bTW" secondAttribute="top" id="KmB-oI-SrJ"/>
-                            <constraint firstItem="Arj-5f-aHk" firstAttribute="leading" secondItem="9pL-jk-bTW" secondAttribute="leading" id="Zdq-ah-fNJ"/>
-                            <constraint firstItem="LAe-aB-wjf" firstAttribute="bottom" secondItem="Arj-5f-aHk" secondAttribute="bottom" id="h34-jS-cqi"/>
-                            <constraint firstItem="LAe-aB-wjf" firstAttribute="trailing" secondItem="Arj-5f-aHk" secondAttribute="trailing" id="vlk-1G-SRl"/>
+                            <constraint firstAttribute="trailing" secondItem="djM-U0-qnF" secondAttribute="trailing" id="6lh-au-Ue7"/>
+                            <constraint firstItem="o6k-F3-Ob3" firstAttribute="top" secondItem="djM-U0-qnF" secondAttribute="bottom" id="Ofs-QG-83G"/>
+                            <constraint firstItem="djM-U0-qnF" firstAttribute="leading" secondItem="zaR-1p-pjV" secondAttribute="leading" id="Ofz-dp-Q8E"/>
+                            <constraint firstItem="djM-U0-qnF" firstAttribute="top" secondItem="zaR-1p-pjV" secondAttribute="top" id="sjq-ub-LPB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="LAe-aB-wjf"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
-                        <outlet property="ellipseSampleView" destination="Arj-5f-aHk" id="TxQ-Gj-f56"/>
+                        <outlet property="ellipseSampleView" destination="djM-U0-qnF" id="bsP-CC-iGw"/>
+                        <outlet property="particlesSampleView" destination="djM-U0-qnF" id="nFh-aw-DnE"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xty-Up-U0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lRX-j2-Vvs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="79" y="161"/>
+            <point key="canvasLocation" x="-384.80000000000001" y="135.38230884557723"/>
         </scene>
     </scenes>
 </document>

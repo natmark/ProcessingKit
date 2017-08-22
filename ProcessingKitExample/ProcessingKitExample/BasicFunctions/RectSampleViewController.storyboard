@@ -1,44 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13168.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ch7-jb-ftZ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yj7-P4-J4b">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13147.4"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Rect Sample View Controller-->
-        <scene sceneID="jdi-xD-vIe">
+        <scene sceneID="2Es-HL-fRo">
             <objects>
-                <viewController id="ch7-jb-ftZ" customClass="RectSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mIn-pD-vhH">
+                <viewController id="yj7-P4-J4b" customClass="RectSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="00R-8s-p6X"/>
+                        <viewControllerLayoutGuide type="bottom" id="TPO-DB-VmN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hyl-ch-zdM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DBr-tt-AB9" customClass="RectSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rWo-ie-yj1" customClass="RectSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DBr-tt-AB9" firstAttribute="bottom" secondItem="7nK-86-fBK" secondAttribute="bottom" id="31t-iL-xwo"/>
-                            <constraint firstItem="DBr-tt-AB9" firstAttribute="top" secondItem="mIn-pD-vhH" secondAttribute="top" id="UQd-FQ-4zt"/>
-                            <constraint firstItem="DBr-tt-AB9" firstAttribute="trailing" secondItem="7nK-86-fBK" secondAttribute="trailing" id="Yaj-fs-yMf"/>
-                            <constraint firstItem="DBr-tt-AB9" firstAttribute="leading" secondItem="7nK-86-fBK" secondAttribute="leading" id="nLd-M0-VQO"/>
+                            <constraint firstItem="TPO-DB-VmN" firstAttribute="top" secondItem="rWo-ie-yj1" secondAttribute="bottom" id="Ipc-ee-4Cz"/>
+                            <constraint firstItem="rWo-ie-yj1" firstAttribute="top" secondItem="hyl-ch-zdM" secondAttribute="top" id="SNB-km-0gm"/>
+                            <constraint firstItem="rWo-ie-yj1" firstAttribute="leading" secondItem="hyl-ch-zdM" secondAttribute="leading" id="oMx-0R-0hm"/>
+                            <constraint firstAttribute="trailing" secondItem="rWo-ie-yj1" secondAttribute="trailing" id="zsD-yQ-rvM"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7nK-86-fBK"/>
                     </view>
-                    <extendedEdge key="edgesForExtendedLayout"/>
                     <connections>
-                        <outlet property="rectSampleView" destination="DBr-tt-AB9" id="4zi-7l-oob"/>
+                        <outlet property="rectSampleView" destination="rWo-ie-yj1" id="EeQ-XX-BsT"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UYH-RQ-UC1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7s-d1-sTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="129.98500749625188"/>
+            <point key="canvasLocation" x="-384.80000000000001" y="135.38230884557723"/>
         </scene>
     </scenes>
 </document>
