@@ -13,6 +13,7 @@ public protocol Shape {
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
+    func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
 }
 
 extension ProcessingView: Shape {
@@ -55,5 +56,10 @@ extension ProcessingView: Shape {
 
         g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+    }
+    public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+        setGraphicsConfiguration(context: g)
+        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: true)
     }
 }
