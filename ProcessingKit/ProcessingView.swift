@@ -60,7 +60,7 @@ open class ProcessingView: UIImageView {
 
     private func initializer() {
         loopModel = LoopModel(timer: self.timer)
-        frameModel = FrameModel(frameComponents: self.frameComponents, frame: self.frame, timer: self.timer)
+        frameModel = FrameModel(frameComponents: self.frameComponents, timer: self.timer)
         shapeModel = ShapeModel(colorComponents: self.colorComponents)
         eventModel = EventModel(processingView: self, eventComponents: self.eventComponents)
         colorModel = ColorModel(processingView: self, colorComponents: self.colorComponents)

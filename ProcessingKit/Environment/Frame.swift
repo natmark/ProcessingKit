@@ -14,8 +14,6 @@ class FrameComponents {
 
 protocol FrameModelContractor {
     var frameRate: CGFloat { get }
-    var width: CGFloat { get }
-    var height: CGFloat { get }
     mutating func frameRate(_ fps: CGFloat)
 }
 
@@ -23,20 +21,12 @@ struct FrameModel: FrameModelContractor {
     var frameRate: CGFloat {
         return self.frameComponents.frameRate
     }
-    var width: CGFloat {
-        return self.frame?.size.width ?? 0
-    }
-    var height: CGFloat {
-        return self.frame?.size.height ?? 0
-    }
 
     private var frameComponents: FrameComponents
-    private var frame: CGRect?
     private var timer: Timer?
 
-    init(frameComponents: FrameComponents, frame: CGRect?, timer: Timer?) {
+    init(frameComponents: FrameComponents, timer: Timer?) {
         self.frameComponents = frameComponents
-        self.frame = frame
         self.timer = timer
     }
 
@@ -51,10 +41,10 @@ extension ProcessingView: FrameModelContractor {
     }
 
     public var width: CGFloat {
-        return self.frameModel.width
+        return self.frame.size.width
     }
 
     public var height: CGFloat {
-        return  self.frameModel.height
+        return  self.frame.size.height
     }
 }
