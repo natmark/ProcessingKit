@@ -6,22 +6,33 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-public protocol Image {
+public protocol ImageModelContractor {
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
 }
 
-extension ProcessingView: Image {
-    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
+struct ImageModel: ImageModelContractor {
+    func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         if let cgImg = img.cgImage {
             g?.draw(cgImg, in: CGRect(x: x, y: y, width: img.size.width, height: img.size.height))
         }
     }
-    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+
+    func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         if let cgImg = img.cgImage {
             g?.draw(cgImg, in: CGRect(x: x, y: y, width: width, height: height))
         }
+    }
+}
+
+extension ProcessingView: ImageModelContractor {
+    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
+        self.imageModel.image(img, x, y)
+    }
+
+    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+        self.imageModel.image(img, x, y, width, height)
     }
 }

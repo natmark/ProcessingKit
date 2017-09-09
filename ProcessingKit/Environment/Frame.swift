@@ -8,34 +8,53 @@
 
 import Foundation
 
-struct FrameComponents {
-    var frameRate_: CGFloat = 60.0
+class FrameComponents {
+    var frameRate: CGFloat = 60.0
 }
 
-public protocol Frame {
-    func frameRate(_ fps: CGFloat)
+protocol FrameModelContractor {
     var frameRate: CGFloat { get }
     var width: CGFloat { get }
     var height: CGFloat { get }
+    mutating func frameRate(_ fps: CGFloat)
 }
 
-extension ProcessingView: Frame {
-    public func frameRate(_ fps: CGFloat) {
-        frameComponents.frameRate_ = fps
-        timer?.invalidate()
-        timer = nil
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate_), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+struct FrameModel: FrameModelContractor {
+    var frameRate: CGFloat {
+        return self.frameComponents.frameRate
+    }
+    var width: CGFloat {
+        return self.frame?.size.width ?? 0
+    }
+    var height: CGFloat {
+        return self.frame?.size.height ?? 0
     }
 
+    private var frameComponents: FrameComponents
+    private var frame: CGRect?
+    private var timer: Timer?
+
+    init(frameComponents: FrameComponents, frame: CGRect?, timer: Timer?) {
+        self.frameComponents = frameComponents
+        self.frame = frame
+        self.timer = timer
+    }
+
+    mutating func frameRate(_ fps: CGFloat) {
+        self.frameComponents.frameRate = fps
+    }
+}
+
+extension ProcessingView: FrameModelContractor {
     public var frameRate: CGFloat {
-        return frameComponents.frameRate_
+        return self.frameModel.frameRate
     }
 
     public var width: CGFloat {
-        return self.frame.size.width
+        return self.frameModel.width
     }
 
     public var height: CGFloat {
-        return self.frame.size.height
+        return  self.frameModel.height
     }
 }

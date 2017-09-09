@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol Shape {
+protocol ShapeModelContractor {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
@@ -16,21 +16,21 @@ public protocol Shape {
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
 }
 
-extension ProcessingView: Shape {
-    func setGraphicsConfiguration(context: CGContext?) {
-        context?.setFillColor(self.colorComponents.fill_.cgColor)
-        context?.setStrokeColor(self.colorComponents.stroke_.cgColor)
-        context?.setLineWidth(self.colorComponents.strokeWeight_)
+struct ShapeModel: ShapeModelContractor {
+    private var colorComponents: ColorComponents
+
+    init(colorComponents: ColorComponents) {
+        self.colorComponents = colorComponents
     }
 
-    public func point(_ x: CGFloat, _ y: CGFloat) {
+    func point(_ x: CGFloat, _ y: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
 
-        g?.setFillColor(self.colorComponents.stroke_.cgColor)
+        g?.setFillColor(self.colorComponents.stroke.cgColor)
         g?.fill(CGRect(x: x, y: y, width: 1.0, height: 1.0))
     }
 
-    public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+    func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.saveGState()
 
@@ -42,7 +42,7 @@ extension ProcessingView: Shape {
         g?.restoreGState()
     }
 
-    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
 
@@ -50,16 +50,45 @@ extension ProcessingView: Shape {
         g?.fill(CGRect(x: x, y: y, width: width, height: height))
     }
 
-    public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
     }
-    public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
+
+    func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
         g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: true)
+    }
+
+    private func setGraphicsConfiguration(context: CGContext?) {
+        context?.setFillColor(self.colorComponents.fill.cgColor)
+        context?.setStrokeColor(self.colorComponents.stroke.cgColor)
+        context?.setLineWidth(self.colorComponents.strokeWeight)
+    }
+}
+
+extension ProcessingView: ShapeModelContractor {
+    public func point(_ x: CGFloat, _ y: CGFloat) {
+        self.shapeModel.point(x, y)
+    }
+
+    public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        self.shapeModel.line(x1, y1, x2, y2)
+    }
+
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+        self.shapeModel.rect(x, y, width, height)
+    }
+
+    public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+        self.shapeModel.ellipse(x, y, width, height)
+    }
+
+    public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
+        self.shapeModel.arc(x, y, radius, start, stop)
     }
 }

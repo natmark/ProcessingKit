@@ -8,51 +8,91 @@
 
 import Foundation
 
-struct ColorComponents {
-    var fill_: UIColor = UIColor.white
-    var stroke_: UIColor = UIColor.clear
-    var strokeWeight_: CGFloat = 1.0
+class ColorComponents {
+    var fill: UIColor = UIColor.white
+    var stroke: UIColor = UIColor.clear
+    var strokeWeight: CGFloat = 1.0
 }
 
-public protocol Color {
+protocol ColorModelContractor {
     func background(_ color: UIColor)
     func clear()
 
-    func fill(_ color: UIColor)
-    func stroke(_ color: UIColor)
-    func strokeWeight(_ weight: CGFloat)
-    func noFill()
-    func noStroke()
+    mutating func fill(_ color: UIColor)
+    mutating func stroke(_ color: UIColor)
+    mutating func strokeWeight(_ weight: CGFloat)
+    mutating func noFill()
+    mutating func noStroke()
 }
 
-extension ProcessingView: Color {
-    public func background(_ color: UIColor) {
-        let g = UIGraphicsGetCurrentContext()
-        g!.clear(self.bounds)
-        self.backgroundColor = color
+struct ColorModel: ColorModelContractor {
+    private var processingView: ProcessingView
+    private var colorComponents: ColorComponents
+
+    init(processingView: ProcessingView, colorComponents: ColorComponents) {
+        self.processingView = processingView
+        self.colorComponents = colorComponents
     }
-    public func clear() {
+
+    func background(_ color: UIColor) {
         let g = UIGraphicsGetCurrentContext()
-        g!.clear(self.bounds)
+        g!.clear(self.processingView.bounds)
+        self.processingView.backgroundColor = color
+    }
+
+    func clear() {
+        let g = UIGraphicsGetCurrentContext()
+        g!.clear(self.processingView.bounds)
         self.background(UIColor.white)
     }
+
+    mutating func fill(_ color: UIColor) {
+        self.colorComponents.fill = color
+    }
+
+    mutating func stroke(_ color: UIColor) {
+        self.colorComponents.stroke = color
+    }
+
+    mutating func strokeWeight(_ weight: CGFloat) {
+        self.colorComponents.strokeWeight = weight
+    }
+
+    mutating func noFill() {
+        self.colorComponents.fill = UIColor.clear
+    }
+
+    mutating func noStroke() {
+        self.colorComponents.stroke = UIColor.clear
+    }
+}
+
+extension ProcessingView: ColorModelContractor {
+    public func background(_ color: UIColor) {
+        self.colorModel.background(color)
+    }
+
+    public func clear() {
+        self.colorModel.clear()
+    }
+
     public func fill(_ color: UIColor) {
-        self.colorComponents.fill_ = color
+        self.colorModel.fill(color)
     }
 
     public func stroke(_ color: UIColor) {
-        self.colorComponents.stroke_ = color
+        self.colorModel.stroke(color)
     }
 
     public func strokeWeight(_ weight: CGFloat) {
-        self.colorComponents.strokeWeight_ = weight
+        self.colorModel.strokeWeight(weight)
     }
 
     public func noFill() {
-        self.colorComponents.fill_ = UIColor.clear
+        self.colorModel.noFill()
     }
 
     public func noStroke() {
-        self.colorComponents.stroke_ = UIColor.clear
+        self.colorModel.noStroke()
     }
 }
