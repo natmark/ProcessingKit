@@ -13,28 +13,13 @@ protocol LoopModelContractor {
     func noLoop()
 }
 
-struct LoopModel: LoopModelContractor {
-    private var timer: Timer?
-
-    init(timer: Timer?) {
-        self.timer = timer
-    }
-
-    func loop() {
+extension ProcessingView: LoopModelContractor {
+    public func loop() {
         self.timer?.fire()
     }
 
-    func noLoop() {
-        self.timer?.invalidate()
-    }
-}
-
-extension ProcessingView: LoopModelContractor {
-    public func loop() {
-        self.loopModel.loop()
-    }
-
     public func noLoop() {
-        self.loopModel.noLoop()
+        self.timer?.invalidate()
+        self.timer = nil
     }
 }
