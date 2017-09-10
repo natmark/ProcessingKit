@@ -70,7 +70,7 @@ Connect the UIImageView to SampleView Class
  }
  
  override func viewWillDisappear(_ animated: Bool) { 
-     sampleView.noLoop() // 
+     sampleView.noLoop()
  } 
 ```
 
