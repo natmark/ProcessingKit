@@ -19,36 +19,52 @@ open class ProcessingView: UIImageView {
 
     public weak var delegate: ProcessingViewDelegate? = nil
 
-    // MARK: internal properties
+    // MARK: Internal properties
     lazy var frameModel: FrameModelContractor! = {
-        return FrameModel(frameComponents: self.frameComponents, timer: self.timer)
+        return FrameModel(
+            frameComponents: self.frameComponents,
+            timer: self.timer
+        )
     }()
     lazy var shapeModel: ShapeModelContractor! = {
-        return ShapeModel(colorComponents: self.colorComponents)
+        return ShapeModel(
+            colorComponents: self.colorComponents
+        )
     }()
     lazy var eventModel: EventModelContractor! = {
-        return EventModel(processingView: self, eventComponents: self.eventComponents)
+        return EventModel(
+            frameComponents: self.frameComponents,
+            eventComponents: self.eventComponents
+        )
     }()
     lazy var colorModel: ColorModelContractor! = {
-        return ColorModel(processingView: self, colorComponents: self.colorComponents)
+        return ColorModel(
+            colorComponents: self.colorComponents,
+            frameComponents: self.frameComponents
+        )
     }()
     lazy var textModel: TextModelContractor! = {
-        return TextModel(processingView: self, textComponents: self.textComponents, colorComponents: self.colorComponents)
+        return TextModel(
+            frameComponents: self.frameComponents,
+            textComponents: self.textComponents,
+            colorComponents: self.colorComponents
+        )
     }()
     lazy var imageModel: ImageModelContractor! = {
         return ImageModel()
     }()
     lazy var timer: Timer? = nil
 
-    // MARK: fileprivate properties
-    fileprivate var colorComponents = ColorComponents()
-    fileprivate var eventComponents = EventComponents()
-    fileprivate var textComponents = TextComponents()
-    fileprivate var frameComponents = FrameComponents()
+    // MARK: Private properties
+    private var colorComponents = ColorComponents()
+    private var eventComponents = EventComponents()
+    private var textComponents = TextComponents()
+    private var frameComponents = FrameComponents()
 
     // Flag for setup function (setup function execute only once)
-    fileprivate var firstcall: Bool = true
+    private var firstcall: Bool = true
 
+    // MARK: - Initializer
     public init() {
         super.init(frame: CGRect.zero)
         self.configuration()
@@ -71,6 +87,11 @@ open class ProcessingView: UIImageView {
         self.isUserInteractionEnabled = true
     }
 
+    private func run() {
+        self.frameRate(60.0)
+    }
+
+    // MARK: - Notifications
     @objc private func suspend(notification: NSNotification) {
         self.noLoop()
     }
@@ -79,24 +100,17 @@ open class ProcessingView: UIImageView {
         self.loop()
     }
 
-    private func run() {
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
-    }
-
-    @objc fileprivate func update(timer: Timer) {
-        self.draw(self.frame)
-    }
-
+    // MARK: - Override Methods
     open override func draw(_ rect: CGRect) {
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
-        // setup
+        // Setup
         if firstcall {
             self.firstcall = false
             self.delegate?.setup?()
         }
 
-        // touch events
+        // Touch events
         if self.eventComponents.fingerTapped {
             self.eventComponents.fingerTapped = false
             self.delegate?.fingerTapped?()
@@ -110,7 +124,7 @@ open class ProcessingView: UIImageView {
             self.delegate?.fingerReleased?()
         }
 
-        // draw
+        // Draw
         self.delegate?.draw?()
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
@@ -121,20 +135,17 @@ open class ProcessingView: UIImageView {
             return
         }
     }
+
+    // MARK: - Update view bounds
+    open override var bounds: CGRect {
+        didSet {
+            frameComponents.bounds = self.bounds
+        }
+    }
+
+    // MARK: - deinit
     deinit {
         self.timer?.invalidate()
         self.timer = nil
-    }
-}
-
-// MARK: - Extensions
-
-extension ProcessingView {
-    public func frameRate(_ fps: CGFloat) {
-        self.frameModel.frameRate(fps)
-
-        self.timer?.invalidate()
-        self.timer = nil
-        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 }

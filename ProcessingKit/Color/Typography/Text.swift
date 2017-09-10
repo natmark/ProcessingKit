@@ -18,18 +18,18 @@ protocol TextModelContractor {
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat)
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func textWidth(_ str: String) -> CGFloat
-    mutating func textSize(_ size: CGFloat)
-    mutating func textFont(_ font: UIFont)
-    mutating func textAlign(_ allignX: NSTextAlignment)
+    func textSize(_ size: CGFloat)
+    func textFont(_ font: UIFont)
+    func textAlign(_ allignX: NSTextAlignment)
 }
 
 struct TextModel: TextModelContractor {
     private var textComponents: TextComponents
     private var colorComponents: ColorComponents
-    private var processingView: ProcessingView
+    private var frameComponents: FrameComponents
 
-    init(processingView: ProcessingView, textComponents: TextComponents, colorComponents: ColorComponents) {
-        self.processingView = processingView
+    init(frameComponents: FrameComponents, textComponents: TextComponents, colorComponents: ColorComponents) {
+        self.frameComponents = frameComponents
         self.textComponents = textComponents
         self.colorComponents = colorComponents
     }
@@ -49,12 +49,12 @@ struct TextModel: TextModelContractor {
 
         g?.saveGState()
 
-        g?.translateBy(x: 0, y: self.processingView.frame.size.height)
+        g?.translateBy(x: 0, y: frameComponents.bounds.size.height)
         g?.scaleBy(x: 1.0, y: -1.0)
         g?.textMatrix = CGAffineTransform.identity
 
         let path: CGMutablePath = CGMutablePath()
-        let bounds: CGRect = CGRect(x: x, y: -y + self.processingView.frame.size.height, width: width, height: height)
+        let bounds: CGRect = CGRect(x: x, y: -y + frameComponents.bounds.size.height, width: width, height: height)
         path.addRect(bounds)
 
         let paragraph = NSMutableParagraphStyle()
@@ -84,21 +84,22 @@ struct TextModel: TextModelContractor {
         return size.width
     }
 
-    mutating func textSize(_ size: CGFloat) {
+    func textSize(_ size: CGFloat) {
         self.textComponents.textSize = size
         self.textComponents.textFont = UIFont.systemFont(ofSize: size)
     }
 
-    mutating func textFont(_ font: UIFont) {
+    func textFont(_ font: UIFont) {
         self.textComponents.textFont = font
         self.textComponents.textSize = font.pointSize
     }
 
-    mutating func textAlign(_ allignX: NSTextAlignment) {
+    func textAlign(_ allignX: NSTextAlignment) {
         self.textComponents.textAlignX = allignX
     }
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: TextModelContractor {
     public func text(_ str: String, _ x: CGFloat, _ y: CGFloat) {
         self.textModel.text(str, x, y)

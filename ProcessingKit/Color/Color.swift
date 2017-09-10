@@ -17,63 +17,63 @@ class ColorComponents {
 protocol ColorModelContractor {
     func background(_ color: UIColor)
     func clear()
-
-    mutating func fill(_ color: UIColor)
-    mutating func stroke(_ color: UIColor)
-    mutating func strokeWeight(_ weight: CGFloat)
-    mutating func noFill()
-    mutating func noStroke()
+    func fill(_ color: UIColor)
+    func stroke(_ color: UIColor)
+    func strokeWeight(_ weight: CGFloat)
+    func noFill()
+    func noStroke()
 }
 
 struct ColorModel: ColorModelContractor {
-    private var processingView: ProcessingView
     private var colorComponents: ColorComponents
+    private var frameComponents: FrameComponents
 
-    init(processingView: ProcessingView, colorComponents: ColorComponents) {
-        self.processingView = processingView
+    init(colorComponents: ColorComponents, frameComponents: FrameComponents) {
         self.colorComponents = colorComponents
+        self.frameComponents = frameComponents
     }
 
     func background(_ color: UIColor) {
         let g = UIGraphicsGetCurrentContext()
-        g!.clear(self.processingView.bounds)
-        self.processingView.backgroundColor = color
+        g!.clear(self.frameComponents.bounds)
     }
 
     func clear() {
         let g = UIGraphicsGetCurrentContext()
-        g!.clear(self.processingView.bounds)
-        self.background(UIColor.white)
+        g!.clear(self.frameComponents.bounds)
     }
 
-    mutating func fill(_ color: UIColor) {
+    func fill(_ color: UIColor) {
         self.colorComponents.fill = color
     }
 
-    mutating func stroke(_ color: UIColor) {
+    func stroke(_ color: UIColor) {
         self.colorComponents.stroke = color
     }
 
-    mutating func strokeWeight(_ weight: CGFloat) {
+    func strokeWeight(_ weight: CGFloat) {
         self.colorComponents.strokeWeight = weight
     }
 
-    mutating func noFill() {
+    func noFill() {
         self.colorComponents.fill = UIColor.clear
     }
 
-    mutating func noStroke() {
+    func noStroke() {
         self.colorComponents.stroke = UIColor.clear
     }
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: ColorModelContractor {
     public func background(_ color: UIColor) {
         self.colorModel.background(color)
+        self.backgroundColor = color
     }
 
     public func clear() {
         self.colorModel.clear()
+        self.background(UIColor.white)
     }
 
     public func fill(_ color: UIColor) {

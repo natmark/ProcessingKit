@@ -13,6 +13,7 @@ protocol LoopModelContractor {
     func noLoop()
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: LoopModelContractor {
     public func loop() {
         self.timer?.fire()

@@ -71,6 +71,7 @@ struct ShapeModel: ShapeModelContractor {
     }
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: ShapeModelContractor {
     public func point(_ x: CGFloat, _ y: CGFloat) {
         self.shapeModel.point(x, y)
