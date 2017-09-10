@@ -68,6 +68,10 @@ Connect the UIImageView to SampleView Class
      sampleView.delegate = sampleView
      sampleView.isUserInteractionEnabled = true // If you want to use touch events
  }
+ 
+ override func viewWillDisappear(_ animated: Bool) { 
+     sampleView.noLoop() // 
+ } 
 ```
 
 ## Instration
