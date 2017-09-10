@@ -8,27 +8,36 @@
 
 import Foundation
 
-struct FrameComponents {
-    var frameRate_: CGFloat = 60.0
+class FrameComponents {
+    var frameRate: CGFloat = 60.0
 }
 
-public protocol Frame {
-    func frameRate(_ fps: CGFloat)
+protocol FrameModelContractor {
     var frameRate: CGFloat { get }
-    var width: CGFloat { get }
-    var height: CGFloat { get }
+    mutating func frameRate(_ fps: CGFloat)
 }
 
-extension ProcessingView: Frame {
-    public func frameRate(_ fps: CGFloat) {
-        frameComponents.frameRate_ = fps
-        timer?.invalidate()
-        timer = nil
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate_), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+struct FrameModel: FrameModelContractor {
+    var frameRate: CGFloat {
+        return self.frameComponents.frameRate
     }
 
+    private var frameComponents: FrameComponents
+    private var timer: Timer?
+
+    init(frameComponents: FrameComponents, timer: Timer?) {
+        self.frameComponents = frameComponents
+        self.timer = timer
+    }
+
+    mutating func frameRate(_ fps: CGFloat) {
+        self.frameComponents.frameRate = fps
+    }
+}
+
+extension ProcessingView: FrameModelContractor {
     public var frameRate: CGFloat {
-        return frameComponents.frameRate_
+        return self.frameModel.frameRate
     }
 
     public var width: CGFloat {
@@ -36,6 +45,6 @@ extension ProcessingView: Frame {
     }
 
     public var height: CGFloat {
-        return self.frame.size.height
+        return  self.frame.size.height
     }
 }

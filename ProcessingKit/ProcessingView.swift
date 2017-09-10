@@ -17,14 +17,23 @@
 
 open class ProcessingView: UIImageView {
 
-    public var delegate: ProcessingViewDelegate? = nil
+    public weak var delegate: ProcessingViewDelegate? = nil
 
     // MARK: internal properties
-    var colorComponents = ColorComponents()
-    var eventComponents = EventComponents()
-    var textComponents = TextComponents()
-    var frameComponents = FrameComponents()
-    var timer: Timer? = nil
+    var loopModel: LoopModelContractor!
+    var frameModel: FrameModelContractor!
+    var shapeModel: ShapeModelContractor!
+    var eventModel: EventModelContractor!
+    var colorModel: ColorModelContractor!
+    var textModel: TextModelContractor!
+    var imageModel: ImageModelContractor!
+
+    // MARK: fileprivate properties
+    fileprivate var colorComponents = ColorComponents()
+    fileprivate var eventComponents = EventComponents()
+    fileprivate var textComponents = TextComponents()
+    fileprivate var frameComponents = FrameComponents()
+    fileprivate var timer: Timer? = nil
 
     // Flag for setup function (setup function execute only once)
     fileprivate var firstcall: Bool = true
@@ -37,14 +46,26 @@ open class ProcessingView: UIImageView {
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.initializer()
         self.configuration()
         self.run()
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.initializer()
         self.configuration()
         self.run()
+    }
+
+    private func initializer() {
+        loopModel = LoopModel(timer: self.timer)
+        frameModel = FrameModel(frameComponents: self.frameComponents, timer: self.timer)
+        shapeModel = ShapeModel(colorComponents: self.colorComponents)
+        eventModel = EventModel(processingView: self, eventComponents: self.eventComponents)
+        colorModel = ColorModel(processingView: self, colorComponents: self.colorComponents)
+        textModel = TextModel(processingView: self, textComponents: self.textComponents, colorComponents: self.colorComponents)
+        imageModel = ImageModel()
     }
 
     private func configuration() {
@@ -52,10 +73,10 @@ open class ProcessingView: UIImageView {
     }
 
     private func run() {
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate_), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 
-    func update(timer: Timer) {
+    @objc fileprivate func update(timer: Timer) {
         self.draw(self.frame)
     }
 
@@ -63,7 +84,7 @@ open class ProcessingView: UIImageView {
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
         // setup
-        if(firstcall) {
+        if firstcall {
             self.firstcall = false
             self.delegate?.setup?()
         }
@@ -85,5 +106,17 @@ open class ProcessingView: UIImageView {
         self.delegate?.draw?()
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
+    }
+}
+
+// MARK: - Extensions
+
+extension ProcessingView {
+    public func frameRate(_ fps: CGFloat) {
+        self.frameModel.frameRate(fps)
+
+        self.timer?.invalidate()
+        self.timer = nil
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / frameComponents.frameRate), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 }

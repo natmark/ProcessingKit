@@ -8,17 +8,33 @@
 
 import Foundation
 
-public protocol Loop {
+protocol LoopModelContractor {
     func loop()
     func noLoop()
 }
 
-extension ProcessingView: Loop {
-    public func loop() {
+struct LoopModel: LoopModelContractor {
+    private var timer: Timer?
+
+    init(timer: Timer?) {
+        self.timer = timer
+    }
+
+    func loop() {
         self.timer?.fire()
     }
 
-    public func noLoop() {
+    func noLoop() {
         self.timer?.invalidate()
+    }
+}
+
+extension ProcessingView: LoopModelContractor {
+    public func loop() {
+        self.loopModel.loop()
+    }
+
+    public func noLoop() {
+        self.loopModel.noLoop()
     }
 }
