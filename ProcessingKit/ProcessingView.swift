@@ -40,6 +40,7 @@ open class ProcessingView: UIImageView {
 
     public init() {
         super.init(frame: CGRect.zero)
+        self.initializer()
         self.configuration()
         self.run()
     }
@@ -95,6 +96,7 @@ open class ProcessingView: UIImageView {
             self.firstcall = false
             self.delegate?.setup?()
         }
+
         // touch events
         if self.eventComponents.fingerTapped {
             self.eventComponents.fingerTapped = false
@@ -113,11 +115,16 @@ open class ProcessingView: UIImageView {
         self.delegate?.draw?()
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
+        UIGraphicsEndImageContext()
 
         guard let _ = self.delegate?.draw else {
             self.timer?.invalidate()
             return
         }
+    }
+    deinit {
+        self.timer?.invalidate()
+        self.timer = nil
     }
 }
 
