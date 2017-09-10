@@ -73,11 +73,11 @@ open class ProcessingView: UIImageView {
         NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: .UIApplicationWillEnterForeground, object: nil)
     }
 
-    @objc private func suspend(notification: NSNotification){
+    @objc private func suspend(notification: NSNotification) {
         self.noLoop()
     }
 
-    @objc private func resume(notification: NSNotification){
+    @objc private func resume(notification: NSNotification) {
         self.loop()
     }
 
