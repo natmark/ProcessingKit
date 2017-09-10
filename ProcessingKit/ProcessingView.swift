@@ -69,8 +69,6 @@ open class ProcessingView: UIImageView {
 
     private func configuration() {
         self.isUserInteractionEnabled = true
-        NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: .UIApplicationWillResignActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: .UIApplicationWillEnterForeground, object: nil)
     }
 
     @objc private func suspend(notification: NSNotification){
