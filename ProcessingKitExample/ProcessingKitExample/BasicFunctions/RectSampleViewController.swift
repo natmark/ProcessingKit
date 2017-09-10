@@ -11,10 +11,15 @@ import UIKit
 class RectSampleViewController: UIViewController {
 
     @IBOutlet weak var rectSampleView: RectSampleView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         rectSampleView.delegate = rectSampleView
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        rectSampleView.noLoop()
     }
 
     override func didReceiveMemoryWarning() {

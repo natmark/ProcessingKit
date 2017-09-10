@@ -27,13 +27,13 @@ open class ProcessingView: UIImageView {
     var colorModel: ColorModelContractor!
     var textModel: TextModelContractor!
     var imageModel: ImageModelContractor!
+    var timer: Timer? = nil
 
     // MARK: fileprivate properties
     fileprivate var colorComponents = ColorComponents()
     fileprivate var eventComponents = EventComponents()
     fileprivate var textComponents = TextComponents()
     fileprivate var frameComponents = FrameComponents()
-    fileprivate var timer: Timer? = nil
 
     // Flag for setup function (setup function execute only once)
     fileprivate var firstcall: Bool = true
@@ -59,7 +59,6 @@ open class ProcessingView: UIImageView {
     }
 
     private func initializer() {
-        loopModel = LoopModel(timer: self.timer)
         frameModel = FrameModel(frameComponents: self.frameComponents, timer: self.timer)
         shapeModel = ShapeModel(colorComponents: self.colorComponents)
         eventModel = EventModel(processingView: self, eventComponents: self.eventComponents)
@@ -70,6 +69,16 @@ open class ProcessingView: UIImageView {
 
     private func configuration() {
         self.isUserInteractionEnabled = true
+        NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: .UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(suspend), name: .UIApplicationWillEnterForeground, object: nil)
+    }
+
+    @objc private func suspend(notification: NSNotification){
+        self.noLoop()
+    }
+
+    @objc private func resume(notification: NSNotification){
+        self.loop()
     }
 
     private func run() {
@@ -106,6 +115,11 @@ open class ProcessingView: UIImageView {
         self.delegate?.draw?()
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
+
+        guard let _ = self.delegate?.draw else {
+            self.timer?.invalidate()
+            return
+        }
     }
 }
 
