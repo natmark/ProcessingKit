@@ -1,0 +1,39 @@
+disabled_rules: # rule identifiers to exclude from running
+  - force_cast
+  - force_try
+  - function_parameter_count
+  - line_length
+  - todo
+  - trailing_comma
+  - valid_docs
+  - variable_name
+included:
+  - ProcessingKit/
+excluded: # paths to ignore during linting.
+type_body_length:
+  - 400 # warning
+  - 500 # error
+function_body_length:
+  - 150 # warning
+  - 200 # error
+file_length:
+  warning: 600 # warning
+  error: 1000 # error
+type_name:
+  max_length:
+    warning: 60 # warning
+    error: 80 # error
+vertical_whitespace:
+      severity: error
+trailing_newline:
+      severity: error
+variable_name:
+  min_length: # not possible to disable this partial rule, so set it to zero
+    warning: 0
+    error: 0
+  max_length:
+    warning: 60 # warning
+    error: 80 # error
+  excluded:
+    - id
+    - e
