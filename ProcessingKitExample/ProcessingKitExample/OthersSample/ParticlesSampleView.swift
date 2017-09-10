@@ -35,7 +35,7 @@ class ParticlesSampleView : ProcessingView, ProcessingViewDelegate {
 
         var r: CGFloat = 255
         var g: CGFloat = 255
-        var b: CGFloat = 255
+        let b: CGFloat = 255
 
         for dot in dots {
             r = (dot.x / width) * 255
