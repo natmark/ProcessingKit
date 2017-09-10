@@ -20,14 +20,25 @@ open class ProcessingView: UIImageView {
     public weak var delegate: ProcessingViewDelegate? = nil
 
     // MARK: internal properties
-    var loopModel: LoopModelContractor!
-    var frameModel: FrameModelContractor!
-    var shapeModel: ShapeModelContractor!
-    var eventModel: EventModelContractor!
-    var colorModel: ColorModelContractor!
-    var textModel: TextModelContractor!
-    var imageModel: ImageModelContractor!
-    var timer: Timer? = nil
+    lazy var frameModel: FrameModelContractor! = {
+        return FrameModel(frameComponents: self.frameComponents, timer: self.timer)
+    }()
+    lazy var shapeModel: ShapeModelContractor! = {
+        return ShapeModel(colorComponents: self.colorComponents)
+    }()
+    lazy var eventModel: EventModelContractor! = {
+        return EventModel(processingView: self, eventComponents: self.eventComponents)
+    }()
+    lazy var colorModel: ColorModelContractor! = {
+        return ColorModel(processingView: self, colorComponents: self.colorComponents)
+    }()
+    lazy var textModel: TextModelContractor! = {
+        return TextModel(processingView: self, textComponents: self.textComponents, colorComponents: self.colorComponents)
+    }()
+    lazy var imageModel: ImageModelContractor! = {
+        return ImageModel()
+    }()
+    lazy var timer: Timer? = nil
 
     // MARK: fileprivate properties
     fileprivate var colorComponents = ColorComponents()
@@ -40,32 +51,20 @@ open class ProcessingView: UIImageView {
 
     public init() {
         super.init(frame: CGRect.zero)
-        self.initializer()
         self.configuration()
         self.run()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.initializer()
         self.configuration()
         self.run()
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        self.initializer()
         self.configuration()
         self.run()
-    }
-
-    private func initializer() {
-        frameModel = FrameModel(frameComponents: self.frameComponents, timer: self.timer)
-        shapeModel = ShapeModel(colorComponents: self.colorComponents)
-        eventModel = EventModel(processingView: self, eventComponents: self.eventComponents)
-        colorModel = ColorModel(processingView: self, colorComponents: self.colorComponents)
-        textModel = TextModel(processingView: self, textComponents: self.textComponents, colorComponents: self.colorComponents)
-        imageModel = ImageModel()
     }
 
     private func configuration() {
