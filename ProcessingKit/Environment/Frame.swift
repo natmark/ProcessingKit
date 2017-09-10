@@ -9,19 +9,18 @@
 import Foundation
 
 class FrameComponents {
+    var bounds: CGRect = CGRect.zero
     var frameRate: CGFloat = 60.0
 }
 
 protocol FrameModelContractor {
+    var width: CGFloat { get }
+    var height: CGFloat { get }
     var frameRate: CGFloat { get }
-    mutating func frameRate(_ fps: CGFloat)
+    func frameRate(_ fps: CGFloat)
 }
 
 struct FrameModel: FrameModelContractor {
-    var frameRate: CGFloat {
-        return self.frameComponents.frameRate
-    }
-
     private var frameComponents: FrameComponents
     private var timer: Timer?
 
@@ -30,21 +29,46 @@ struct FrameModel: FrameModelContractor {
         self.timer = timer
     }
 
-    mutating func frameRate(_ fps: CGFloat) {
+    var width: CGFloat {
+        return self.frameComponents.bounds.size.width
+    }
+
+    var height: CGFloat {
+        return self.frameComponents.bounds.size.height
+    }
+
+    var frameRate: CGFloat {
+        return self.frameComponents.frameRate
+    }
+
+    func frameRate(_ fps: CGFloat) {
         self.frameComponents.frameRate = fps
     }
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: FrameModelContractor {
     public var frameRate: CGFloat {
         return self.frameModel.frameRate
     }
 
     public var width: CGFloat {
-        return self.frame.size.width
+        return self.frameModel.width
     }
 
     public var height: CGFloat {
-        return  self.frame.size.height
+        return self.frameModel.height
+    }
+
+    public func frameRate(_ fps: CGFloat) {
+        self.frameModel.frameRate(fps)
+
+        self.timer?.invalidate()
+        self.timer = nil
+        self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / fps), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
+    }
+
+    @objc private func update(timer: Timer) {
+        self.draw(self.frame)
     }
 }

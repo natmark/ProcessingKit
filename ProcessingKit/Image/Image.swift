@@ -27,6 +27,7 @@ struct ImageModel: ImageModelContractor {
     }
 }
 
+// MARK: - ProcessingView Public APIs
 extension ProcessingView: ImageModelContractor {
     public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
         self.imageModel.image(img, x, y)
