@@ -13,14 +13,14 @@ class FrameComponents {
     var frameRate: CGFloat = 60.0
 }
 
-protocol FrameModelContractor {
+protocol FrameModelContract {
     var width: CGFloat { get }
     var height: CGFloat { get }
     var frameRate: CGFloat { get }
     func frameRate(_ fps: CGFloat)
 }
 
-struct FrameModel: FrameModelContractor {
+struct FrameModel: FrameModelContract {
     private var frameComponents: FrameComponents
     private var timer: Timer?
 
@@ -47,7 +47,7 @@ struct FrameModel: FrameModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: FrameModelContractor {
+extension ProcessingView: FrameModelContract {
     public var frameRate: CGFloat {
         return self.frameModel.frameRate
     }

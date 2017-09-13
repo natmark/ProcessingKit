@@ -14,7 +14,7 @@ class ColorComponents {
     var strokeWeight: CGFloat = 1.0
 }
 
-protocol ColorModelContractor {
+protocol ColorModelContract {
     func background(_ color: UIColor)
     func clear()
     func fill(_ color: UIColor)
@@ -24,7 +24,7 @@ protocol ColorModelContractor {
     func noStroke()
 }
 
-struct ColorModel: ColorModelContractor {
+struct ColorModel: ColorModelContract {
     private var colorComponents: ColorComponents
     private var frameComponents: FrameComponents
 
@@ -65,7 +65,7 @@ struct ColorModel: ColorModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: ColorModelContractor {
+extension ProcessingView: ColorModelContract {
     public func background(_ color: UIColor) {
         self.colorModel.background(color)
         self.backgroundColor = color

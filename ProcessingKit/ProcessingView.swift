@@ -20,37 +20,37 @@ open class ProcessingView: UIImageView {
     public weak var delegate: ProcessingViewDelegate? = nil
 
     // MARK: Internal properties
-    lazy var frameModel: FrameModelContractor! = {
+    lazy var frameModel: FrameModelContract = {
         return FrameModel(
             frameComponents: self.frameComponents,
             timer: self.timer
         )
     }()
-    lazy var shapeModel: ShapeModelContractor! = {
+    lazy var shapeModel: ShapeModelContract = {
         return ShapeModel(
             colorComponents: self.colorComponents
         )
     }()
-    lazy var eventModel: EventModelContractor! = {
+    lazy var eventModel: EventModelContract = {
         return EventModel(
             frameComponents: self.frameComponents,
             eventComponents: self.eventComponents
         )
     }()
-    lazy var colorModel: ColorModelContractor! = {
+    lazy var colorModel: ColorModelContract = {
         return ColorModel(
             colorComponents: self.colorComponents,
             frameComponents: self.frameComponents
         )
     }()
-    lazy var textModel: TextModelContractor! = {
+    lazy var textModel: TextModelContract = {
         return TextModel(
             frameComponents: self.frameComponents,
             textComponents: self.textComponents,
             colorComponents: self.colorComponents
         )
     }()
-    lazy var imageModel: ImageModelContractor! = {
+    lazy var imageModel: ImageModelContract = {
         return ImageModel()
     }()
     lazy var timer: Timer? = nil

@@ -17,7 +17,7 @@ class EventComponents {
     var touchY: CGFloat = 0.0
 }
 
-protocol EventModelContractor {
+protocol EventModelContract {
     var fingerPressed: Bool { get }
     var touchX: CGFloat { get }
     var touchY: CGFloat { get }
@@ -26,7 +26,7 @@ protocol EventModelContractor {
     mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
 }
 
-struct EventModel: EventModelContractor {
+struct EventModel: EventModelContract {
     private var eventComponents: EventComponents
     private var frameComponents: FrameComponents
     lazy var dummyView: UIView = {
@@ -78,7 +78,7 @@ struct EventModel: EventModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: EventModelContractor {
+extension ProcessingView: EventModelContract {
     public var fingerPressed: Bool {
         return self.eventModel.fingerPressed
     }

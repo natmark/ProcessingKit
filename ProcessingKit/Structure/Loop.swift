@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol LoopModelContractor {
+protocol LoopModelContract {
     func loop()
     func noLoop()
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: LoopModelContractor {
+extension ProcessingView: LoopModelContract {
     public func loop() {
         self.timer?.fire()
     }

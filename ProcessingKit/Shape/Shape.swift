@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ShapeModelContractor {
+protocol ShapeModelContract {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
@@ -16,7 +16,7 @@ protocol ShapeModelContractor {
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
 }
 
-struct ShapeModel: ShapeModelContractor {
+struct ShapeModel: ShapeModelContract {
     private var colorComponents: ColorComponents
 
     init(colorComponents: ColorComponents) {
@@ -72,7 +72,7 @@ struct ShapeModel: ShapeModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: ShapeModelContractor {
+extension ProcessingView: ShapeModelContract {
     public func point(_ x: CGFloat, _ y: CGFloat) {
         self.shapeModel.point(x, y)
     }

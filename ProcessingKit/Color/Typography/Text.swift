@@ -14,7 +14,7 @@ class TextComponents {
     var textAlignX: NSTextAlignment = .left
 }
 
-protocol TextModelContractor {
+protocol TextModelContract {
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat)
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func textWidth(_ str: String) -> CGFloat
@@ -23,7 +23,7 @@ protocol TextModelContractor {
     func textAlign(_ allignX: NSTextAlignment)
 }
 
-struct TextModel: TextModelContractor {
+struct TextModel: TextModelContract {
     private var textComponents: TextComponents
     private var colorComponents: ColorComponents
     private var frameComponents: FrameComponents
@@ -100,7 +100,7 @@ struct TextModel: TextModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: TextModelContractor {
+extension ProcessingView: TextModelContract {
     public func text(_ str: String, _ x: CGFloat, _ y: CGFloat) {
         self.textModel.text(str, x, y)
     }

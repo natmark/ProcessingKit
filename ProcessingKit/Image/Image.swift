@@ -6,12 +6,12 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-public protocol ImageModelContractor {
+public protocol ImageModelContract {
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
 }
 
-struct ImageModel: ImageModelContractor {
+struct ImageModel: ImageModelContract {
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         if let cgImg = img.cgImage {
@@ -28,7 +28,7 @@ struct ImageModel: ImageModelContractor {
 }
 
 // MARK: - ProcessingView Public APIs
-extension ProcessingView: ImageModelContractor {
+extension ProcessingView: ImageModelContract {
     public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
         self.imageModel.image(img, x, y)
     }
