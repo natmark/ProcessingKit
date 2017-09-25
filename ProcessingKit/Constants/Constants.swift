@@ -15,6 +15,7 @@ public protocol Constants {
     var TAU: CGFloat { get }
     var TWO_PI: CGFloat { get }
 }
+
 extension ProcessingView: Constants {
     public var HALF_PI: CGFloat {
         return .pi / 2

@@ -31,6 +31,9 @@ class MainTableViewController: UITableViewController {
         case IndexPath(row: 2, section: 0): //Ellipse
             transition(viewController: EllipseSampleViewController.create())
             return
+        case IndexPath(row: 3, section: 0): //Arc
+            transition(viewController: ArcSampleViewController.create())
+            return
         case IndexPath(row: 0, section: 1): //Simple Tap
             transition(viewController: TouchSampleViewController.create())
         case IndexPath(row: 0, section: 2): //Particles
