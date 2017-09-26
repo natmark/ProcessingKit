@@ -28,6 +28,9 @@
 		E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E747DDB41F447322006BAC6A /* TouchSampleViewController.storyboard */; };
 		E747DDB71F447335006BAC6A /* TouchSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDB61F447335006BAC6A /* TouchSampleViewController.swift */; };
 		E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDB81F4473E8006BAC6A /* ViewController.swift */; };
+		E76820071F7AAEB4009E8FD2 /* ImageSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820061F7AAEB4009E8FD2 /* ImageSampleView.swift */; };
+		E76820091F7AAEE1009E8FD2 /* ImageSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820081F7AAEE1009E8FD2 /* ImageSampleViewController.swift */; };
+		E768200B1F7AAF87009E8FD2 /* ImageSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E768200A1F7AAF0D009E8FD2 /* ImageSampleViewController.storyboard */; };
 		E7D399121F44A4D1006AF039 /* ParticlesSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D399111F44A4D1006AF039 /* ParticlesSampleView.swift */; };
 		E7D399141F44A505006AF039 /* ParticlesSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D399131F44A505006AF039 /* ParticlesSampleViewController.swift */; };
 		E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */; };
@@ -97,6 +100,9 @@
 		E747DDB41F447322006BAC6A /* TouchSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TouchSampleViewController.storyboard; sourceTree = "<group>"; };
 		E747DDB61F447335006BAC6A /* TouchSampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TouchSampleViewController.swift; sourceTree = "<group>"; };
 		E747DDB81F4473E8006BAC6A /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E76820061F7AAEB4009E8FD2 /* ImageSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSampleView.swift; sourceTree = "<group>"; };
+		E76820081F7AAEE1009E8FD2 /* ImageSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSampleViewController.swift; sourceTree = "<group>"; };
+		E768200A1F7AAF0D009E8FD2 /* ImageSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ImageSampleViewController.storyboard; sourceTree = "<group>"; };
 		E7D399111F44A4D1006AF039 /* ParticlesSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlesSampleView.swift; sourceTree = "<group>"; };
 		E7D399131F44A505006AF039 /* ParticlesSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlesSampleViewController.swift; sourceTree = "<group>"; };
 		E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSampleViewController.swift; sourceTree = "<group>"; };
@@ -208,8 +214,11 @@
 				E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */,
 				E7F3BA7E1F44880F00EFB169 /* RectSampleViewController.swift */,
 				E70595241F4489B8005C8856 /* RectSampleView.swift */,
-				E71388D51F79568F00A45FA6 /* ArcSampleViewController.swift */,
+				E768200A1F7AAF0D009E8FD2 /* ImageSampleViewController.storyboard */,
+				E76820081F7AAEE1009E8FD2 /* ImageSampleViewController.swift */,
+				E76820061F7AAEB4009E8FD2 /* ImageSampleView.swift */,
 				E71388D81F79569900A45FA6 /* ArcSampleViewController.storyboard */,
+				E71388D51F79568F00A45FA6 /* ArcSampleViewController.swift */,
 				E71388DA1F7956B700A45FA6 /* ArcSampleView.swift */,
 			);
 			path = BasicFunctions;
@@ -306,6 +315,7 @@
 				E71779FB1F4C6169004243F2 /* RectSampleViewController.storyboard in Resources */,
 				E74331121F34C6AB00D20482 /* Assets.xcassets in Resources */,
 				E71779FF1F4C6195004243F2 /* EllipseSampleViewController.storyboard in Resources */,
+				E768200B1F7AAF87009E8FD2 /* ImageSampleViewController.storyboard in Resources */,
 				E74331101F34C6AB00D20482 /* Main.storyboard in Resources */,
 				E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */,
 				E71779F81F4C60A2004243F2 /* ParticlesSampleViewController.storyboard in Resources */,
@@ -322,10 +332,12 @@
 				E747DDB21F446A81006BAC6A /* MainTableViewController.swift in Sources */,
 				E71388DB1F7956B700A45FA6 /* ArcSampleView.swift in Sources */,
 				E7F3BA811F44881A00EFB169 /* EllipseSampleViewController.swift in Sources */,
+				E76820071F7AAEB4009E8FD2 /* ImageSampleView.swift in Sources */,
 				E7054AD71F34D36200EA0C0F /* TouchSampleView.swift in Sources */,
 				E7D399141F44A505006AF039 /* ParticlesSampleViewController.swift in Sources */,
 				E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */,
 				E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */,
+				E76820091F7AAEE1009E8FD2 /* ImageSampleViewController.swift in Sources */,
 				E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */,
 				E7D399121F44A4D1006AF039 /* ParticlesSampleView.swift in Sources */,
 				E7F3BA7F1F44880F00EFB169 /* RectSampleViewController.swift in Sources */,
