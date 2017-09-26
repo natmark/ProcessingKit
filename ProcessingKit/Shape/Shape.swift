@@ -14,6 +14,7 @@ protocol ShapeModelContract {
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
+    func radians(_ degrees: CGFloat) -> CGFloat
 }
 
 struct ShapeModel: ShapeModelContract {
@@ -32,9 +33,10 @@ struct ShapeModel: ShapeModelContract {
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
+        setGraphicsConfiguration(context: g)
+
         g?.saveGState()
 
-        setGraphicsConfiguration(context: g)
         g?.move(to: CGPoint(x: x1, y: y1))
         g?.addLine(to: CGPoint(x: x2, y: y2))
         g?.strokePath()
@@ -61,7 +63,21 @@ struct ShapeModel: ShapeModelContract {
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
-        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: true)
+
+        g?.saveGState()
+        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
+        g?.fillPath()
+        g?.restoreGState()
+
+        g?.saveGState()
+        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
+        g?.strokePath()
+        g?.restoreGState()
+    }
+
+    func radians(_ degrees: CGFloat) -> CGFloat {
+        let radian = (CGFloat.pi * 2) * (degrees / 360.0)
+        return radian
     }
 
     private func setGraphicsConfiguration(context: CGContext?) {
@@ -91,5 +107,9 @@ extension ProcessingView: ShapeModelContract {
 
     public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
         self.shapeModel.arc(x, y, radius, start, stop)
+    }
+
+    public func radians(_ degrees: CGFloat) -> CGFloat {
+        return self.shapeModel.radians(degrees)
     }
 }

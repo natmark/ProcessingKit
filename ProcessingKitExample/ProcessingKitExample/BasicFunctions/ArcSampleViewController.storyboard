@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yj7-P4-J4b">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Arc Sample View Controller-->
+        <scene sceneID="2Es-HL-fRo">
+            <objects>
+                <viewController id="yj7-P4-J4b" customClass="ArcSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="00R-8s-p6X"/>
+                        <viewControllerLayoutGuide type="bottom" id="TPO-DB-VmN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hyl-ch-zdM">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rWo-ie-yj1" customClass="ArcSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TPO-DB-VmN" firstAttribute="top" secondItem="rWo-ie-yj1" secondAttribute="bottom" id="Ipc-ee-4Cz"/>
+                            <constraint firstItem="rWo-ie-yj1" firstAttribute="top" secondItem="hyl-ch-zdM" secondAttribute="top" id="SNB-km-0gm"/>
+                            <constraint firstItem="rWo-ie-yj1" firstAttribute="leading" secondItem="hyl-ch-zdM" secondAttribute="leading" id="oMx-0R-0hm"/>
+                            <constraint firstAttribute="trailing" secondItem="rWo-ie-yj1" secondAttribute="trailing" id="zsD-yQ-rvM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="arcSampleView" destination="rWo-ie-yj1" id="pCv-GQ-3Rt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f7s-d1-sTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-384.80000000000001" y="135.38230884557723"/>
+        </scene>
+    </scenes>
+</document>

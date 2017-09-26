@@ -11,6 +11,9 @@
 		E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595201F44899E005C8856 /* EllipseSampleView.swift */; };
 		E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595221F4489AA005C8856 /* TextSampleView.swift */; };
 		E70595251F4489B8005C8856 /* RectSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70595241F4489B8005C8856 /* RectSampleView.swift */; };
+		E71388D61F79568F00A45FA6 /* ArcSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71388D51F79568F00A45FA6 /* ArcSampleViewController.swift */; };
+		E71388D91F79569900A45FA6 /* ArcSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71388D81F79569900A45FA6 /* ArcSampleViewController.storyboard */; };
+		E71388DB1F7956B700A45FA6 /* ArcSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71388DA1F7956B700A45FA6 /* ArcSampleView.swift */; };
 		E71779F81F4C60A2004243F2 /* ParticlesSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779F71F4C60A2004243F2 /* ParticlesSampleViewController.storyboard */; };
 		E71779FB1F4C6169004243F2 /* RectSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */; };
 		E71779FD1F4C617E004243F2 /* TextSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779FC1F4C617E004243F2 /* TextSampleViewController.storyboard */; };
@@ -76,6 +79,9 @@
 		E70595201F44899E005C8856 /* EllipseSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseSampleView.swift; sourceTree = "<group>"; };
 		E70595221F4489AA005C8856 /* TextSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSampleView.swift; sourceTree = "<group>"; };
 		E70595241F4489B8005C8856 /* RectSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RectSampleView.swift; sourceTree = "<group>"; };
+		E71388D51F79568F00A45FA6 /* ArcSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSampleViewController.swift; sourceTree = "<group>"; };
+		E71388D81F79569900A45FA6 /* ArcSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ArcSampleViewController.storyboard; sourceTree = "<group>"; };
+		E71388DA1F7956B700A45FA6 /* ArcSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArcSampleView.swift; sourceTree = "<group>"; };
 		E71779F71F4C60A2004243F2 /* ParticlesSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ParticlesSampleViewController.storyboard; sourceTree = "<group>"; };
 		E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RectSampleViewController.storyboard; sourceTree = "<group>"; };
 		E71779FC1F4C617E004243F2 /* TextSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TextSampleViewController.storyboard; sourceTree = "<group>"; };
@@ -202,6 +208,9 @@
 				E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */,
 				E7F3BA7E1F44880F00EFB169 /* RectSampleViewController.swift */,
 				E70595241F4489B8005C8856 /* RectSampleView.swift */,
+				E71388D51F79568F00A45FA6 /* ArcSampleViewController.swift */,
+				E71388D81F79569900A45FA6 /* ArcSampleViewController.storyboard */,
+				E71388DA1F7956B700A45FA6 /* ArcSampleView.swift */,
 			);
 			path = BasicFunctions;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E71779FD1F4C617E004243F2 /* TextSampleViewController.storyboard in Resources */,
+				E71388D91F79569900A45FA6 /* ArcSampleViewController.storyboard in Resources */,
 				E74331151F34C6AB00D20482 /* LaunchScreen.storyboard in Resources */,
 				E71779FB1F4C6169004243F2 /* RectSampleViewController.storyboard in Resources */,
 				E74331121F34C6AB00D20482 /* Assets.xcassets in Resources */,
@@ -310,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E747DDB21F446A81006BAC6A /* MainTableViewController.swift in Sources */,
+				E71388DB1F7956B700A45FA6 /* ArcSampleView.swift in Sources */,
 				E7F3BA811F44881A00EFB169 /* EllipseSampleViewController.swift in Sources */,
 				E7054AD71F34D36200EA0C0F /* TouchSampleView.swift in Sources */,
 				E7D399141F44A505006AF039 /* ParticlesSampleViewController.swift in Sources */,
@@ -320,6 +331,7 @@
 				E7F3BA7F1F44880F00EFB169 /* RectSampleViewController.swift in Sources */,
 				E747DDB71F447335006BAC6A /* TouchSampleViewController.swift in Sources */,
 				E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */,
+				E71388D61F79568F00A45FA6 /* ArcSampleViewController.swift in Sources */,
 				E70595251F4489B8005C8856 /* RectSampleView.swift in Sources */,
 				E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */,
 			);
