@@ -22,6 +22,8 @@
 		E747DDA91F44656E006BAC6A /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E747DDA81F44656E006BAC6A /* Image.swift */; };
 		E76046B81F4088FB00921B1A /* Loop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046B71F4088FB00921B1A /* Loop.swift */; };
 		E76046C11F408B2E00921B1A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
+		E76820191F7B32B8009E8FD2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820181F7B32B8009E8FD2 /* Date.swift */; };
+		E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768201B1F7B38BC009E8FD2 /* DateTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		E747DDA81F44656E006BAC6A /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Image.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E76046B71F4088FB00921B1A /* Loop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Loop.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E76046C01F408B2E00921B1A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E76820181F7B32B8009E8FD2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		E768201B1F7B38BC009E8FD2 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +84,7 @@
 				E70BB6881F408FAB00E0372D /* Text.swift */,
 			);
 			name = Typography;
-			path = Color/Typography;
+			path = Typography;
 			sourceTree = "<group>";
 		};
 		E7212F361F34B5A600173CD8 = {
@@ -104,18 +108,18 @@
 		E7212F421F34B5A600173CD8 /* ProcessingKit */ = {
 			isa = PBXGroup;
 			children = (
-				E7387A4A1F44829C00C3B35C /* Extensions */,
-				E76046B91F40894700921B1A /* Structure */,
-				E76046BA1F40895100921B1A /* Environment */,
-				E76046BB1F4089AF00921B1A /* Shape */,
-				E76046BC1F4089CF00921B1A /* Input */,
 				E76046BD1F408A0E00921B1A /* Color */,
-				E70BB6871F408F9900E0372D /* Typography */,
-				E76046BE1F408A1200921B1A /* Image */,
 				E76046BF1F408A3E00921B1A /* Constants */,
+				E76046BA1F40895100921B1A /* Environment */,
+				E7387A4A1F44829C00C3B35C /* Extensions */,
+				E76046BE1F408A1200921B1A /* Image */,
+				E76046BC1F4089CF00921B1A /* Input */,
+				E76046BB1F4089AF00921B1A /* Shape */,
+				E76046B91F40894700921B1A /* Structure */,
+				E70BB6871F408F9900E0372D /* Typography */,
+				E7212F441F34B5A600173CD8 /* Info.plist */,
 				E7212F431F34B5A600173CD8 /* ProcessingKit.h */,
 				E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */,
-				E7212F441F34B5A600173CD8 /* Info.plist */,
 			);
 			path = ProcessingKit;
 			sourceTree = "<group>";
@@ -123,9 +127,10 @@
 		E7212F4D1F34B5A600173CD8 /* ProcessingKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				E7212F4E1F34B5A600173CD8 /* ProcessingViewTests.swift */,
-				E71388DC1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift */,
+				E768201A1F7B38A3009E8FD2 /* Input */,
 				E7212F501F34B5A600173CD8 /* Info.plist */,
+				E71388DC1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift */,
+				E7212F4E1F34B5A600173CD8 /* ProcessingViewTests.swift */,
 			);
 			path = ProcessingKitTests;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 		E76046BC1F4089CF00921B1A /* Input */ = {
 			isa = PBXGroup;
 			children = (
+				E76820181F7B32B8009E8FD2 /* Date.swift */,
 				E7054AE11F3A0C8800EA0C0F /* Event.swift */,
 			);
 			path = Input;
@@ -193,6 +199,14 @@
 				E76046C01F408B2E00921B1A /* Constants.swift */,
 			);
 			path = Constants;
+			sourceTree = "<group>";
+		};
+		E768201A1F7B38A3009E8FD2 /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				E768201B1F7B38BC009E8FD2 /* DateTests.swift */,
+			);
+			path = Input;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -334,6 +348,7 @@
 				E71369601F44945900267715 /* UIColor.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,
 				E70BB6891F408FB000E0372D /* Text.swift in Sources */,
+				E76820191F7B32B8009E8FD2 /* Date.swift in Sources */,
 				E76046C11F408B2E00921B1A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7212F4F1F34B5A600173CD8 /* ProcessingViewTests.swift in Sources */,
+				E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */,
 				E71388DD1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

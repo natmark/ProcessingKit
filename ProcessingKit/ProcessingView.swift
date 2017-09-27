@@ -37,6 +37,9 @@ open class ProcessingView: UIImageView {
             eventComponents: self.eventComponents
         )
     }()
+    lazy var dateModel: DateModelContract = {
+        return DateModel()
+    }()
     lazy var colorModel: ColorModelContract = {
         return ColorModel(
             colorComponents: self.colorComponents,
