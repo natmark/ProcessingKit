@@ -24,6 +24,7 @@
 		E76046C11F408B2E00921B1A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
 		E76820191F7B32B8009E8FD2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820181F7B32B8009E8FD2 /* Date.swift */; };
 		E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768201B1F7B38BC009E8FD2 /* DateTests.swift */; };
+		E76820241F7B647A009E8FD2 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820231F7B647A009E8FD2 /* Transform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		E76046C01F408B2E00921B1A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E76820181F7B32B8009E8FD2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E768201B1F7B38BC009E8FD2 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		E76820231F7B647A009E8FD2 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,6 @@
 			children = (
 				E70BB6881F408FAB00E0372D /* Text.swift */,
 			);
-			name = Typography;
 			path = Typography;
 			sourceTree = "<group>";
 		};
@@ -116,6 +117,7 @@
 				E76046BC1F4089CF00921B1A /* Input */,
 				E76046BB1F4089AF00921B1A /* Shape */,
 				E76046B91F40894700921B1A /* Structure */,
+				E76820221F7B6465009E8FD2 /* Transform */,
 				E70BB6871F408F9900E0372D /* Typography */,
 				E7212F441F34B5A600173CD8 /* Info.plist */,
 				E7212F431F34B5A600173CD8 /* ProcessingKit.h */,
@@ -207,6 +209,14 @@
 				E768201B1F7B38BC009E8FD2 /* DateTests.swift */,
 			);
 			path = Input;
+			sourceTree = "<group>";
+		};
+		E76820221F7B6465009E8FD2 /* Transform */ = {
+			isa = PBXGroup;
+			children = (
+				E76820231F7B647A009E8FD2 /* Transform.swift */,
+			);
+			path = Transform;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,6 +357,7 @@
 				E76046B81F4088FB00921B1A /* Loop.swift in Sources */,
 				E71369601F44945900267715 /* UIColor.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,
+				E76820241F7B647A009E8FD2 /* Transform.swift in Sources */,
 				E70BB6891F408FB000E0372D /* Text.swift in Sources */,
 				E76820191F7B32B8009E8FD2 /* Date.swift in Sources */,
 				E76046C11F408B2E00921B1A /* Constants.swift in Sources */,
