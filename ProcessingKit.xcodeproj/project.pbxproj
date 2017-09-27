@@ -24,6 +24,7 @@
 		E76046C11F408B2E00921B1A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
 		E76820191F7B32B8009E8FD2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820181F7B32B8009E8FD2 /* Date.swift */; };
 		E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768201B1F7B38BC009E8FD2 /* DateTests.swift */; };
+		E76820211F7B6446009E8FD2 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820201F7B6446009E8FD2 /* Vertex.swift */; };
 		E76820241F7B647A009E8FD2 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820231F7B647A009E8FD2 /* Transform.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +59,7 @@
 		E76046C01F408B2E00921B1A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E76820181F7B32B8009E8FD2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E768201B1F7B38BC009E8FD2 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
+		E76820201F7B6446009E8FD2 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		E76820231F7B647A009E8FD2 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -166,6 +168,7 @@
 			isa = PBXGroup;
 			children = (
 				E7054ADF1F3A0A7E00EA0C0F /* Shape.swift */,
+				E76820201F7B6446009E8FD2 /* Vertex.swift */,
 			);
 			path = Shape;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E7387A491F44828F00C3B35C /* String.swift in Sources */,
 				E70BB68C1F40902A00E0372D /* Color.swift in Sources */,
 				E76046B81F4088FB00921B1A /* Loop.swift in Sources */,
+				E76820211F7B6446009E8FD2 /* Vertex.swift in Sources */,
 				E71369601F44945900267715 /* UIColor.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,
 				E76820241F7B647A009E8FD2 /* Transform.swift in Sources */,
