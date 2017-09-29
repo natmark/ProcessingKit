@@ -71,31 +71,31 @@ struct DateModel: DateModelContract {
 }
 
 extension ProcessingView: DateModelContract {
-    func millis() -> Int {
+    public func millis() -> Int {
         return self.dateModel.millis()
     }
 
-    func second() -> Int {
+    public func second() -> Int {
         return self.dateModel.second()
     }
 
-    func minute() -> Int {
+    public func minute() -> Int {
         return self.dateModel.minute()
     }
 
-    func hour() -> Int {
+    public func hour() -> Int {
         return self.dateModel.hour()
     }
 
-    func day() -> Int {
+    public func day() -> Int {
         return self.dateModel.day()
     }
 
-    func month() -> Int {
+    public func month() -> Int {
         return self.dateModel.month()
     }
 
-    func year() -> Int {
+    public func year() -> Int {
         return self.dateModel.year()
     }
 }
