@@ -56,6 +56,11 @@ open class ProcessingView: UIImageView {
     lazy var imageModel: ImageModelContract = {
         return ImageModel()
     }()
+
+    lazy var transformModel: TransformModelContract = {
+        return TransformModel()
+    }()
+
     lazy var timer: Timer? = nil
 
     // MARK: Private properties

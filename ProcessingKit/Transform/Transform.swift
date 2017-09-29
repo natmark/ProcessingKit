@@ -49,3 +49,29 @@ struct TransformModel: TransformModelContract {
         g?.translateBy(x: x, y: y)
     }
 }
+
+extension ProcessingView: TransformModelContract {
+    public func pushMatrix() {
+        self.transformModel.pushMatrix()
+    }
+
+    public func popMatrix() {
+        self.transformModel.popMatrix()
+    }
+
+    public func scale(s: CGFloat) {
+        self.transformModel.scale(s: s)
+    }
+
+    public func scale(x: CGFloat, y: CGFloat) {
+        self.transformModel.scale(x: x, y: y)
+    }
+
+    public func rotate(angle: CGFloat) {
+        self.transformModel.rotate(angle: angle)
+    }
+
+    public func translate(x: CGFloat, y: CGFloat) {
+        self.transformModel.translate(x: x, y: y)
+    }
+}
