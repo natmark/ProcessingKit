@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SEC-GA-SGT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SEC-GA-SGT">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="djM-U0-qnF" customClass="EllipseSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -30,9 +30,10 @@
                             <constraint firstAttribute="trailing" secondItem="djM-U0-qnF" secondAttribute="trailing" id="6lh-au-Ue7"/>
                             <constraint firstItem="o6k-F3-Ob3" firstAttribute="top" secondItem="djM-U0-qnF" secondAttribute="bottom" id="Ofs-QG-83G"/>
                             <constraint firstItem="djM-U0-qnF" firstAttribute="leading" secondItem="zaR-1p-pjV" secondAttribute="leading" id="Ofz-dp-Q8E"/>
-                            <constraint firstItem="djM-U0-qnF" firstAttribute="top" secondItem="zaR-1p-pjV" secondAttribute="top" id="sjq-ub-LPB"/>
+                            <constraint firstItem="djM-U0-qnF" firstAttribute="top" secondItem="uIX-TG-Jlw" secondAttribute="bottom" id="YtS-lW-BZW"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="ellipseSampleView" destination="djM-U0-qnF" id="bsP-CC-iGw"/>
                     </connections>
