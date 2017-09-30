@@ -42,8 +42,7 @@ class MainTableViewController: UITableViewController {
         case IndexPath(row: 0, section: 2): //Particles
             transition(viewController: ParticlesSampleViewController.create())
         case IndexPath(row: 1, section: 2): //Clock Sample
-            return
-        case IndexPath(row: 2, section: 2): //Physics
+            transition(viewController: ClockSampleViewController.create())
             return
         default:
             return

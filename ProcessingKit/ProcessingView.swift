@@ -154,6 +154,7 @@ open class ProcessingView: UIImageView {
     // MARK: - Update view bounds
     open override var frame: CGRect {
         didSet {
+            frameComponents.frame = self.frame
             frameComponents.bounds = self.bounds
         }
     }

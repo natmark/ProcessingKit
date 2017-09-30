@@ -10,6 +10,7 @@ import Foundation
 
 class FrameComponents {
     var bounds: CGRect = CGRect.zero
+    var frame: CGRect = CGRect.zero
     var frameRate: CGFloat = 60.0
 }
 

@@ -18,6 +18,9 @@
 		E71779FB1F4C6169004243F2 /* RectSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */; };
 		E71779FD1F4C617E004243F2 /* TextSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779FC1F4C617E004243F2 /* TextSampleViewController.storyboard */; };
 		E71779FF1F4C6195004243F2 /* EllipseSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E71779FE1F4C6195004243F2 /* EllipseSampleViewController.storyboard */; };
+		E72A2AB21F7F95F50044F879 /* ClockSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E72A2AB11F7F95F50044F879 /* ClockSampleViewController.storyboard */; };
+		E72A2AB51F7F96020044F879 /* ClockSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A2AB41F7F96020044F879 /* ClockSampleView.swift */; };
+		E72A2AB71F7F961A0044F879 /* ClockSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72A2AB61F7F961A0044F879 /* ClockSampleViewController.swift */; };
 		E743310B1F34C6AB00D20482 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E743310A1F34C6AB00D20482 /* AppDelegate.swift */; };
 		E74331101F34C6AB00D20482 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E743310E1F34C6AB00D20482 /* Main.storyboard */; };
 		E74331121F34C6AB00D20482 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E74331111F34C6AB00D20482 /* Assets.xcassets */; };
@@ -89,6 +92,9 @@
 		E71779FA1F4C6169004243F2 /* RectSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = RectSampleViewController.storyboard; sourceTree = "<group>"; };
 		E71779FC1F4C617E004243F2 /* TextSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TextSampleViewController.storyboard; sourceTree = "<group>"; };
 		E71779FE1F4C6195004243F2 /* EllipseSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = EllipseSampleViewController.storyboard; sourceTree = "<group>"; };
+		E72A2AB11F7F95F50044F879 /* ClockSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ClockSampleViewController.storyboard; sourceTree = "<group>"; };
+		E72A2AB41F7F96020044F879 /* ClockSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSampleView.swift; sourceTree = "<group>"; };
+		E72A2AB61F7F961A0044F879 /* ClockSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockSampleViewController.swift; sourceTree = "<group>"; };
 		E74331071F34C6AB00D20482 /* ProcessingKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProcessingKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E743310A1F34C6AB00D20482 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E743310F1F34C6AB00D20482 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -198,6 +204,9 @@
 				E71779F71F4C60A2004243F2 /* ParticlesSampleViewController.storyboard */,
 				E7D399131F44A505006AF039 /* ParticlesSampleViewController.swift */,
 				E7D399111F44A4D1006AF039 /* ParticlesSampleView.swift */,
+				E72A2AB11F7F95F50044F879 /* ClockSampleViewController.storyboard */,
+				E72A2AB61F7F961A0044F879 /* ClockSampleViewController.swift */,
+				E72A2AB41F7F96020044F879 /* ClockSampleView.swift */,
 			);
 			path = OthersSample;
 			sourceTree = "<group>";
@@ -319,6 +328,7 @@
 				E74331101F34C6AB00D20482 /* Main.storyboard in Resources */,
 				E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */,
 				E71779F81F4C60A2004243F2 /* ParticlesSampleViewController.storyboard in Resources */,
+				E72A2AB21F7F95F50044F879 /* ClockSampleViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E747DDB21F446A81006BAC6A /* MainTableViewController.swift in Sources */,
+				E72A2AB51F7F96020044F879 /* ClockSampleView.swift in Sources */,
 				E71388DB1F7956B700A45FA6 /* ArcSampleView.swift in Sources */,
 				E7F3BA811F44881A00EFB169 /* EllipseSampleViewController.swift in Sources */,
 				E76820071F7AAEB4009E8FD2 /* ImageSampleView.swift in Sources */,
@@ -341,6 +352,7 @@
 				E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */,
 				E7D399121F44A4D1006AF039 /* ParticlesSampleView.swift in Sources */,
 				E7F3BA7F1F44880F00EFB169 /* RectSampleViewController.swift in Sources */,
+				E72A2AB71F7F961A0044F879 /* ClockSampleViewController.swift in Sources */,
 				E747DDB71F447335006BAC6A /* TouchSampleViewController.swift in Sources */,
 				E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */,
 				E71388D61F79568F00A45FA6 /* ArcSampleViewController.swift in Sources */,
