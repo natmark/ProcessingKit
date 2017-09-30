@@ -16,9 +16,12 @@ class ColorComponents {
 
 protocol ColorModelContract {
     func background(_ color: UIColor)
+    func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat)
     func clear()
     func fill(_ color: UIColor)
+    func fill(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat)
     func stroke(_ color: UIColor)
+    func stroke(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat)
     func strokeWeight(_ weight: CGFloat)
     func noFill()
     func noStroke()
@@ -38,6 +41,10 @@ struct ColorModel: ColorModelContract {
         g!.clear(self.frameComponents.bounds)
     }
 
+    func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) {
+        self.background(UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a / 255.0))
+    }
+
     func clear() {
         let g = UIGraphicsGetCurrentContext()
         g!.clear(self.frameComponents.bounds)
@@ -47,8 +54,16 @@ struct ColorModel: ColorModelContract {
         self.colorComponents.fill = color
     }
 
+    func fill(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) {
+        self.fill(UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a / 255.0))
+    }
+
     func stroke(_ color: UIColor) {
         self.colorComponents.stroke = color
+    }
+
+    func stroke(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) {
+        self.stroke(UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a / 255.0))
     }
 
     func strokeWeight(_ weight: CGFloat) {
@@ -71,6 +86,10 @@ extension ProcessingView: ColorModelContract {
         self.backgroundColor = color
     }
 
+    public func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255) {
+        self.colorModel.background(r, g, b, a)
+    }
+
     public func clear() {
         self.colorModel.clear()
         self.background(UIColor.white)
@@ -80,8 +99,16 @@ extension ProcessingView: ColorModelContract {
         self.colorModel.fill(color)
     }
 
+    public func fill(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255) {
+        self.colorModel.fill(r, g, b, a)
+    }
+
     public func stroke(_ color: UIColor) {
         self.colorModel.stroke(color)
+    }
+
+    public func stroke(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255) {
+        self.colorModel.stroke(r, g, b, a)
     }
 
     public func strokeWeight(_ weight: CGFloat) {
