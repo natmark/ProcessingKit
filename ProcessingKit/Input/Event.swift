@@ -12,7 +12,7 @@ class EventComponents {
     var fingerTapped = false
     var fingerMoved = false
     var fingerReleased = false
-    var fingerPressed = true
+    var fingerPressed = false
     var touchX: CGFloat = 0.0
     var touchY: CGFloat = 0.0
 }
@@ -30,7 +30,7 @@ struct EventModel: EventModelContract {
     private var eventComponents: EventComponents
     private var frameComponents: FrameComponents
     lazy var dummyView: UIView = {
-        return UIView(frame: self.frameComponents.bounds)
+        return UIView(frame: self.frameComponents.frame)
     }()
 
     init(frameComponents: FrameComponents, eventComponents: EventComponents) {
