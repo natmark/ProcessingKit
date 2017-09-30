@@ -59,6 +59,7 @@
 		E76820181F7B32B8009E8FD2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E768201B1F7B38BC009E8FD2 /* DateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTests.swift; sourceTree = "<group>"; };
 		E76820231F7B647A009E8FD2 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		E76820351F7E49B1009E8FD2 /* Demo.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Demo.playground; path = ProcessingKit/Demo.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +92,7 @@
 		E7212F361F34B5A600173CD8 = {
 			isa = PBXGroup;
 			children = (
+				E76820351F7E49B1009E8FD2 /* Demo.playground */,
 				E7212F421F34B5A600173CD8 /* ProcessingKit */,
 				E7212F4D1F34B5A600173CD8 /* ProcessingKitTests */,
 				E7212F411F34B5A600173CD8 /* Products */,
