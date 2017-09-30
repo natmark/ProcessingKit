@@ -55,7 +55,6 @@ struct ShapeModel: ShapeModelContract {
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
-
         g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
     }
@@ -66,12 +65,7 @@ struct ShapeModel: ShapeModelContract {
 
         g?.saveGState()
         g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
-        g?.fillPath()
-        g?.restoreGState()
-
-        g?.saveGState()
-        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
-        g?.strokePath()
+        g?.drawPath(using: .fillStroke)
         g?.restoreGState()
     }
 

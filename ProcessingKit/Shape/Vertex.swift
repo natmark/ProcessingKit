@@ -56,7 +56,7 @@ struct VertexModel: VertexModelContract {
             let g = UIGraphicsGetCurrentContext()
             g?.setFillColor(self.colorComponents.stroke.cgColor)
             for vertex in self.vertexComponents.vertexes {
-                g?.fill(CGRect(x: vertex.x, y: vertex.y, width: 1.0, height: 1.0))
+                g?.fill(CGRect(x: vertex.x, y: vertex.y, width: self.colorComponents.strokeWeight, height: self.colorComponents.strokeWeight))
             }
         case .lines:
             while self.vertexComponents.vertexes.count >= 2 {
@@ -104,9 +104,7 @@ struct VertexModel: VertexModelContract {
         if isClosed {
             g?.addLine(to: vertexes.first!)
         }
-        g?.strokePath()
-        g?.fillPath()
-        g?.closePath()
+        g?.drawPath(using: .fillStroke)
     }
 
     private func setGraphicsConfiguration(context: CGContext?) {
