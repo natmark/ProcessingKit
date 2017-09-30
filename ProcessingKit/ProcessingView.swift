@@ -31,6 +31,12 @@ open class ProcessingView: UIImageView {
             colorComponents: self.colorComponents
         )
     }()
+    lazy var vertexModel: VertexModelContract = {
+        return VertexModel(
+            vertexComponents: self.vertexComponents,
+            colorComponents: self.colorComponents
+        )
+    }()
     lazy var eventModel: EventModelContract = {
         return EventModel(
             frameComponents: self.frameComponents,
@@ -66,6 +72,7 @@ open class ProcessingView: UIImageView {
     // MARK: Private properties
     private var colorComponents = ColorComponents()
     private var eventComponents = EventComponents()
+    private var vertexComponents = VertexComponents()
     private var textComponents = TextComponents()
     private var frameComponents = FrameComponents()
 
