@@ -36,8 +36,10 @@ import ProcessingKit
 
 class SampleView: ProcessingView {
     func setup() {
+        // The setup() function is run once, when the program starts.
     }
     func draw() {
+        // Called directly after setup(), the draw() function continuously executes the lines of code contained inside its block until the program is stopped or noLoop() is called.
     }
 }
 ```
