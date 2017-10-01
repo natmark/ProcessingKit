@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class TextSampleView : ProcessingView, ProcessingViewDelegate {
+class TextSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
         fill(UIColor.black)

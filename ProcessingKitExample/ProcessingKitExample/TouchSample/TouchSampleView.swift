@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class TouchSampleView : ProcessingView, ProcessingViewDelegate {
+class TouchSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
         textAlign(.center)

@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class ImageSampleView : ProcessingView, ProcessingViewDelegate {
+class ImageSampleView : ProcessingView {
     func setup() {
         image(UIImage(named: "ProcessingKit-Logo")!, 0, 100, width, 100)
     }

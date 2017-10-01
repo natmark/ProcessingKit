@@ -15,7 +15,6 @@ class EllipseSampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        ellipseSampleView.delegate = ellipseSampleView
     }
 
     override func didReceiveMemoryWarning() {

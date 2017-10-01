@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class RectSampleView : ProcessingView, ProcessingViewDelegate {
+class RectSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
         fill(UIColor.red)
