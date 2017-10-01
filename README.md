@@ -29,12 +29,12 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
 ## Usage
-1. Create a class that inherits ProcessingView & conform to ProcessingViewDelegate
+1. Create custom class that inherits from ProcessingView
 
 ```Swift
 import ProcessingKit
 
-class SampleView: ProcessingView, ProcessingViewDelegate {
+class SampleView: ProcessingView {
     func setup() {
     }
     func draw() {
@@ -47,8 +47,7 @@ class SampleView: ProcessingView, ProcessingViewDelegate {
 ```Swift
     lazy var sampleView:SampleView = {
         let sampleView = SampleView(frame: frame)
-        sampleView.delegate = sampleView
-        sampleView.isUserInteractionEnabled = true // If you want to use touch events
+        sampleView.isUserInteractionEnabled = true // If you want to use touch events (default true)
         return sampleView
     }()
 ```
@@ -63,14 +62,8 @@ Connect the UIImageView to SampleView Class
  @IBOutlet weak var sampleView: SampleView!
  
  override func viewDidLoad() {
-     super.viewDidLoad()
-     
-     sampleView.delegate = sampleView
-     sampleView.isUserInteractionEnabled = true // If you want to use touch events
- }
- 
- override func viewWillDisappear(_ animated: Bool) { 
-     sampleView.noLoop()
+     super.viewDidLoad()     
+     sampleView.isUserInteractionEnabled = true // If you want to use touch events (default true)
  } 
 ```
 
