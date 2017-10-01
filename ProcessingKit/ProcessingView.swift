@@ -18,6 +18,8 @@
 open class ProcessingView: UIImageView {
 
     public weak var delegate: ProcessingViewDelegate? = nil
+    public var autoRelease: Bool = true
+    public var isPlayground: Bool = false
 
     // MARK: Internal properties
     lazy var frameModel: FrameModelContract = {
@@ -164,7 +166,9 @@ open class ProcessingView: UIImageView {
 
         // Deallocate timer
         guard let _ = self.parentViewController() else {
-            self.noLoop()
+            if (autoRelease == true && isPlayground == false) {
+                self.noLoop()
+            }
             return
         }
     }
