@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ProcessingKit"
-  s.version      = "0.3.0"
+  s.version      = "0.4.0"
   s.summary      = "Visual Programming library for iOS."
   s.description  = <<-DESC
   ProcessingKit is a Visual Programming library for iOS.
@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.0"
   s.platform     = :ios, "10.0"
   s.source       = { :git => "https://github.com/natmark/ProcessingKit.git", :tag => "#{s.version}" }
-  s.source_files  = "ProcessingKit/**/*.{h,m}"
+  s.source_files  = "ProcessingKit/**/*.swift"
+  s.exclude_files = "ProcessingKit/Demo.playground/*"
   s.requires_arc = true
 end
