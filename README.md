@@ -77,11 +77,15 @@ Add the following to your `Podfile`:
   pod "ProcessingKit"
 ```
 
+- (Example project here: [PKPodsExample](https://github.com/natmark/PKPodsExample))
+
 ### [Carthage](https://github.com/Carthage/Carthage)
 Add the following to your `Cartfile`:
 ```
   github "natmark/ProcessingKit"
 ```
+
+- (Example project here: [PKExample](https://github.com/natmark/PKExample))
 
 ## License
 ProcessingKit is available under the MIT license. See the LICENSE file for more info.
