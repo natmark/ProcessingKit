@@ -18,6 +18,8 @@
 open class ProcessingView: UIImageView {
 
     public weak var delegate: ProcessingViewDelegate? = nil
+    public var autoRelease: Bool = true
+    public var isPlayground: Bool = false
 
     // MARK: Internal properties
     lazy var frameModel: FrameModelContract = {
@@ -106,6 +108,17 @@ open class ProcessingView: UIImageView {
         self.frameRate(60.0)
     }
 
+    private func parentViewController() -> UIViewController? {
+        var parentResponder: UIResponder? = self
+        while true {
+            guard let nextResponder = parentResponder?.next else { return nil }
+            if let viewController = nextResponder as? UIViewController {
+                return viewController
+            }
+            parentResponder = nextResponder
+        }
+    }
+
     // MARK: - Notifications
     @objc private func suspend(notification: NSNotification) {
         self.noLoop()
@@ -140,13 +153,22 @@ open class ProcessingView: UIImageView {
         }
 
         // Draw
+        self.frameComponents.frameCount += 1
         self.delegate?.draw?()
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
         UIGraphicsEndImageContext()
 
         guard let _ = self.delegate?.draw else {
-            self.timer?.invalidate()
+            self.noLoop()
+            return
+        }
+
+        // Deallocate timer
+        guard let _ = self.parentViewController() else {
+            if (autoRelease == true && isPlayground == false) {
+                self.noLoop()
+            }
             return
         }
     }

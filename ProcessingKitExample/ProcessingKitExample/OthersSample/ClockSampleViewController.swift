@@ -18,10 +18,6 @@ class ClockSampleViewController: UIViewController {
         clockSampleView.isUserInteractionEnabled = true
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        clockSampleView.noLoop()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

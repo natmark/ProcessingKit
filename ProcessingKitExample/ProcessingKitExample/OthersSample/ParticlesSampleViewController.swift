@@ -19,10 +19,6 @@ class ParticlesSampleViewController: UIViewController {
         particlesSampleView.isUserInteractionEnabled = true
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        particlesSampleView.noLoop()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

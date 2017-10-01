@@ -18,10 +18,6 @@ class EllipseSampleViewController: UIViewController {
         ellipseSampleView.delegate = ellipseSampleView
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        ellipseSampleView.noLoop()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
