@@ -15,7 +15,7 @@
     @objc optional func fingerReleased()
 }
 
-open class ProcessingView: UIImageView {
+open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
     public weak var delegate: ProcessingViewDelegate? = nil
 
@@ -100,7 +100,7 @@ open class ProcessingView: UIImageView {
 
     private func configuration() {
         self.isUserInteractionEnabled = true
-        self.delegate = self as? ProcessingViewDelegate
+        self.delegate = self
     }
 
     private func run() {

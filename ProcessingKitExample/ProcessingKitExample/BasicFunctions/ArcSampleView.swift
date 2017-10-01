@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class ArcSampleView : ProcessingView, ProcessingViewDelegate {
+class ArcSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
         fill(UIColor.red)

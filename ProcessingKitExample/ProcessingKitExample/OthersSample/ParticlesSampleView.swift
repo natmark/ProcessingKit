@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class ParticlesSampleView : ProcessingView, ProcessingViewDelegate {
+class ParticlesSampleView : ProcessingView {
     let totalDots = 50
     var dots: [Dot] = []
     let diameter: CGFloat = 12.0

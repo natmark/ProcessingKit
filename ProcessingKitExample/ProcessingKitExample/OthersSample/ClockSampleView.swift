@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class ClockSampleView : ProcessingView, ProcessingViewDelegate {
+class ClockSampleView : ProcessingView {
     func setup() {
         stroke(UIColor.black)
     }

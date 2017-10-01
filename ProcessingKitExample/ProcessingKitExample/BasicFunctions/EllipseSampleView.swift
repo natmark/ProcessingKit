@@ -8,7 +8,7 @@
 
 import ProcessingKit
 
-class EllipseSampleView : ProcessingView, ProcessingViewDelegate {
+class EllipseSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
         fill(UIColor.red)
