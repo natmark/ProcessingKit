@@ -29,8 +29,5 @@ class SampleView: ProcessingView, ProcessingViewDelegate {
 //: Step 2: Create custom view instance
 let sampleView = SampleView(frame: CGRect(x: 0, y: 0, width: 360, height: 480))
 
-//: Step 3: Set delegate
-sampleView.delegate = sampleView
-
 PlaygroundPage.current.needsIndefiniteExecution = true
 PlaygroundPage.current.liveView = sampleView

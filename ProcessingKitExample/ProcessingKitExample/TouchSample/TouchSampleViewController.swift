@@ -15,8 +15,6 @@ class TouchSampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        touchSampleView.delegate = touchSampleView
-        touchSampleView.isUserInteractionEnabled = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {

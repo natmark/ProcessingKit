@@ -15,7 +15,6 @@ class ArcSampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        arcSampleView.delegate = arcSampleView
     }
 
     override func viewWillDisappear(_ animated: Bool) {

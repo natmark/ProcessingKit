@@ -15,8 +15,6 @@ class ParticlesSampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        particlesSampleView.delegate = particlesSampleView
-        particlesSampleView.isUserInteractionEnabled = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {

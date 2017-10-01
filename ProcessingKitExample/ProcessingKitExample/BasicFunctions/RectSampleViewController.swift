@@ -15,7 +15,6 @@ class RectSampleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        rectSampleView.delegate = rectSampleView
     }
 
     override func viewWillDisappear(_ animated: Bool) {

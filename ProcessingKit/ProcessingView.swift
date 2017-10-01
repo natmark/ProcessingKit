@@ -100,6 +100,7 @@ open class ProcessingView: UIImageView {
 
     private func configuration() {
         self.isUserInteractionEnabled = true
+        self.delegate = self as? ProcessingViewDelegate
     }
 
     private func run() {
