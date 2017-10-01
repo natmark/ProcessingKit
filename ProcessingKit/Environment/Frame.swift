@@ -12,6 +12,7 @@ class FrameComponents {
     var bounds: CGRect = CGRect.zero
     var frame: CGRect = CGRect.zero
     var frameRate: CGFloat = 60.0
+    var frameCount: UInt64 = 0
 }
 
 protocol FrameModelContract {

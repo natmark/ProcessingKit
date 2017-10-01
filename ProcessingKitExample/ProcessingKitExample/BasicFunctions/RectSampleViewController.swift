@@ -18,10 +18,6 @@ class RectSampleViewController: UIViewController {
         rectSampleView.delegate = rectSampleView
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        rectSampleView.noLoop()
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -10,12 +10,12 @@ class SampleView: ProcessingView, ProcessingViewDelegate {
     var dx: CGFloat = 0
 
     //: The setup() function is run once, when the program starts.
-    func setup(){
+    func setup() {
         dx = 10
     }
 
     //: Called directly after setup(), the draw() function continuously executes the lines of code contained inside its block until the program is stopped or noLoop() is called.
-    func draw(){
+    func draw() {
         background(UIColor.white)
         fill(UIColor.red)
         ellipse(i, 100, 100, 100)
