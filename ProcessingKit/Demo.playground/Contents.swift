@@ -5,7 +5,7 @@ import PlaygroundSupport
 import ProcessingKit
 
 //: Step 1: Create custom view class for drawing
-class SampleView: ProcessingView, ProcessingViewDelegate {
+class SampleView: ProcessingView {
     var i: CGFloat = 0
     var dx: CGFloat = 0
 

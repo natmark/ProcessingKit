@@ -167,7 +167,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
         // Deallocate timer
         guard let _ = self.parentViewController() else {
-            if (autoRelease == true && isPlayground == false) {
+            if autoRelease == true && isPlayground == false {
                 self.noLoop()
             }
             return
