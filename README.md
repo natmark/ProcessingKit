@@ -45,7 +45,7 @@ class SampleView: ProcessingView {
 2. Create a SampleView instance
 ### Create programmatically
 ```Swift
-    lazy var sampleView:SampleView = {
+    lazy var sampleView: SampleView = {
         let sampleView = SampleView(frame: frame)
         sampleView.isUserInteractionEnabled = true // If you want to use touch events (default true)
         return sampleView
