@@ -28,6 +28,12 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ## Demo
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
+## Requirements
+- Xcode8.3
+- Swift3.x
+
+Future release version 1.0.0 will supports Swift4 
+
 ## Usage
 1. Create custom class that inherits from ProcessingView
 
