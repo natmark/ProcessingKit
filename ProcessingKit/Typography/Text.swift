@@ -66,7 +66,7 @@ struct TextModel: TextModelContract {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = self.textComponents.textAlignX
 
-        let attributes: [NSAttributedStringKey : Any] = [NSAttributedStringKey.paragraphStyle: paragraph]
+        let attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.paragraphStyle: paragraph]
 
         let attrString = NSMutableAttributedString(string: str, attributes: attributes)
 
@@ -86,7 +86,7 @@ struct TextModel: TextModelContract {
     }
 
     func textWidth(_ str: String) -> CGFloat {
-        let size = str.size(withAttributes: [NSAttributedStringKey.font : self.textComponents.textFont])
+        let size = str.size(withAttributes: [NSAttributedStringKey.font: self.textComponents.textFont])
         return size.width
     }
 
