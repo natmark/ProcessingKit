@@ -17,7 +17,7 @@
 
 open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
-    public weak var delegate: ProcessingViewDelegate? = nil
+    public weak var delegate: ProcessingViewDelegate?
     public var autoRelease: Bool = true
     public var isPlayground: Bool = false
 
@@ -160,17 +160,16 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.image = drawnImage
         UIGraphicsEndImageContext()
 
-        guard let _ = self.delegate?.draw else {
+        if self.delegate?.draw == nil {
             self.noLoop()
             return
         }
 
         // Deallocate timer
-        guard let _ = self.parentViewController() else {
+        if self.parentViewController() == nil {
             if autoRelease == true && isPlayground == false {
                 self.noLoop()
             }
-            return
         }
     }
 
