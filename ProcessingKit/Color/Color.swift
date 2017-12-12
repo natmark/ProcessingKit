@@ -88,7 +88,7 @@ extension ProcessingView: ColorModelContract {
 
     public func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat = 255) {
         self.colorModel.background(r, g, b, a)
-        self.backgroundColor = UIColor(red: r, green: g, blue: b, alpha: a)
+        self.backgroundColor = UIColor(red: r / 255.0, green: g / 255.0, blue: b / 255.0, alpha: a / 255.0)
     }
 
     public func clear() {
