@@ -18,28 +18,28 @@ class ClockSampleView : ProcessingView {
         let s = second()
         let m = minute()
         let h = hour() % 12
-        translate(x: width/2, y: width/2)
+        translate(width/2, width/2)
 
         noFill()
         stroke(UIColor.black)
 
         // 秒針
         pushMatrix()
-        rotate(angle: radians(CGFloat(s)*(360/60)))
+        rotate(radians(CGFloat(s)*(360/60)))
         strokeWeight(1)
         line(0, 0, 0, -width/2)
         popMatrix()
 
         // 分針
         pushMatrix()
-        rotate(angle: radians(CGFloat(m)*(360/60)))
+        rotate(radians(CGFloat(m)*(360/60)))
         strokeWeight(2)
         line(0, 0, 0, -width/2)
         popMatrix()
 
         // 時針
         pushMatrix()
-        rotate(angle: radians(CGFloat(h)*(360/12)))
+        rotate(radians(CGFloat(h)*(360/12)))
         strokeWeight(4)
         line(0, 0, 0, -width/3)
         popMatrix()

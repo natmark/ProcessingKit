@@ -11,11 +11,11 @@ import Foundation
 protocol TransformModelContract {
     func pushMatrix()
     func popMatrix()
-    func scale(s: CGFloat)
-    func scale(x: CGFloat, y: CGFloat)
-    func shere(angleX: CGFloat, angleY: CGFloat)
-    func rotate(angle: CGFloat)
-    func translate(x: CGFloat, y: CGFloat)
+    func scale(_ s: CGFloat)
+    func scale(_ x: CGFloat, _ y: CGFloat)
+    func shere(_ angleX: CGFloat, _ angleY: CGFloat)
+    func rotate(_ angle: CGFloat)
+    func translate(_ x: CGFloat, _ y: CGFloat)
 }
 
 struct TransformModel: TransformModelContract {
@@ -29,28 +29,28 @@ struct TransformModel: TransformModelContract {
         g?.restoreGState()
     }
 
-    func scale(s: CGFloat) {
+    func scale(_ s: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.scaleBy(x: s, y: s)
 
     }
 
-    func scale(x: CGFloat, y: CGFloat) {
+    func scale(_ x: CGFloat, _ y: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.scaleBy(x: x, y: y)
     }
 
-    func shere(angleX: CGFloat, angleY: CGFloat) {
+    func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.concatenate(CGAffineTransform(a: 1, b: angleY, c: angleX, d: 1, tx: 0, ty: 0))
     }
 
-    func rotate(angle: CGFloat) {
+    func rotate(_ angle: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.rotate(by: angle)
     }
 
-    func translate(x: CGFloat, y: CGFloat) {
+    func translate(_ x: CGFloat, _ y: CGFloat) {
         let g = UIGraphicsGetCurrentContext()
         g?.translateBy(x: x, y: y)
     }
@@ -65,23 +65,23 @@ extension ProcessingView: TransformModelContract {
         self.transformModel.popMatrix()
     }
 
-    public func scale(s: CGFloat) {
-        self.transformModel.scale(s: s)
+    public func scale(_ s: CGFloat) {
+        self.transformModel.scale(s)
     }
 
-    public func scale(x: CGFloat, y: CGFloat) {
-        self.transformModel.scale(x: x, y: y)
+    public func scale(_ x: CGFloat, _ y: CGFloat) {
+        self.transformModel.scale(x, y)
     }
 
-    public func shere(angleX: CGFloat, angleY: CGFloat) {
-        self.transformModel.shere(angleX: angleX, angleY: angleY)
+    public func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
+        self.transformModel.shere(angleX, angleY)
     }
 
-    public func rotate(angle: CGFloat) {
-        self.transformModel.rotate(angle: angle)
+    public func rotate(_ angle: CGFloat) {
+        self.transformModel.rotate(angle)
     }
 
-    public func translate(x: CGFloat, y: CGFloat) {
-        self.transformModel.translate(x: x, y: y)
+    public func translate(_ x: CGFloat, _ y: CGFloat) {
+        self.transformModel.translate(x, y)
     }
 }
