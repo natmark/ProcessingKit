@@ -15,6 +15,7 @@ protocol ShapeModelContract {
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat)
+    func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat)
     func radians(_ degrees: CGFloat) -> CGFloat
 }
 
@@ -82,7 +83,21 @@ struct ShapeModel: ShapeModelContract {
         g?.closePath()
         g?.drawPath(using: .fillStroke)
         g?.restoreGState()
+    }
 
+    func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+        setGraphicsConfiguration(context: g)
+
+        g?.saveGState()
+        g?.beginPath()
+        g?.move(to: CGPoint(x: x1, y: y1))
+        g?.addLine(to: CGPoint(x: x2, y: y2))
+        g?.addLine(to: CGPoint(x: x3, y: y3))
+        g?.addLine(to: CGPoint(x: x4, y: y4))
+        g?.closePath()
+        g?.drawPath(using: .fillStroke)
+        g?.restoreGState()
     }
 
     func radians(_ degrees: CGFloat) -> CGFloat {
@@ -121,6 +136,10 @@ extension ProcessingView: ShapeModelContract {
 
     public func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
         self.shapeModel.triangle(x1, y1, x2, y2, x3, y3)
+    }
+
+    public func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
+        self.shapeModel.quad(x1, y1, x2, y2, x3, y3, x4, y4)
     }
 
     public func radians(_ degrees: CGFloat) -> CGFloat {

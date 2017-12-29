@@ -37,6 +37,9 @@
 		E77AEFDE1FF684C600B97406 /* TriangleSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77AEFDD1FF684C600B97406 /* TriangleSampleViewController.storyboard */; };
 		E77AEFE11FF684E900B97406 /* TriangleSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFE01FF684E900B97406 /* TriangleSampleViewController.swift */; };
 		E77AEFE31FF684F600B97406 /* TriangleSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFE21FF684F600B97406 /* TriangleSampleView.swift */; };
+		E77AEFE91FF68ACB00B97406 /* QuadSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFE81FF68ACB00B97406 /* QuadSampleViewController.swift */; };
+		E77AEFEE1FF68AF300B97406 /* QuadSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77AEFED1FF68AF300B97406 /* QuadSampleViewController.storyboard */; };
+		E77AEFF01FF68B0200B97406 /* QuadSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFEF1FF68B0200B97406 /* QuadSampleView.swift */; };
 		E7D399121F44A4D1006AF039 /* ParticlesSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D399111F44A4D1006AF039 /* ParticlesSampleView.swift */; };
 		E7D399141F44A505006AF039 /* ParticlesSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D399131F44A505006AF039 /* ParticlesSampleViewController.swift */; };
 		E7F3BA7D1F44880200EFB169 /* TextSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */; };
@@ -115,6 +118,9 @@
 		E77AEFDD1FF684C600B97406 /* TriangleSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TriangleSampleViewController.storyboard; sourceTree = "<group>"; };
 		E77AEFE01FF684E900B97406 /* TriangleSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleSampleViewController.swift; sourceTree = "<group>"; };
 		E77AEFE21FF684F600B97406 /* TriangleSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriangleSampleView.swift; sourceTree = "<group>"; };
+		E77AEFE81FF68ACB00B97406 /* QuadSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadSampleViewController.swift; sourceTree = "<group>"; };
+		E77AEFED1FF68AF300B97406 /* QuadSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuadSampleViewController.storyboard; sourceTree = "<group>"; };
+		E77AEFEF1FF68B0200B97406 /* QuadSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadSampleView.swift; sourceTree = "<group>"; };
 		E7D399111F44A4D1006AF039 /* ParticlesSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlesSampleView.swift; sourceTree = "<group>"; };
 		E7D399131F44A505006AF039 /* ParticlesSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlesSampleViewController.swift; sourceTree = "<group>"; };
 		E7F3BA7C1F44880200EFB169 /* TextSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSampleViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +244,9 @@
 				E77AEFE21FF684F600B97406 /* TriangleSampleView.swift */,
 				E77AEFDD1FF684C600B97406 /* TriangleSampleViewController.storyboard */,
 				E77AEFE01FF684E900B97406 /* TriangleSampleViewController.swift */,
+				E77AEFEF1FF68B0200B97406 /* QuadSampleView.swift */,
+				E77AEFED1FF68AF300B97406 /* QuadSampleViewController.storyboard */,
+				E77AEFE81FF68ACB00B97406 /* QuadSampleViewController.swift */,
 			);
 			path = BasicFunctions;
 			sourceTree = "<group>";
@@ -328,6 +337,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E71779FD1F4C617E004243F2 /* TextSampleViewController.storyboard in Resources */,
+				E77AEFEE1FF68AF300B97406 /* QuadSampleViewController.storyboard in Resources */,
 				E71388D91F79569900A45FA6 /* ArcSampleViewController.storyboard in Resources */,
 				E74331151F34C6AB00D20482 /* LaunchScreen.storyboard in Resources */,
 				E71779FB1F4C6169004243F2 /* RectSampleViewController.storyboard in Resources */,
@@ -359,7 +369,9 @@
 				E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */,
 				E77AEFE11FF684E900B97406 /* TriangleSampleViewController.swift in Sources */,
 				E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */,
+				E77AEFF01FF68B0200B97406 /* QuadSampleView.swift in Sources */,
 				E76820091F7AAEE1009E8FD2 /* ImageSampleViewController.swift in Sources */,
+				E77AEFE91FF68ACB00B97406 /* QuadSampleViewController.swift in Sources */,
 				E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */,
 				E77AEFE31FF684F600B97406 /* TriangleSampleView.swift in Sources */,
 				E7D399121F44A4D1006AF039 /* ParticlesSampleView.swift in Sources */,
