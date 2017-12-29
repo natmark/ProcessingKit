@@ -37,7 +37,10 @@ class MainTableViewController: UITableViewController {
         case IndexPath(row: 4, section: 0): //Triangle
             transition(viewController: TriangleSampleViewController.create())
             return
-        case IndexPath(row: 5, section: 0): //Image
+        case IndexPath(row: 5, section: 0): //Quad
+            transition(viewController: QuadSampleViewController.create())
+            return
+        case IndexPath(row: 6, section: 0): //Image
             transition(viewController: ImageSampleViewController.create())
             return
         case IndexPath(row: 0, section: 1): //Simple Tap

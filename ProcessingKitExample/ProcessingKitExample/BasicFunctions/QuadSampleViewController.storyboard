@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="y0G-fi-nRt">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Quad Sample View Controller-->
+        <scene sceneID="667-Tc-Ym8">
+            <objects>
+                <viewController id="y0G-fi-nRt" customClass="QuadSampleViewController" customModule="ProcessingKitExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Og6-iC-a7H"/>
+                        <viewControllerLayoutGuide type="bottom" id="73D-5F-paT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mF1-nT-Ar2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IaY-kI-8HE" customClass="QuadSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="IaY-kI-8HE" firstAttribute="top" secondItem="Og6-iC-a7H" secondAttribute="bottom" id="20N-xb-fA3"/>
+                            <constraint firstAttribute="trailing" secondItem="IaY-kI-8HE" secondAttribute="trailing" id="8SF-yO-Sk8"/>
+                            <constraint firstItem="73D-5F-paT" firstAttribute="top" secondItem="IaY-kI-8HE" secondAttribute="bottom" id="Res-Gv-MYk"/>
+                            <constraint firstItem="IaY-kI-8HE" firstAttribute="leading" secondItem="mF1-nT-Ar2" secondAttribute="leading" id="xWn-DF-kL3"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="quadSampleView" destination="IaY-kI-8HE" id="SiP-n9-4Vi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BgX-cf-cI2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="92" y="174.96251874062969"/>
+        </scene>
+    </scenes>
+</document>
