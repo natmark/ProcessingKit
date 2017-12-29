@@ -70,6 +70,14 @@ extension ProcessingView: FrameModelContract {
         self.timer = Timer.scheduledTimer(timeInterval: TimeInterval(1.0 / fps), target: self, selector: #selector(update(timer:)), userInfo: nil, repeats: true)
     }
 
+    public func delay(napTime: Int) {
+        let delayInSeconds = Double(napTime) / 1000.0
+        self.timer?.invalidate()
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delayInSeconds) {
+            self.timer?.fire()
+        }
+    }
+
     @objc private func update(timer: Timer) {
         self.draw(self.frame)
     }
