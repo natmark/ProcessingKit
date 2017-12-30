@@ -26,6 +26,7 @@
 		E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E768201B1F7B38BC009E8FD2 /* DateTests.swift */; };
 		E76820211F7B6446009E8FD2 /* Vertex.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820201F7B6446009E8FD2 /* Vertex.swift */; };
 		E76820241F7B647A009E8FD2 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820231F7B647A009E8FD2 /* Transform.swift */; };
+		E7B77DCD1FF7D30500CE691A /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77DCC1FF7D30500CE691A /* CGPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		E76820201F7B6446009E8FD2 /* Vertex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vertex.swift; sourceTree = "<group>"; };
 		E76820231F7B647A009E8FD2 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		E76820351F7E49B1009E8FD2 /* Demo.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = Demo.playground; path = ProcessingKit/Demo.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		E7B77DCC1FF7D30500CE691A /* CGPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 			children = (
 				E7387A481F44828F00C3B35C /* String.swift */,
 				E713695F1F44945900267715 /* UIColor.swift */,
+				E7B77DCC1FF7D30500CE691A /* CGPoint.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				E76820241F7B647A009E8FD2 /* Transform.swift in Sources */,
 				E70BB6891F408FB000E0372D /* Text.swift in Sources */,
 				E76820191F7B32B8009E8FD2 /* Date.swift in Sources */,
+				E7B77DCD1FF7D30500CE691A /* CGPoint.swift in Sources */,
 				E76046C11F408B2E00921B1A /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
