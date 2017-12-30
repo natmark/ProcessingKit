@@ -16,7 +16,8 @@ protocol ShapeModelContract {
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat)
     func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat)
-    func curve(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat)
+    func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat)
+    func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func radians(_ degrees: CGFloat) -> CGFloat
 }
 
@@ -101,13 +102,45 @@ struct ShapeModel: ShapeModelContract {
         g?.restoreGState()
     }
 
-    func curve(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
+    func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
+
+        let alpha: CGFloat = 1.0
+        let p0 = CGPoint(x: cpx1, y: cpy1)
+        let p1 = CGPoint(x: x1, y: y1)
+        let p2 = CGPoint(x: x2, y: y2)
+        let p3 = CGPoint(x: cpx2, y: cpy2)
+
+        let d1 = p1.deltaTo(p0).length()
+        let d2 = p2.deltaTo(p1).length()
+        let d3 = p3.deltaTo(p2).length()
+
+        var b1 = p2.multiplyBy(pow(d1, 2 * alpha))
+        b1 = b1.deltaTo(p0.multiplyBy(pow(d2, 2 * alpha)))
+        b1 = b1.addTo(p1.multiplyBy(2 * pow(d1, 2 * alpha) + 3 * pow(d1, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
+        b1 = b1.multiplyBy(1.0 / (3 * pow(d1, alpha) * (pow(d1, alpha) + pow(d2, alpha))))
+
+        var b2 = p1.multiplyBy(pow(d3, 2 * alpha))
+        b2 = b2.deltaTo(p3.multiplyBy(pow(d2, 2 * alpha)))
+        b2 = b2.addTo(p2.multiplyBy(2 * pow(d3, 2 * alpha) + 3 * pow(d3, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
+        b2 = b2.multiplyBy(1.0 / (3 * pow(d3, alpha) * (pow(d3, alpha) + pow(d2, alpha))))
+
         let g = UIGraphicsGetCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
         g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addCurve(to: CGPoint(x: x4, y: y4), control1: CGPoint(x: x2, y: y2), control2: CGPoint(x: x3, y: y3))
+        g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
+        g?.drawPath(using: .fillStroke)
+        g?.restoreGState()
+    }
+
+    func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+        setGraphicsConfiguration(context: g)
+
+        g?.saveGState()
+        g?.move(to: CGPoint(x: x1, y: y1))
+        g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
         g?.drawPath(using: .fillStroke)
         g?.restoreGState()
     }
@@ -154,8 +187,12 @@ extension ProcessingView: ShapeModelContract {
         self.shapeModel.quad(x1, y1, x2, y2, x3, y3, x4, y4)
     }
 
-    public func curve(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
-        self.shapeModel.curve(x1, y1, x2, y2, x3, y3, x4, y4)
+    public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
+        self.shapeModel.curve(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
+    }
+
+    public func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        self.shapeModel.bezier(x1, y1, cpx1, cpy1, cpx2, cpy2, x2, y2)
     }
 
     public func radians(_ degrees: CGFloat) -> CGFloat {

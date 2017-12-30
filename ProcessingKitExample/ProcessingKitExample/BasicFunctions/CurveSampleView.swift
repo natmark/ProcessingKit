@@ -11,10 +11,16 @@ import ProcessingKit
 class CurveSampleView : ProcessingView {
     func setup() {
         background(UIColor.white)
-        fill(UIColor.red)
-        strokeWeight(5.0)
-        stroke(UIColor.blue)
-        curve(0, 200, 50, 50, 200, 50, width, 200)
+        stroke(UIColor.black)
+        curve(40, 40, 80, 60, 100, 100, 60, 120)
+        noStroke()
+        fill(255, 0, 0)
+        ellipse(40, 40, 3, 3)
+        fill(0, 0, 255, 192)
+        ellipse(100, 100, 3, 3)
+        ellipse(80, 60, 3, 3)
+        fill(255, 0, 0)
+        ellipse(60, 120, 3, 3)
     }
 }
 
