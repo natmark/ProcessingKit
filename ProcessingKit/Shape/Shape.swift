@@ -17,6 +17,7 @@ protocol ShapeModelContract {
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat)
     func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat)
     func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat)
+    func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func radians(_ degrees: CGFloat) -> CGFloat
 }
 
@@ -133,6 +134,17 @@ struct ShapeModel: ShapeModelContract {
         g?.restoreGState()
     }
 
+    func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        let g = UIGraphicsGetCurrentContext()
+        setGraphicsConfiguration(context: g)
+
+        g?.saveGState()
+        g?.move(to: CGPoint(x: x1, y: y1))
+        g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
+        g?.drawPath(using: .fillStroke)
+        g?.restoreGState()
+    }
+
     func radians(_ degrees: CGFloat) -> CGFloat {
         let radian = (CGFloat.pi * 2) * (degrees / 360.0)
         return radian
@@ -177,6 +189,10 @@ extension ProcessingView: ShapeModelContract {
 
     public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
         self.shapeModel.curve(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
+    }
+
+    public func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+        self.shapeModel.bezier(x1, y1, cpx1, cpy1, cpx2, cpy2, x2, y2)
     }
 
     public func radians(_ degrees: CGFloat) -> CGFloat {
