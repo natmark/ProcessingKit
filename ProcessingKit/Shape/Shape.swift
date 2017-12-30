@@ -29,14 +29,14 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func point(_ x: CGFloat, _ y: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
 
         g?.setFillColor(self.colorComponents.stroke.cgColor)
         g?.fill(CGRect(x: x, y: y, width: 1.0, height: 1.0))
     }
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
@@ -49,7 +49,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.stroke(CGRect(x: x, y: y, width: width, height: height))
@@ -57,14 +57,14 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
         g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
     }
 
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
@@ -74,7 +74,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
@@ -88,7 +88,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
@@ -124,7 +124,7 @@ struct ShapeModel: ShapeModelContract {
         b2 = b2.addTo(p2.multiplyBy(2 * pow(d3, 2 * alpha) + 3 * pow(d3, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
         b2 = b2.multiplyBy(1.0 / (3 * pow(d3, alpha) * (pow(d3, alpha) + pow(d2, alpha))))
 
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()
@@ -135,7 +135,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         g?.saveGState()

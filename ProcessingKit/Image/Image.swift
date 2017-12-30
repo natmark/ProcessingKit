@@ -6,6 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+import Cocoa
+#endif
+
 public protocol ImageModelContract {
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
@@ -14,7 +18,7 @@ public protocol ImageModelContract {
 struct ImageModel: ImageModelContract {
 
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: img.size.height)
         g?.scaleBy(x: 1.0, y: -1.0)
@@ -25,7 +29,7 @@ struct ImageModel: ImageModelContract {
     }
 
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
         g?.scaleBy(x: 1.0, y: -1.0)

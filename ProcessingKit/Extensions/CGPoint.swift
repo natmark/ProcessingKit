@@ -6,6 +6,11 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+    import Cocoa
+    typealias CGPoint = NSPoint
+#endif
+
 extension CGPoint {
     func addTo(_ a: CGPoint) -> CGPoint {
         return CGPoint(x: self.x + a.x, y: self.y + a.y)

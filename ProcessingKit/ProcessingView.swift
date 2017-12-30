@@ -6,6 +6,12 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+import Cocoa
+#endif
+
+import Foundation
+
 @objc public protocol ProcessingViewDelegate {
     @objc optional func setup()
     @objc optional func draw()
@@ -101,7 +107,9 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }
 
     private func configuration() {
+        #if os(iOS)
         self.isUserInteractionEnabled = true
+        #endif
         self.delegate = self
     }
 
@@ -112,7 +120,11 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     private func parentViewController() -> UIViewController? {
         var parentResponder: UIResponder? = self
         while true {
+            #if os(iOS)
             guard let nextResponder = parentResponder?.next else { return nil }
+            #else
+            guard let nextResponder = parentResponder?.nextResponder else { return nil }
+            #endif
             if let viewController = nextResponder as? UIViewController {
                 return viewController
             }
@@ -131,8 +143,13 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
     // MARK: - Override Methods
     open override func draw(_ rect: CGRect) {
-        UIGraphicsBeginImageContext(rect.size)
-        self.image?.draw(at: CGPoint(x: 0, y: 0))
+        #if os(iOS)
+            UIGraphicsBeginImageContext(rect.size)
+            self.image?.draw(at: CGPoint(x: 0, y: 0))
+        #else
+            self.image?.lockFocus()
+        #endif
+
         // Setup
         if firstcall {
             self.firstcall = false
@@ -156,9 +173,16 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         // Draw
         self.frameComponents.frameCount += 1
         self.delegate?.draw?()
-        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
-        self.image = drawnImage
-        UIGraphicsEndImageContext()
+
+        #if os(iOS)
+            let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+            self.image = drawnImage
+            UIGraphicsEndImageContext()
+        #else
+            guard let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() else { return }
+            self.image = NSImage(cgImage: cgImage, size: self.frame.size)
+            self.image?.unlockFocus()
+        #endif
 
         if self.delegate?.draw == nil {
             self.noLoop()

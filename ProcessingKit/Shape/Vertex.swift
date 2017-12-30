@@ -53,7 +53,7 @@ struct VertexModel: VertexModelContract {
 
         switch self.vertexComponents.kind {
         case .points:
-            let g = UIGraphicsGetCurrentContext()
+            let g = MultiplatformCommon.getCurrentContext()
             g?.setFillColor(self.colorComponents.stroke.cgColor)
             for vertex in self.vertexComponents.vertexes {
                 g?.fill(CGRect(x: vertex.x, y: vertex.y, width: self.colorComponents.strokeWeight, height: self.colorComponents.strokeWeight))
@@ -91,7 +91,7 @@ struct VertexModel: VertexModelContract {
     }
 
     private func addLineToPoints(vertexes: [CGPoint], isClosed: Bool) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
         for (index, vertex) in vertexes.enumerated() {

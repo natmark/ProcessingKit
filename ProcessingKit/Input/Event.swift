@@ -6,6 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+import Cocoa
+#endif
+
 import Foundation
 
 class EventComponents {
@@ -25,9 +29,15 @@ protocol EventModelContract {
     var touchY: CGFloat { get }
     var touchesX: Set<CGFloat> { get }
     var touchesY: Set<CGFloat> { get }
+    #if os(iOS)
     mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    #else
+    mutating func touchesBegan(with event: NSEvent)
+    mutating func touchesMoved(with event: NSEvent)
+    mutating func touchesEnded(with event: NSEvent)
+    #endif
 }
 
 struct EventModel: EventModelContract {
@@ -62,6 +72,7 @@ struct EventModel: EventModelContract {
         return self.eventComponents.touchesY
     }
 
+    #if os(iOS)
     mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.storeTouches(touches)
         self.eventComponents.fingerPressed = true
@@ -78,6 +89,22 @@ struct EventModel: EventModelContract {
         self.eventComponents.fingerTapped = false
         self.eventComponents.fingerReleased = true
     }
+    #else
+    mutating func touchesBegan(with event: NSEvent) {
+        self.storeTouches(event.touches(matching: .any, in: nil))
+        self.eventComponents.fingerPressed = true
+        self.eventComponents.fingerTapped = true
+    }
+    mutating func touchesMoved(with event: NSEvent) {
+        self.storeTouches(event.touches(matching: .any, in: nil))
+        self.eventComponents.fingerMoved = true
+    }
+    mutating func touchesEnded(with event: NSEvent) {
+        self.storeTouches(event.touches(matching: .any, in: nil))
+        self.eventComponents.fingerTapped = false
+        self.eventComponents.fingerReleased = true
+    }
+    #endif
 
     private mutating func storeTouches(_ touches: Set<UITouch>) {
         self.eventComponents.touchesX.removeAll()
@@ -117,6 +144,7 @@ extension ProcessingView: EventModelContract {
         return self.eventModel.touchesY
     }
 
+    #if os(iOS)
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.eventModel.touchesBegan(touches, with: event)
     }
@@ -128,4 +156,15 @@ extension ProcessingView: EventModelContract {
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.eventModel.touchesEnded(touches, with: event)
     }
+    #else
+    open override func touchesBegan(with event: NSEvent) {
+        self.eventModel.touchesBegan(with: event)
+    }
+    open override func touchesMoved(with event: NSEvent) {
+        self.eventModel.touchesMoved(with: event)
+    }
+    open override func touchesEnded(with event: NSEvent) {
+        self.eventModel.touchesEnded(with: event)
+    }
+    #endif
 }

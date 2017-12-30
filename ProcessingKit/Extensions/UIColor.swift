@@ -6,6 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+    import Cocoa
+#endif
+
 extension UIColor {
     open class func hexStr (hexStr: NSString, alpha: CGFloat) -> UIColor {
         let alpha = alpha
