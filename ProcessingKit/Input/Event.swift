@@ -15,12 +15,16 @@ class EventComponents {
     var fingerPressed = false
     var touchX: CGFloat = 0.0
     var touchY: CGFloat = 0.0
+    var touchesX: Set<CGFloat> = []
+    var touchesY: Set<CGFloat> = []
 }
 
 protocol EventModelContract {
     var fingerPressed: Bool { get }
     var touchX: CGFloat { get }
     var touchY: CGFloat { get }
+    var touchesX: Set<CGFloat> { get }
+    var touchesY: Set<CGFloat> { get }
     mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
@@ -50,30 +54,44 @@ struct EventModel: EventModelContract {
         return self.eventComponents.touchY
     }
 
+    var touchesX: Set<CGFloat> {
+        return self.eventComponents.touchesX
+    }
+
+    var touchesY: Set<CGFloat> {
+        return self.eventComponents.touchesY
+    }
+
     mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            self.eventComponents.touchX = touch.location(in: self.dummyView).x
-            self.eventComponents.touchY = touch.location(in: self.dummyView).y
-        }
+        self.storeTouches(touches)
         self.eventComponents.fingerPressed = true
         self.eventComponents.fingerTapped = true
     }
 
     mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            self.eventComponents.touchX = touch.location(in: self.dummyView).x
-            self.eventComponents.touchY = touch.location(in: self.dummyView).y
-        }
+        self.storeTouches(touches)
         self.eventComponents.fingerMoved = true
     }
 
     mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            self.eventComponents.touchX = touch.location(in: self.dummyView).x
-            self.eventComponents.touchY = touch.location(in: self.dummyView).y
-        }
+        self.storeTouches(touches)
         self.eventComponents.fingerTapped = false
         self.eventComponents.fingerReleased = true
+    }
+
+    private mutating func storeTouches(_ touches: Set<UITouch>) {
+        self.eventComponents.touchesX.removeAll()
+        self.eventComponents.touchesY.removeAll()
+        for (index, touch) in touches.enumerated() {
+            let touchX = touch.location(in: self.dummyView).x
+            let touchY = touch.location(in: self.dummyView).y
+            self.eventComponents.touchesX.insert(touchX)
+            self.eventComponents.touchesY.insert(touchY)
+            if index == 0 {
+                self.eventComponents.touchX = touchX
+                self.eventComponents.touchY = touchY
+            }
+        }
     }
 }
 
@@ -89,6 +107,14 @@ extension ProcessingView: EventModelContract {
 
     public var touchY: CGFloat {
         return self.eventModel.touchY
+    }
+
+    var touchesX: Set<CGFloat> {
+        return self.eventModel.touchesX
+    }
+
+    var touchesY: Set<CGFloat> {
+        return self.eventModel.touchesY
     }
 
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
