@@ -181,7 +181,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         #else
             guard let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() else { return }
             self.image = NSImage(cgImage: cgImage, size: self.frame.size)
-            self.image?.unlockFocus()
+            //self.image?.unlockFocus()
         #endif
 
         if self.delegate?.draw == nil {
