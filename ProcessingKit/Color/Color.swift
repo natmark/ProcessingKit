@@ -38,7 +38,7 @@ struct ColorModel: ColorModelContract {
 
     func background(_ color: UIColor) {
         let g = MultiplatformCommon.getCurrentContext()
-        g!.clear(self.frameComponents.bounds)
+        g?.clear(self.frameComponents.bounds)
     }
 
     func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) {
@@ -47,7 +47,7 @@ struct ColorModel: ColorModelContract {
 
     func clear() {
         let g = MultiplatformCommon.getCurrentContext()
-        g!.clear(self.frameComponents.bounds)
+        g?.clear(self.frameComponents.bounds)
     }
 
     func fill(_ color: UIColor) {
