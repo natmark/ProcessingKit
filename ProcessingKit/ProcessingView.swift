@@ -109,6 +109,12 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     private func configuration() {
         #if os(iOS)
         self.isUserInteractionEnabled = true
+        #else
+        if let window = self.window {
+            self.bounds = CGRect(x: 0, y: 0, width: window.frame.size.width, height: window.frame.size.height)
+        } else {
+            self.bounds = CGRect.zero
+        }
         #endif
         self.delegate = self
     }
@@ -144,10 +150,10 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     // MARK: - Override Methods
     open override func draw(_ rect: CGRect) {
         #if os(iOS)
-            UIGraphicsBeginImageContext(rect.size)
-            self.image?.draw(at: CGPoint(x: 0, y: 0))
+        UIGraphicsBeginImageContext(rect.size)
+        self.image?.draw(at: CGPoint(x: 0, y: 0))
         #else
-            self.image?.lockFocus()
+        self.image?.draw(at: NSZeroPoint, from: NSZeroRect, operation: .copy, fraction: 1.0)
         #endif
 
         // Setup
@@ -175,13 +181,16 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.delegate?.draw?()
 
         #if os(iOS)
-            let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
-            self.image = drawnImage
-            UIGraphicsEndImageContext()
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        self.image = drawnImage
+        UIGraphicsEndImageContext()
         #else
-            guard let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() else { return }
-            self.image = NSImage(cgImage: cgImage, size: self.frame.size)
-            //self.image?.unlockFocus()
+        if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
+            DispatchQueue.main.async {
+                self.image = NSImage(cgImage: cgImage, size: self.frame.size)
+                self.setNeedsDisplay()
+            }
+        }
         #endif
 
         if self.delegate?.draw == nil {
