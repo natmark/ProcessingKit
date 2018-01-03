@@ -13,20 +13,17 @@ import Cocoa
 class CustomView: ProcessingView {
     func setup() {
         background(NSColor.white)
-        fill(NSColor.blue)
-        ellipse(50, 50, 100, 100)
     }
-//    var x: CGFloat = 0
-//    func draw() {
-//        background(NSColor.white)
-//        print(x)
-//        if x < 300 {
-//            x += 1
-//        }else{
-//            x = 0
-//        }
-//
-//        fill(NSColor.blue)
-//        ellipse(x, 50, 100, 100)
-//    }
+
+    var x: CGFloat = 0
+
+    func draw() {
+        background(NSColor.white)
+        x += 2
+        if x > width {
+            x = 0
+        }
+        fill(NSColor.blue)
+        ellipse(x, 0, 100, 100)
+    }
 }
