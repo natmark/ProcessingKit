@@ -16,9 +16,16 @@ import Foundation
     @objc optional func setup()
     @objc optional func draw()
 
+    #if os(iOS)
     @objc optional func fingerTapped()
-    @objc optional func fingerMoved()
+    @objc optional func fingerDragged()
     @objc optional func fingerReleased()
+    #else
+    @objc optional func mouseClicked()
+    @objc optional func mouseDragged()
+    @objc optional func mouseMoved()
+    @objc optional func mouseReleased()
+    #endif
 }
 
 open class ProcessingView: UIImageView, ProcessingViewDelegate {
@@ -169,18 +176,37 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         }
 
         // Touch events
+        #if os(iOS)
         if self.eventComponents.fingerTapped {
             self.eventComponents.fingerTapped = false
             self.delegate?.fingerTapped?()
         }
-        if self.eventComponents.fingerMoved {
-            self.eventComponents.fingerMoved = false
-            self.delegate?.fingerMoved?()
+        if self.eventComponents.fingerDragged {
+            self.eventComponents.fingerDragged = false
+            self.delegate?.fingerDragged?()
         }
         if self.eventComponents.fingerReleased {
             self.eventComponents.fingerReleased = false
             self.delegate?.fingerReleased?()
         }
+        #else
+        if self.eventComponents.mouseClicked {
+            self.eventComponents.mouseClicked = false
+            self.delegate?.mouseClicked?()
+        }
+        if self.eventComponents.mouseDragged {
+            self.eventComponents.mouseDragged = false
+            self.delegate?.mouseDragged?()
+        }
+        if self.eventComponents.mouseMoved {
+            self.eventComponents.mouseMoved = false
+            self.delegate?.mouseMoved?()
+        }
+        if self.eventComponents.mouseReleased {
+            self.eventComponents.mouseReleased = false
+            self.delegate?.mouseReleased?()
+        }
+        #endif
 
         // Draw
         self.frameComponents.frameCount += 1
