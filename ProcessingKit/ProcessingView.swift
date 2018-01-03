@@ -154,6 +154,12 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.image?.draw(at: CGPoint(x: 0, y: 0))
         #else
         self.image?.draw(at: NSZeroPoint, from: NSZeroRect, operation: .copy, fraction: 1.0)
+
+        // MARK: Coordinate systems are different between iOS and OS X
+        let g = MultiplatformCommon.getCurrentContext()
+        g?.saveGState()
+        g?.translateBy(x: 0.0, y: height)
+        g?.scaleBy(x: 1.0, y: -1.0)
         #endif
 
         // Setup
@@ -191,6 +197,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
                 self.setNeedsDisplay()
             }
         }
+        g?.restoreGState()
         #endif
 
         if self.delegate?.draw == nil {
