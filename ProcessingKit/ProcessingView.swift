@@ -160,7 +160,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
         #else
-        self.image?.draw(at: NSZeroPoint, from: NSZeroRect, operation: .copy, fraction: 1.0)
+        self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
 
         // MARK: Coordinate systems are different between iOS and OS X
         let g = MultiplatformCommon.getCurrentContext()
@@ -176,6 +176,41 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         }
 
         // Touch events
+        self.callDelegatesIfNeeded()
+
+        // Draw
+        self.frameComponents.frameCount += 1
+        self.delegate?.draw?()
+
+        #if os(iOS)
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        self.image = drawnImage
+        UIGraphicsEndImageContext()
+        #else
+        if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
+            DispatchQueue.main.async {
+                self.image = NSImage(cgImage: cgImage, size: self.frame.size)
+                self.setNeedsDisplay()
+            }
+        }
+        g?.restoreGState()
+        #endif
+
+        // Only setup
+        if self.delegate?.draw == nil {
+            self.noLoop()
+            return
+        }
+
+        // Deallocate timer
+        if self.parentViewController() == nil {
+            if autoRelease == true && isPlayground == false {
+                self.noLoop()
+            }
+        }
+    }
+
+    private func callDelegatesIfNeeded() {
         #if os(iOS)
         if self.eventComponents.fingerTapped {
             self.eventComponents.fingerTapped = false
@@ -207,36 +242,6 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
             self.delegate?.mouseReleased?()
         }
         #endif
-
-        // Draw
-        self.frameComponents.frameCount += 1
-        self.delegate?.draw?()
-
-        #if os(iOS)
-        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
-        self.image = drawnImage
-        UIGraphicsEndImageContext()
-        #else
-        if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
-            DispatchQueue.main.async {
-                self.image = NSImage(cgImage: cgImage, size: self.frame.size)
-                self.setNeedsDisplay()
-            }
-        }
-        g?.restoreGState()
-        #endif
-
-        if self.delegate?.draw == nil {
-            self.noLoop()
-            return
-        }
-
-        // Deallocate timer
-        if self.parentViewController() == nil {
-            if autoRelease == true && isPlayground == false {
-                self.noLoop()
-            }
-        }
     }
 
     // MARK: - Update view bounds
