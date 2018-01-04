@@ -14,7 +14,7 @@
              alt="Platforms">
     </a>
     <a href="https://github.com/apple/swift">
-        <img alt="Swift" src="https://img.shields.io/badge/swift-3.2-orange.svg">
+        <img alt="Swift" src="https://img.shields.io/badge/swift-4.0-orange.svg">
     </a>
     <a href="https://github.com/Carthage/Carthage">
         <img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"
@@ -37,8 +37,6 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 - OSX 10.11 or later
 
 If you use Swift 3.x, try [ProcessingKit 0.6.0](https://github.com/ishkawa/APIKit/tree/2.0.5).
-
-Future release version 1.0.0 will supports Swift4 
 
 ## Usage
 1. Create custom class that inherits from ProcessingView
@@ -68,15 +66,15 @@ class SampleView: ProcessingView {
 
 ### Use StoryBoard
 
-Connect the (UIImageView / NSImageView) to SampleView Class 
+Connect the (UIImageView / NSImageView) to SampleView Class
 
 ```Swift
  @IBOutlet weak var sampleView: SampleView!
- 
+
  override func viewDidLoad() {
-     super.viewDidLoad()     
+     super.viewDidLoad()
      sampleView.isUserInteractionEnabled = true // If you want to use touch events (default true)
- } 
+ }
 ```
 
 ## Instration
@@ -85,6 +83,7 @@ Connect the (UIImageView / NSImageView) to SampleView Class
 Add the following to your `Podfile`:
 ```
   pod "ProcessingKit"
+  pod "ProcessingKit", "0.6.0" # If you use Swift 3.x
 ```
 
 - (Example project here: [PKPodsExample](https://github.com/natmark/PKPodsExample))
@@ -93,6 +92,7 @@ Add the following to your `Podfile`:
 Add the following to your `Cartfile`:
 ```
   github "natmark/ProcessingKit"
+  github "natmark/ProcessingKit" == 0.6.0 # If you use Swift 3.x
 ```
 
 - (Example project here: [PKExample](https://github.com/natmark/PKExample))
