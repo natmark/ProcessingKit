@@ -13,6 +13,9 @@
         <img src="https://img.shields.io/cocoapods/p/ProcessingKit.svg?style=flat"
              alt="Platforms">
     </a>
+    <a href="https://github.com/apple/swift">
+        <img alt="Swift" src="https://img.shields.io/badge/swift-3.2-orange.svg">
+    </a>
     <a href="https://github.com/Carthage/Carthage">
         <img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"
              alt="Carthage Compatible">
@@ -22,7 +25,7 @@
 ----------------
 
 # ProcessingKit
-ProcessingKit is a Visual Designing library for iOS.  
+ProcessingKit is a Visual Designing library for iOS & OSX.
 ProcessingKit written in Swift🐧 and you can write like [processing](https://github.com/processing/processing).
 
 ## Demo
@@ -62,7 +65,7 @@ class SampleView: ProcessingView {
 
 ### Use StoryBoard
 
-Connect the UIImageView to SampleView Class 
+Connect the (UIImageView / NSImageView) to SampleView Class 
 
 ```Swift
  @IBOutlet weak var sampleView: SampleView!
