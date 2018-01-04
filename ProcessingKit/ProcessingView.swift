@@ -189,7 +189,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.image = drawnImage
         UIGraphicsEndImageContext()
         #elseif os(OSX)
-        if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
+            if let cgImage = NSGraphicsContext.current?.cgContext.makeImage() {
             DispatchQueue.main.async {
                 self.image = NSImage(cgImage: cgImage, size: self.frame.size)
                 self.setNeedsDisplay()
