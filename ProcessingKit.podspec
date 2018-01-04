@@ -16,5 +16,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/natmark/ProcessingKit.git", :tag => "#{s.version}" }
   s.source_files  = "ProcessingKit/**/*.swift"
   s.exclude_files = "ProcessingKit/Demo.playground/*"
+  s.ios.exclude_files = "ProcessingKit/Extensions/NSImage.swift", "ProcessingKit/Extensions/NSView.swift"
   s.requires_arc = true
 end
