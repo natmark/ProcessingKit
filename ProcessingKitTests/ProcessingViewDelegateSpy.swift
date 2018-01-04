@@ -18,7 +18,7 @@ class ProcessingViewDelegateSetupSpy: ProcessingViewDelegate {
     }
 
     func setup() {
-        self.record()
+        self.record(())
         exceptions.fulfill()
     }
 
@@ -36,11 +36,11 @@ class ProcessingViewDelegateDrawSpy: ProcessingViewDelegate {
     }
 
     func setup() {
-        self.record()
+        self.record(())
     }
 
     func draw() {
-        self.record()
+        self.record(())
         exceptions.fulfill()
     }
     private func record(_ args: Void) {

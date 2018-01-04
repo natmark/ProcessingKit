@@ -28,7 +28,7 @@ public class MultiplatformCommon {
         #if os(iOS)
             return UIGraphicsGetCurrentContext()
         #elseif os(OSX)
-            return NSGraphicsContext.current()?.cgContext
+            return NSGraphicsContext.current?.cgContext
         #endif
     }
 }
