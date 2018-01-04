@@ -6,13 +6,26 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+import Cocoa
+#endif
+
+import Foundation
+
 @objc public protocol ProcessingViewDelegate {
     @objc optional func setup()
     @objc optional func draw()
 
+    #if os(iOS)
     @objc optional func fingerTapped()
-    @objc optional func fingerMoved()
+    @objc optional func fingerDragged()
     @objc optional func fingerReleased()
+    #else
+    @objc optional func mouseClicked()
+    @objc optional func mouseDragged()
+    @objc optional func mouseMoved()
+    @objc optional func mouseReleased()
+    #endif
 }
 
 open class ProcessingView: UIImageView, ProcessingViewDelegate {
@@ -101,7 +114,15 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }
 
     private func configuration() {
+        #if os(iOS)
         self.isUserInteractionEnabled = true
+        #else
+        if let window = self.window {
+            self.bounds = CGRect(x: 0, y: 0, width: window.frame.size.width, height: window.frame.size.height)
+        } else {
+            self.bounds = CGRect.zero
+        }
+        #endif
         self.delegate = self
     }
 
@@ -112,7 +133,11 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     private func parentViewController() -> UIViewController? {
         var parentResponder: UIResponder? = self
         while true {
+            #if os(iOS)
             guard let nextResponder = parentResponder?.next else { return nil }
+            #else
+            guard let nextResponder = parentResponder?.nextResponder else { return nil }
+            #endif
             if let viewController = nextResponder as? UIViewController {
                 return viewController
             }
@@ -131,8 +156,19 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
     // MARK: - Override Methods
     open override func draw(_ rect: CGRect) {
+        #if os(iOS)
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
+        #else
+        self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
+
+        // MARK: Coordinate systems are different between iOS and OS X
+        let g = MultiplatformCommon.getCurrentContext()
+        g?.saveGState()
+        g?.translateBy(x: 0.0, y: height)
+        g?.scaleBy(x: 1.0, y: -1.0)
+        #endif
+
         // Setup
         if firstcall {
             self.firstcall = false
@@ -140,26 +176,27 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         }
 
         // Touch events
-        if self.eventComponents.fingerTapped {
-            self.eventComponents.fingerTapped = false
-            self.delegate?.fingerTapped?()
-        }
-        if self.eventComponents.fingerMoved {
-            self.eventComponents.fingerMoved = false
-            self.delegate?.fingerMoved?()
-        }
-        if self.eventComponents.fingerReleased {
-            self.eventComponents.fingerReleased = false
-            self.delegate?.fingerReleased?()
-        }
+        self.callDelegatesIfNeeded()
 
         // Draw
         self.frameComponents.frameCount += 1
         self.delegate?.draw?()
+
+        #if os(iOS)
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
         UIGraphicsEndImageContext()
+        #else
+        if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
+            DispatchQueue.main.async {
+                self.image = NSImage(cgImage: cgImage, size: self.frame.size)
+                self.setNeedsDisplay()
+            }
+        }
+        g?.restoreGState()
+        #endif
 
+        // Only setup
         if self.delegate?.draw == nil {
             self.noLoop()
             return
@@ -171,6 +208,40 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
                 self.noLoop()
             }
         }
+    }
+
+    private func callDelegatesIfNeeded() {
+        #if os(iOS)
+        if self.eventComponents.fingerTapped {
+            self.eventComponents.fingerTapped = false
+            self.delegate?.fingerTapped?()
+        }
+        if self.eventComponents.fingerDragged {
+            self.eventComponents.fingerDragged = false
+            self.delegate?.fingerDragged?()
+        }
+        if self.eventComponents.fingerReleased {
+            self.eventComponents.fingerReleased = false
+            self.delegate?.fingerReleased?()
+        }
+        #else
+        if self.eventComponents.mouseClicked {
+            self.eventComponents.mouseClicked = false
+            self.delegate?.mouseClicked?()
+        }
+        if self.eventComponents.mouseDragged {
+            self.eventComponents.mouseDragged = false
+            self.delegate?.mouseDragged?()
+        }
+        if self.eventComponents.mouseMoved {
+            self.eventComponents.mouseMoved = false
+            self.delegate?.mouseMoved?()
+        }
+        if self.eventComponents.mouseReleased {
+            self.eventComponents.mouseReleased = false
+            self.delegate?.mouseReleased?()
+        }
+        #endif
     }
 
     // MARK: - Update view bounds

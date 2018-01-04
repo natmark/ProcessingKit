@@ -6,6 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if !os(iOS)
+    import Cocoa
+#endif
+
 import Foundation
 
 class TextComponents {
@@ -45,7 +49,7 @@ struct TextModel: TextModelContract {
     }
 
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
 
         g?.saveGState()
 
@@ -80,7 +84,11 @@ struct TextModel: TextModelContract {
     }
 
     func textWidth(_ str: String) -> CGFloat {
-        let size = str.size(attributes: [NSFontAttributeName: self.textComponents.textFont])
+        #if os(iOS)
+            let size = str.size(attributes: [NSFontAttributeName: self.textComponents.textFont])
+        #else
+            let size = str.size(withAttributes: [NSFontAttributeName: self.textComponents.textFont])
+        #endif
         return size.width
     }
 

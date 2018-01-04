@@ -20,38 +20,38 @@ protocol TransformModelContract {
 
 struct TransformModel: TransformModelContract {
     func pushMatrix() {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.saveGState()
     }
 
     func popMatrix() {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.restoreGState()
     }
 
     func scale(_ s: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.scaleBy(x: s, y: s)
 
     }
 
     func scale(_ x: CGFloat, _ y: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.scaleBy(x: x, y: y)
     }
 
     func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.concatenate(CGAffineTransform(a: 1, b: angleY, c: angleX, d: 1, tx: 0, ty: 0))
     }
 
     func rotate(_ angle: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.rotate(by: angle)
     }
 
     func translate(_ x: CGFloat, _ y: CGFloat) {
-        let g = UIGraphicsGetCurrentContext()
+        let g = MultiplatformCommon.getCurrentContext()
         g?.translateBy(x: x, y: y)
     }
 }

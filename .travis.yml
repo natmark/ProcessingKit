@@ -9,3 +9,4 @@ before_script:
     - set -o pipefail
 script:
     - xcodebuild test -project ./ProcessingKit.xcodeproj -scheme ProcessingKitTests -configuration Debug -sdk iphonesimulator -destination 'platform=iOS Simulator,id=ABBD7191-486B-462F-80B4-AE08C5820DA1' | xcpretty -c
+    - xcodebuild -project ./ProcessingKit.xcodeproj -scheme 'ProcessingKit OSX' -configuration Debug | xcpretty -c
