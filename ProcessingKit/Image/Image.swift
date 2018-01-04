@@ -6,7 +6,9 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
 import Cocoa
 #endif
 
@@ -14,7 +16,7 @@ public protocol ImageModelContract {
     #if os(iOS)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
-    #else
+    #elseif os(OSX)
     func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat)
     func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     #endif
@@ -43,7 +45,7 @@ struct ImageModel: ImageModelContract {
         }
         g?.restoreGState()
     }
-    #else
+    #elseif os(OSX)
     func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         g?.saveGState()
@@ -78,7 +80,7 @@ extension ProcessingView: ImageModelContract {
     public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         self.imageModel.image(img, x, y, width, height)
     }
-    #else
+    #elseif os(OSX)
     public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
         self.imageModel.drawImage(img, x, y)
     }

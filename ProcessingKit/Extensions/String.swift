@@ -6,8 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
-    import Cocoa
+#if os(iOS)
+import UIKit
+#else
+import Cocoa
 #endif
 
 extension String {
@@ -15,7 +17,7 @@ extension String {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         #if os(iOS)
             let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
-        #else
+        #elseif os(OSX)
             let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: font], context: nil)
         #endif
 

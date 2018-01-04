@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
+
 public protocol Constants {
     var HALF_PI: CGFloat { get }
     var PI: CGFloat { get }

@@ -6,11 +6,13 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
+import Foundation
+
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
 import Cocoa
 #endif
-
-import Foundation
 
 class EventComponents {
     #if os(iOS)
@@ -22,7 +24,7 @@ class EventComponents {
     var touchY: CGFloat = 0.0
     var touchesX: Set<CGFloat> = []
     var touchesY: Set<CGFloat> = []
-    #else
+    #elseif os(OSX)
     var mouseClicked = false
     var mouseDragged = false
     var mouseMoved = false
@@ -43,7 +45,7 @@ protocol EventModelContract {
     mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
-    #else
+    #elseif os(OSX)
     var mousePressed: Bool { get }
     var mouseX: CGFloat { get }
     var mouseY: CGFloat { get }
@@ -86,7 +88,7 @@ struct EventModel: EventModelContract {
     var touchesY: Set<CGFloat> {
         return self.eventComponents.touchesY
     }
-    #else
+    #elseif os(OSX)
     var mousePressed: Bool {
         return self.eventComponents.mousePressed
     }
@@ -132,7 +134,7 @@ struct EventModel: EventModelContract {
             }
         }
     }
-    #else
+    #elseif os(OSX)
     mutating func mouseDown(with event: NSEvent) {
         self.eventComponents.mouseX = event.locationInWindow.x
         self.eventComponents.mouseY = event.locationInWindow.y
@@ -190,7 +192,7 @@ extension ProcessingView: EventModelContract {
     public var touchesY: Set<CGFloat> {
         return self.eventModel.touchesY
     }
-    #else
+    #elseif os(OSX)
     public var mousePressed: Bool {
         return self.eventModel.mousePressed
     }
@@ -217,7 +219,7 @@ extension ProcessingView: EventModelContract {
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.eventModel.touchesEnded(touches, with: event)
     }
-    #else
+    #elseif os(OSX)
     open override func mouseDown(with event: NSEvent) {
         self.eventModel.mouseDown(with: event)
     }

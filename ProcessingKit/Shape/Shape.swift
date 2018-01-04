@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
+
 protocol ShapeModelContract {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)

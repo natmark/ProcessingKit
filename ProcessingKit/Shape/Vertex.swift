@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
+
 public enum BeginShapeKind {
     case points
     case lines

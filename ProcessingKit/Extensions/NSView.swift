@@ -6,7 +6,9 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+#if os(OSX)
 import Cocoa
+#endif
 
 extension NSView {
     var backgroundColor: NSColor? {
