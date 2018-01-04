@@ -32,8 +32,11 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
 ## Requirements
-- Xcode8.3
-- Swift3.x
+- Swift 3.0 or later
+- iOS 10.0 or later
+- OSX 10.11 or later
+
+If you use Swift 3.x, try [ProcessingKit 0.6.0](https://github.com/ishkawa/APIKit/tree/2.0.5).
 
 Future release version 1.0.0 will supports Swift4 
 
