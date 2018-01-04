@@ -6,9 +6,11 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
-    import Cocoa
-    typealias CGPoint = NSPoint
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+typealias CGPoint = NSPoint
 #endif
 
 extension CGPoint {

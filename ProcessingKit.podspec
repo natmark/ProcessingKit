@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
   s.author             = { "Atsuya Sato" => "natmark0918@gmail.com" }
   s.osx.deployment_target = "10.11"
   s.ios.deployment_target = "10.0"
-  s.platforms = { :ios => "10.0", :osx => "10.11" }
   s.source       = { :git => "https://github.com/natmark/ProcessingKit.git", :tag => "#{s.version}" }
   s.source_files  = "ProcessingKit/**/*.swift"
   s.exclude_files = "ProcessingKit/Demo.playground/*"

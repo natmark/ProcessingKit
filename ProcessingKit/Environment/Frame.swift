@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
+
 class FrameComponents {
     var bounds: CGRect = CGRect.zero
     var frame: CGRect = CGRect.zero

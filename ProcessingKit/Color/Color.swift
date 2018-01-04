@@ -8,6 +8,12 @@
 
 import Foundation
 
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
+
 class ColorComponents {
     var fill: UIColor = UIColor.white
     var stroke: UIColor = UIColor.clear

@@ -6,11 +6,13 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
-    import Cocoa
-#endif
-
 import Foundation
+
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
+#endif
 
 class TextComponents {
     var textSize: CGFloat = 20.0

@@ -6,7 +6,7 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for ProcessingKit.
 FOUNDATION_EXPORT double ProcessingKitVersionNumber;

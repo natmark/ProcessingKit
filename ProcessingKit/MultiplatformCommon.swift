@@ -6,7 +6,11 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
+import Foundation
+
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
 import Cocoa
 public typealias UIColor = NSColor
 public typealias UIImageView = NSImageView
@@ -19,13 +23,11 @@ public typealias UIView = NSView
 public typealias UIResponder = NSResponder
 #endif
 
-import Foundation
-
 public class MultiplatformCommon {
     public class func getCurrentContext() -> CGContext? {
         #if os(iOS)
             return UIGraphicsGetCurrentContext()
-        #else
+        #elseif os(OSX)
             return NSGraphicsContext.current()?.cgContext
         #endif
     }

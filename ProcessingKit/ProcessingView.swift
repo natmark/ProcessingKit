@@ -6,11 +6,13 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
+import Foundation
+
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
 import Cocoa
 #endif
-
-import Foundation
 
 @objc public protocol ProcessingViewDelegate {
     @objc optional func setup()
@@ -20,7 +22,7 @@ import Foundation
     @objc optional func fingerTapped()
     @objc optional func fingerDragged()
     @objc optional func fingerReleased()
-    #else
+    #elseif os(OSX)
     @objc optional func mouseClicked()
     @objc optional func mouseDragged()
     @objc optional func mouseMoved()
@@ -116,7 +118,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     private func configuration() {
         #if os(iOS)
         self.isUserInteractionEnabled = true
-        #else
+        #elseif os(OSX)
         if let window = self.window {
             self.bounds = CGRect(x: 0, y: 0, width: window.frame.size.width, height: window.frame.size.height)
         } else {
@@ -159,7 +161,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         #if os(iOS)
         UIGraphicsBeginImageContext(rect.size)
         self.image?.draw(at: CGPoint(x: 0, y: 0))
-        #else
+        #elseif os(OSX)
         self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
 
         // MARK: Coordinate systems are different between iOS and OS X
@@ -186,7 +188,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
         self.image = drawnImage
         UIGraphicsEndImageContext()
-        #else
+        #elseif os(OSX)
         if let cgImage = NSGraphicsContext.current()?.cgContext.makeImage() {
             DispatchQueue.main.async {
                 self.image = NSImage(cgImage: cgImage, size: self.frame.size)
@@ -224,7 +226,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
             self.eventComponents.fingerReleased = false
             self.delegate?.fingerReleased?()
         }
-        #else
+        #elseif os(OSX)
         if self.eventComponents.mouseClicked {
             self.eventComponents.mouseClicked = false
             self.delegate?.mouseClicked?()

@@ -6,8 +6,10 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
-#if !os(iOS)
-    import Cocoa
+#if os(iOS)
+import UIKit
+#elseif os(OSX)
+import Cocoa
 #endif
 
 extension UIColor {
