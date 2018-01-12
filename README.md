@@ -25,7 +25,7 @@
 ----------------
 
 # ProcessingKit
-ProcessingKit is a Visual Designing library for iOS & OSX.
+ProcessingKit is a Visual designing library for iOS & OSX.
 ProcessingKit written in Swift🐧 and you can write like [processing](https://github.com/processing/processing).
 
 ## Demo
