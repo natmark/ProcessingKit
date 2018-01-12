@@ -31,6 +31,12 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ## Demo
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
+## Example
+|OS|gif|code|
+|:---:|:------:|:------:|
+|iOS| <img src="https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_Example.gif" alt="gif"  height="50%"> | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_ExampleCode.png)|
+|OSX| ![gif](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_Example.gif) | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_ExampleCode.png)|
+
 ## Requirements
 - Swift 3.0 or later
 - iOS 10.0 or later
