@@ -136,8 +136,7 @@ struct EventModel: EventModelContract {
     }
     #elseif os(OSX)
     mutating func mouseDown(with event: NSEvent) {
-        self.eventComponents.mouseX = event.locationInWindow.x
-        self.eventComponents.mouseY = event.locationInWindow.y
+        self.storeTouch(event.locationInWindow)
 
         self.eventComponents.mousePressed = true
         self.eventComponents.mouseClicked = true
