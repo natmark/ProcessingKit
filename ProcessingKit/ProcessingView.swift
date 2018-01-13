@@ -160,7 +160,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     open override func draw(_ rect: CGRect) {
         #if os(iOS)
         UIGraphicsBeginImageContext(rect.size)
-        self.image?.draw(at: CGPoint(x: 0, y: 0))
+        self.image?.draw(at: CGPoint.zero)
         #elseif os(OSX)
         self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
 

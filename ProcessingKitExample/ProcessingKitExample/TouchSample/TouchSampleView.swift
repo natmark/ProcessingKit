@@ -6,6 +6,7 @@
 //  Copyright © 2017年 Atsuya Sato. All rights reserved.
 //
 
+import UIKit
 import ProcessingKit
 
 class TouchSampleView : ProcessingView {
