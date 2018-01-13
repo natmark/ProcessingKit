@@ -89,7 +89,7 @@ Connect the (UIImageView / NSImageView) to SampleView Class
 Add the following to your `Podfile`:
 ```
   pod "ProcessingKit"
-  pod "ProcessingKit", "0.6.0" # If you use Swift 3.x
+  pod "ProcessingKit", "~> 0.6.0" # If you use Swift 3.x
 ```
 
 - (Example project here: [PKPodsExample](https://github.com/natmark/PKPodsExample))
@@ -98,7 +98,7 @@ Add the following to your `Podfile`:
 Add the following to your `Cartfile`:
 ```
   github "natmark/ProcessingKit"
-  github "natmark/ProcessingKit" == 0.6.0 # If you use Swift 3.x
+  github "natmark/ProcessingKit" ~> 0.6.0 # If you use Swift 3.x
 ```
 
 - (Example project here: [PKExample](https://github.com/natmark/PKExample))
