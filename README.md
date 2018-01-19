@@ -83,7 +83,7 @@ Connect the (UIImageView / NSImageView) to SampleView Class
  }
 ```
 
-## Instration
+## Installation
 
 ### [CocoaPods](http://cocoadocs.org/docsets/ProcessingKit/)
 Add the following to your `Podfile`:
