@@ -33,7 +33,7 @@ class ProcessingViewDelegateTranslateSpy: ProcessingViewDelegate {
 
     func setup() {
         self.view.translate(x, y)
-        self.record(view.context)
+        self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
     }
 
@@ -52,26 +52,56 @@ class TransformTests: XCTestCase {
     }
 
     func testTranslate() {
-        let view = ProcessingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        let translateDelegateSpy = ProcessingViewDelegateTranslateSpy(
-            exception: expectation(description: "Point"),
-            view: view,
-            x: 100,
-            y: 0
-        )
-        view.delegate = translateDelegateSpy
-        waitForExpectations(timeout: 100)
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "Move 100pt to the right",
+                translate: (x: 100.0, y: 0.0),
+                expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 100.0, ty: 100.0)
+            ),
+            #line: TestCase(
+                description: "Move 50pt to the bottom",
+                translate: (x: 0.0, y: 50.0),
+                expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 50.0)
+            ),
+            #line: TestCase(
+                description: "Move 40pt to the left, 20pt to the top",
+                translate: (x: -40.0, y: -20.0),
+                expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: -40.0, ty: 120.0)
+            ),
+        ]
 
-        let expect = CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 100.0, ty: 100.0)
-        let result = translateDelegateSpy.context?.ctm
-        XCTAssertEqual(expect, result)
-    }
+        _ = testCases.map { (line, testCase) in
+            let view = ProcessingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+            let translateDelegateSpy = ProcessingViewDelegateTranslateSpy(
+                exception: expectation(description: "Point"),
+                view: view,
+                x: testCase.translate.x,
+                y: testCase.translate.y
+            )
+
+            view.delegate = translateDelegateSpy
+            waitForExpectations(timeout: 100)
+
+            let actual = translateDelegateSpy.context?.ctm
+            let expected = testCase.expect
+            XCTAssertEqual(actual, expected, String(line))
         }
     }
 
+    struct TestCase {
+        let description: String
+        let translate: (x: CGFloat, y: CGFloat)
+        let expect: CGAffineTransform
+
+        init(
+            description: String,
+            translate: (x: CGFloat, y: CGFloat),
+            expect: CGAffineTransform
+            ) {
+            self.description = description
+            self.translate = translate
+            self.expect = expect
+        }
+    }
 }
