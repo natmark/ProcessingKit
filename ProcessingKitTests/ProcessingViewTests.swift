@@ -22,19 +22,18 @@ class ProcessingViewTests: XCTestCase {
     func testCallSetup() {
         let view = ProcessingView(frame: CGRect.zero)
 
-        let processingViewDelegateSpy = ProcessingViewDelegateSetupSpy(exceptions:
+        let processingViewDelegateSpy = ProcessingViewDelegateSetupSpy(exception:
             expectation(description: "Setup")
         )
         view.delegate = processingViewDelegateSpy
         waitForExpectations(timeout: 100)
-        print(processingViewDelegateSpy.spyHistory.count)
         XCTAssertEqual(processingViewDelegateSpy.spyHistory.count, 1)
     }
 
     func testCallDraw() {
         let view = ProcessingView(frame: CGRect.zero)
 
-        let processingViewDelegateSpy = ProcessingViewDelegateDrawSpy(exceptions:
+        let processingViewDelegateSpy = ProcessingViewDelegateDrawSpy(exception:
             expectation(description: "Draw")
         )
         view.delegate = processingViewDelegateSpy

@@ -10,16 +10,16 @@ import XCTest
 @testable import ProcessingKit
 
 class ProcessingViewDelegateSetupSpy: ProcessingViewDelegate {
-    private let exceptions: XCTestExpectation
+    private let exception: XCTestExpectation
     private(set) var spyHistory: [Any] = []
 
-    init(exceptions: XCTestExpectation) {
-        self.exceptions = exceptions
+    init(exception: XCTestExpectation) {
+        self.exception = exception
     }
 
     func setup() {
         self.record(())
-        exceptions.fulfill()
+        exception.fulfill()
     }
 
     private func record(_ args: Void) {
@@ -28,11 +28,11 @@ class ProcessingViewDelegateSetupSpy: ProcessingViewDelegate {
 }
 
 class ProcessingViewDelegateDrawSpy: ProcessingViewDelegate {
-    private let exceptions: XCTestExpectation
+    private let exception: XCTestExpectation
     private(set) var spyHistory: [Any] = []
 
-    init(exceptions: XCTestExpectation) {
-        self.exceptions = exceptions
+    init(exception: XCTestExpectation) {
+        self.exception = exception
     }
 
     func setup() {
@@ -41,7 +41,7 @@ class ProcessingViewDelegateDrawSpy: ProcessingViewDelegate {
 
     func draw() {
         self.record(())
-        exceptions.fulfill()
+        exception.fulfill()
     }
     private func record(_ args: Void) {
         self.spyHistory += [args]

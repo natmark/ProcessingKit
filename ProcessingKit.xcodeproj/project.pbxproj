@@ -46,6 +46,7 @@
 		E7B77E251FF7E36F00CE691A /* MultiplatformCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77E231FF7E30C00CE691A /* MultiplatformCommon.swift */; };
 		E7B77E2B1FF7EC6600CE691A /* NSImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77E291FF7EBFF00CE691A /* NSImage.swift */; };
 		E7B77E2E1FF7F19D00CE691A /* NSView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77E2C1FF7F19700CE691A /* NSView.swift */; };
+		E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E1830C200A7D0D009C32ED /* TransformTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		E7B77E231FF7E30C00CE691A /* MultiplatformCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplatformCommon.swift; sourceTree = "<group>"; };
 		E7B77E291FF7EBFF00CE691A /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		E7B77E2C1FF7F19700CE691A /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
+		E7E1830C200A7D0D009C32ED /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +173,7 @@
 				E7212F501F34B5A600173CD8 /* Info.plist */,
 				E71388DC1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift */,
 				E7212F4E1F34B5A600173CD8 /* ProcessingViewTests.swift */,
+				E7E1830C200A7D0D009C32ED /* TransformTests.swift */,
 			);
 			path = ProcessingKitTests;
 			sourceTree = "<group>";
@@ -454,6 +457,7 @@
 				E7212F4F1F34B5A600173CD8 /* ProcessingViewTests.swift in Sources */,
 				E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */,
 				E71388DD1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift in Sources */,
+				E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
