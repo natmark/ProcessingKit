@@ -127,16 +127,9 @@ class TransformTests: XCTestCase {
             waitForExpectations(timeout: 100)
 
             let actual = transformDelegateSpy.context?.ctm
-
-            switch testCase.transform {
-            // Multiply translate(0.0, 100.0), scale(1.0, -1.0) and expect together for coordinate system
-            case .translate(_, _):
-                let expected = CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 100.0).concatenating(testCase.expect)
-                XCTAssertEqual(actual, expected, String(line))
-            case .rotate(_):
-                let expected = CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 0.0).concatenating(testCase.expect.concatenating(CGAffineTransform(a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 100.0)))
-                XCTAssertEqual(actual, expected, String(line))
-            }
+            // Multiply scale(1.0, -1.0), translate(0.0, 100.0) and expect together for coordinate system
+            let expected = CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 0.0).concatenating(testCase.expect.concatenating(CGAffineTransform(a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 100.0)))
+            XCTAssertEqual(actual, expected, String(line))
         }
     }
 
