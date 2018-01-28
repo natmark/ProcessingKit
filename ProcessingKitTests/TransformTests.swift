@@ -17,7 +17,7 @@ import XCTest
                        | tx ty 1 |
  */
 
-class ProcessingViewDelegateTranslateSpy: ProcessingViewDelegate {
+class ProcessingViewDelegateTransformSpy: ProcessingViewDelegate {
     private let exception: XCTestExpectation
     private let view: ProcessingView
     private let x: CGFloat
@@ -55,29 +55,37 @@ class TransformTests: XCTestCase {
         let testCases: [UInt: TestCase] = [
             #line: TestCase(
                 description: "Move 100pt to the right",
-                translate: (x: 100.0, y: 0.0),
+                transform: (x: 100.0, y: 0.0),
                 expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 100.0, ty: 100.0)
             ),
             #line: TestCase(
                 description: "Move 50pt to the bottom",
-                translate: (x: 0.0, y: 50.0),
+                transform: (x: 0.0, y: 50.0),
                 expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 50.0)
             ),
             #line: TestCase(
                 description: "Move 40pt to the left, 20pt to the top",
-                translate: (x: -40.0, y: -20.0),
+                transform: (x: -40.0, y: -20.0),
                 expect: CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: -40.0, ty: 120.0)
             ),
         ]
 
+        check(testCases: testCases)
+    }
+
+    func testRotate() {
+
+    }
+
+    func check(testCases: [UInt: TestCase]) {
         _ = testCases.map { (line, testCase) in
             let view = ProcessingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
 
-            let translateDelegateSpy = ProcessingViewDelegateTranslateSpy(
-                exception: expectation(description: "Point"),
+            let translateDelegateSpy = ProcessingViewDelegateTransformSpy(
+                exception: expectation(description: testCase.description),
                 view: view,
-                x: testCase.translate.x,
-                y: testCase.translate.y
+                x: testCase.transform.x,
+                y: testCase.transform.y
             )
 
             view.delegate = translateDelegateSpy
@@ -91,16 +99,16 @@ class TransformTests: XCTestCase {
 
     struct TestCase {
         let description: String
-        let translate: (x: CGFloat, y: CGFloat)
+        let transform: (x: CGFloat, y: CGFloat)
         let expect: CGAffineTransform
 
         init(
             description: String,
-            translate: (x: CGFloat, y: CGFloat),
+            transform: (x: CGFloat, y: CGFloat),
             expect: CGAffineTransform
             ) {
             self.description = description
-            self.translate = translate
+            self.transform = transform
             self.expect = expect
         }
     }
