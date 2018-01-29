@@ -26,7 +26,7 @@ import XCTest
 enum Transform {
     case translate(x: CGFloat, y: CGFloat)
     case rotate(angle: CGFloat)
-    case shere(angleX: CGFloat, angleY: CGFloat)
+    case shear(angleX: CGFloat, angleY: CGFloat)
     case scale(x: CGFloat, y: CGFloat)
 }
 
@@ -48,8 +48,8 @@ class ProcessingViewDelegateTransformSpy: ProcessingViewDelegate {
             self.view.translate(x, y)
         case .rotate(let angle):
             self.view.rotate(angle)
-        case .shere(let x, let y):
-            self.view.shere(x, y)
+        case .shear(let x, let y):
+            self.view.shear(x, y)
         case .scale(let x, let y):
             self.view.scale(x, y)
         }
@@ -119,21 +119,21 @@ class TransformTests: XCTestCase {
         check(testCases: testCases)
     }
 
-    func testShere() {
+    func testShear() {
         let testCases: [UInt: TestCase] = [
             #line: TestCase(
-                description: "x-shere angle to 30°",
-                transform: .shere(angleX: radians(30), angleY: radians(0)),
+                description: "x-shear angle to 30°",
+                transform: .shear(angleX: radians(30), angleY: radians(0)),
                 expect: CGAffineTransform(a: 1.0, b: tan(radians(-0)), c: tan(radians(-30)), d: 1.0, tx: 0.0, ty: 0.0)
             ),
             #line: TestCase(
-                description: "y-shere angle to 60°",
-                transform: .shere(angleX: radians(0), angleY: radians(60)),
+                description: "y-shear angle to 60°",
+                transform: .shear(angleX: radians(0), angleY: radians(60)),
                 expect: CGAffineTransform(a: 1.0, b: tan(radians(-60)), c: tan(radians(-0)), d: 1.0, tx: 0.0, ty: 0.0)
             ),
             #line: TestCase(
-                description: "x-shere angle to 45° & y-shere angle to 45°",
-                transform: .shere(angleX: radians(45), angleY: radians(45)),
+                description: "x-shear angle to 45° & y-shear angle to 45°",
+                transform: .shear(angleX: radians(45), angleY: radians(45)),
                 expect: CGAffineTransform(a: 1.0, b: tan(radians(-45)), c: tan(radians(-45)), d: 1.0, tx: 0.0, ty: 0.0)
             ),
         ]
