@@ -20,6 +20,9 @@
         <img src="https://img.shields.io/badge/Carthage-compatible-brightgreen.svg?style=flat"
              alt="Carthage Compatible">
     </a>
+    <a href="https://codecov.io/gh/natmark/ProcessingKit">
+        <img alt="codecov" src="https://codecov.io/gh/natmark/ProcessingKit/branch/master/graph/badge.svg">
+    </a>
 </p>
 
 ----------------
