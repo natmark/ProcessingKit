@@ -26,6 +26,8 @@ import XCTest
 enum Transform {
     case translate(x: CGFloat, y: CGFloat)
     case rotate(angle: CGFloat)
+    case shere(angleX: CGFloat, angleY: CGFloat)
+    case scale(x: CGFloat, y: CGFloat)
 }
 
 class ProcessingViewDelegateTransformSpy: ProcessingViewDelegate {
@@ -46,6 +48,10 @@ class ProcessingViewDelegateTransformSpy: ProcessingViewDelegate {
             self.view.translate(x, y)
         case .rotate(let angle):
             self.view.rotate(angle)
+        case .shere(let x, let y):
+            self.view.shere(x, y)
+        case .scale(let x, let y):
+            self.view.scale(x, y)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -57,6 +63,10 @@ class ProcessingViewDelegateTransformSpy: ProcessingViewDelegate {
 }
 
 class TransformTests: XCTestCase {
+    let radians = { (angle: CGFloat) -> CGFloat in
+        return .pi * angle / 360
+    }
+
     override func setUp() {
         super.setUp()
     }
@@ -88,10 +98,6 @@ class TransformTests: XCTestCase {
     }
 
     func testRotate() {
-        let radians = { (angle: CGFloat) -> CGFloat in
-            return .pi * angle / 360
-        }
-
         let testCases: [UInt: TestCase] = [
             #line: TestCase(
                 description: "Rotate by 90 degrees",
@@ -113,6 +119,48 @@ class TransformTests: XCTestCase {
         check(testCases: testCases)
     }
 
+    func testShere() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "x-shere angle to 30°",
+                transform: .shere(angleX: radians(30), angleY: radians(0)),
+                expect: CGAffineTransform(a: 1.0, b: tan(radians(-0)), c: tan(radians(-30)), d: 1.0, tx: 0.0, ty: 0.0)
+            ),
+            #line: TestCase(
+                description: "y-shere angle to 60°",
+                transform: .shere(angleX: radians(0), angleY: radians(60)),
+                expect: CGAffineTransform(a: 1.0, b: tan(radians(-60)), c: tan(radians(-0)), d: 1.0, tx: 0.0, ty: 0.0)
+            ),
+            #line: TestCase(
+                description: "x-shere angle to 45° & y-shere angle to 45°",
+                transform: .shere(angleX: radians(45), angleY: radians(45)),
+                expect: CGAffineTransform(a: 1.0, b: tan(radians(-45)), c: tan(radians(-45)), d: 1.0, tx: 0.0, ty: 0.0)
+            ),
+        ]
+        check(testCases: testCases)
+    }
+
+    func testScale() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "Scale width by 2.0 times",
+                transform: .scale(x: 2.0, y: 1.0),
+                expect: CGAffineTransform(a: 2.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0)
+            ),
+            #line: TestCase(
+                description: "Scale width by 0.5 times, height by 2.0 times",
+                transform: .scale(x: 0.5, y: 2.0),
+                expect: CGAffineTransform(a: 0.5, b: 0.0, c: 0.0, d: 2.0, tx: 0.0, ty: 0.0)
+            ),
+            #line: TestCase(
+                description: "Scale width by -2.0 times",
+                transform: .scale(x: -2.0, y: 1.0),
+                expect: CGAffineTransform(a: -2.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 0.0)
+            ),
+        ]
+        check(testCases: testCases)
+    }
+
     func check(testCases: [UInt: TestCase]) {
         _ = testCases.map { (line, testCase) in
             let view = ProcessingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -129,6 +177,7 @@ class TransformTests: XCTestCase {
             let actual = transformDelegateSpy.context?.ctm
             // Multiply scale(1.0, -1.0), translate(0.0, 100.0) and expect together for coordinate system
             let expected = CGAffineTransform(a: 1.0, b: 0.0, c: -0.0, d: -1.0, tx: 0.0, ty: 0.0).concatenating(testCase.expect.concatenating(CGAffineTransform(a: 1.0, b: 0.0, c: 0.0, d: 1.0, tx: 0.0, ty: 100.0)))
+
             XCTAssertEqual(actual, expected, String(line))
         }
     }

@@ -48,7 +48,7 @@ struct TransformModel: TransformModelContract {
 
     func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
-        g?.concatenate(CGAffineTransform(a: 1, b: angleY, c: angleX, d: 1, tx: 0, ty: 0))
+        g?.concatenate(CGAffineTransform(a: 1, b: tan(angleY), c: tan(angleX), d: 1, tx: 0, ty: 0))
     }
 
     func rotate(_ angle: CGFloat) {
