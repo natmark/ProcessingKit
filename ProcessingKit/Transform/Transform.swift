@@ -19,7 +19,7 @@ protocol TransformModelContract {
     func popMatrix()
     func scale(_ s: CGFloat)
     func scale(_ x: CGFloat, _ y: CGFloat)
-    func shere(_ angleX: CGFloat, _ angleY: CGFloat)
+    func shear(_ angleX: CGFloat, _ angleY: CGFloat)
     func rotate(_ angle: CGFloat)
     func translate(_ x: CGFloat, _ y: CGFloat)
 }
@@ -46,9 +46,9 @@ struct TransformModel: TransformModelContract {
         g?.scaleBy(x: x, y: y)
     }
 
-    func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
+    func shear(_ angleX: CGFloat, _ angleY: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
-        g?.concatenate(CGAffineTransform(a: 1, b: angleY, c: angleX, d: 1, tx: 0, ty: 0))
+        g?.concatenate(CGAffineTransform(a: 1, b: tan(angleY), c: tan(angleX), d: 1, tx: 0, ty: 0))
     }
 
     func rotate(_ angle: CGFloat) {
@@ -79,8 +79,8 @@ extension ProcessingView: TransformModelContract {
         self.transformModel.scale(x, y)
     }
 
-    public func shere(_ angleX: CGFloat, _ angleY: CGFloat) {
-        self.transformModel.shere(angleX, angleY)
+    public func shear(_ angleX: CGFloat, _ angleY: CGFloat) {
+        self.transformModel.shear(angleX, angleY)
     }
 
     public func rotate(_ angle: CGFloat) {
