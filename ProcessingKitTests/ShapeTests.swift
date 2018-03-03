@@ -11,6 +11,7 @@ import XCTest
 
 enum Shape {
     case rect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
+    case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
 }
 
 class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
@@ -29,6 +30,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
         switch shape {
         case .rect(let x, let y, let width, let height):
             self.view.rect(x, y, width, height)
+        case .ellipse(let x, let y, let width, let height):
+            self.view.ellipse(x, y, width, height)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -44,10 +47,17 @@ extension UIBezierPath {
         self.move(to: point)
         return self
     }
+
     open func addLineTo(_ point: CGPoint) -> UIBezierPath {
         self.addLine(to: point)
         return self
     }
+
+    open func addCurveTo(_ points: (to: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)) -> UIBezierPath {
+        self.addCurve(to: points.to, controlPoint1: points.controlPoint1, controlPoint2: points.controlPoint2)
+        return self
+    }
+
     open func closePath() -> UIBezierPath {
         self.close()
         return self
@@ -68,28 +78,95 @@ class ShapeTests: XCTestCase {
             #line: TestCase(
                 description: "draw rect(0, 0, 50, 50)",
                 shape: .rect(x: 0, y: 0, width: 50, height: 50),
-                expect: UIBezierPath()
+                expect: .left(
+                    UIBezierPath()
                     .moveTo(CGPoint(x: 0, y: 0))
                     .addLineTo(CGPoint(x: 50, y: 0))
                     .addLineTo(CGPoint(x: 50, y: 50))
                     .addLineTo(CGPoint(x: 0, y: 50))
                     .closePath()
                     .cgPath
+                )
             ),
             #line: TestCase(
                 description: "draw rect(20, 20, 30, 50)",
                 shape: .rect(x: 20, y: 20, width: 30, height: 50),
-                expect: UIBezierPath()
+                expect: .left(
+                    UIBezierPath()
                     .moveTo(CGPoint(x: 20, y: 20))
                     .addLineTo(CGPoint(x: 50, y: 20))
                     .addLineTo(CGPoint(x: 50, y: 70))
                     .addLineTo(CGPoint(x: 20, y: 70))
                     .closePath()
                     .cgPath
+                )
             ),
         ]
 
         check(testCases: testCases)
+    }
+
+    func testElipse() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw ellipse(100, 100, 100, 100)",
+                shape: .ellipse(x: 100, y: 100, width: 100, height: 100),
+                expect: .right([
+                    CGPoint(x: 150, y: 100),
+                    CGPoint(x: 100, y: 150),
+                    CGPoint(x: 50, y: 100),
+                    CGPoint(x: 100, y: 50),
+                    ]
+                )
+            ),
+            #line: TestCase(
+                description: "draw ellipse(0, 0, 100, 100)",
+                shape: .ellipse(x: 0, y: 0, width: 100, height: 100),
+                expect: .right([
+                    CGPoint(x: 50, y: 0),
+                    CGPoint(x: 0, y: 50),
+                    CGPoint(x: -50, y: 0),
+                    CGPoint(x: 0, y: -50),
+                    ]
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
+    }
+
+    enum Quadrant {
+        case first
+        case second
+        case third
+        case fourth
+    }
+
+    func getControlPoints(x: CGFloat, y:CGFloat, width: CGFloat, height: CGFloat, quadrant: Quadrant) -> (to: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint) {
+        let control: CGFloat = 2 * tan(CGFloat.pi / 8) / 3
+
+        switch quadrant {
+        case .first:
+            let to = CGPoint(x: x + width / 2, y: y)
+            let controlPoint1 = CGPoint(x: x + control * width, y: y - height / 2)
+            let controlPoint2 = CGPoint(x: x + width / 2, y: y - control * height)
+            return (to, controlPoint1, controlPoint2)
+        case .second:
+            let to = CGPoint(x: x, y: y - height / 2)
+            let controlPoint1 = CGPoint(x: x - width / 2, y: y - control * height)
+            let controlPoint2 = CGPoint(x: x - control * width, y: y - height / 2)
+            return (to, controlPoint1, controlPoint2)
+        case .third:
+            let to = CGPoint(x: x - width / 2, y: y)
+            let controlPoint1 = CGPoint(x: x  - control * width, y: y + height / 2)
+            let controlPoint2 = CGPoint(x: x - width / 2, y: y + control * height)
+            return (to, controlPoint1, controlPoint2)
+        case .fourth:
+            let to = CGPoint(x: x, y: y + height / 2)
+            let controlPoint1 = CGPoint(x: x + width / 2, y: y + control * height)
+            let controlPoint2 = CGPoint(x: x + control * width, y: y + height / 2)
+            return (to, controlPoint1, controlPoint2)
+        }
     }
 
     func check(testCases: [UInt: TestCase]) {
@@ -108,13 +185,25 @@ class ShapeTests: XCTestCase {
             let actual = transformDelegateSpy.context?.path
             let expected = testCase.expect
 
-            XCTAssertEqual(actual, expected, String(line))
+            switch expected {
+            case .left(let path):
+                XCTAssertEqual(actual, path, String(line))
+            case .right(let points):
+                for point in points {
+                    XCTAssertTrue(actual?.contains(point) ?? false, String(line))
+                }
+            }
         }
+    }
+
+    enum Either<T, U> {
+        case left(T)
+        case right(U)
     }
 
     struct TestCase {
         let description: String
         let shape: Shape
-        let expect: CGPath
+        let expect: Either<CGPath, [CGPoint]>
     }
 }
