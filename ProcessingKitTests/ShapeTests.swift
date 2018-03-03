@@ -135,40 +135,6 @@ class ShapeTests: XCTestCase {
         check(testCases: testCases)
     }
 
-    enum Quadrant {
-        case first
-        case second
-        case third
-        case fourth
-    }
-
-    func getControlPoints(x: CGFloat, y:CGFloat, width: CGFloat, height: CGFloat, quadrant: Quadrant) -> (to: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint) {
-        let control: CGFloat = 2 * tan(CGFloat.pi / 8) / 3
-
-        switch quadrant {
-        case .first:
-            let to = CGPoint(x: x + width / 2, y: y)
-            let controlPoint1 = CGPoint(x: x + control * width, y: y - height / 2)
-            let controlPoint2 = CGPoint(x: x + width / 2, y: y - control * height)
-            return (to, controlPoint1, controlPoint2)
-        case .second:
-            let to = CGPoint(x: x, y: y - height / 2)
-            let controlPoint1 = CGPoint(x: x - width / 2, y: y - control * height)
-            let controlPoint2 = CGPoint(x: x - control * width, y: y - height / 2)
-            return (to, controlPoint1, controlPoint2)
-        case .third:
-            let to = CGPoint(x: x - width / 2, y: y)
-            let controlPoint1 = CGPoint(x: x  - control * width, y: y + height / 2)
-            let controlPoint2 = CGPoint(x: x - width / 2, y: y + control * height)
-            return (to, controlPoint1, controlPoint2)
-        case .fourth:
-            let to = CGPoint(x: x, y: y + height / 2)
-            let controlPoint1 = CGPoint(x: x + width / 2, y: y + control * height)
-            let controlPoint2 = CGPoint(x: x + control * width, y: y + height / 2)
-            return (to, controlPoint1, controlPoint2)
-        }
-    }
-
     func check(testCases: [UInt: TestCase]) {
         _ = testCases.map { (line, testCase) in
             let view = ProcessingView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
