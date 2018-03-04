@@ -36,76 +36,77 @@ struct ShapeModel: ShapeModelContract {
 
     func point(_ x: CGFloat, _ y: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
-
         g?.setFillColor(self.colorComponents.stroke.cgColor)
-        g?.fill(CGRect(x: x, y: y, width: 1.0, height: 1.0))
+
+        drawing(mode: .fill) {
+            let width = self.colorComponents.strokeWeight
+            let height = self.colorComponents.strokeWeight
+            g?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+        }
     }
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-
-        g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addLine(to: CGPoint(x: x2, y: y2))
-        g?.strokePath()
-
-        g?.restoreGState()
+        drawing(mode: .stroke) {
+            g?.move(to: CGPoint(x: x1, y: y1))
+            g?.addLine(to: CGPoint(x: x2, y: y2))
+        }
     }
 
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.stroke(CGRect(x: x, y: y, width: width, height: height))
-        g?.fill(CGRect(x: x, y: y, width: width, height: height))
+        drawing(mode: .fillStroke) {
+            g?.addRect(CGRect(x: x, y: y, width: width, height: height))
+        }
     }
 
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
-        g?.strokeEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
-        g?.fillEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+
+        drawing(mode: .fillStroke) {
+            g?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+        }
     }
 
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-        g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
-        g?.drawPath(using: .fillStroke)
-        g?.restoreGState()
+        drawing(mode: .fillStroke) {
+            g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
+        }
     }
 
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-        g?.beginPath()
-        g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addLine(to: CGPoint(x: x2, y: y2))
-        g?.addLine(to: CGPoint(x: x3, y: y3))
-        g?.closePath()
-        g?.drawPath(using: .fillStroke)
-        g?.restoreGState()
+        drawing(mode: .fillStroke) {
+            g?.beginPath()
+            g?.move(to: CGPoint(x: x1, y: y1))
+            g?.addLine(to: CGPoint(x: x2, y: y2))
+            g?.addLine(to: CGPoint(x: x3, y: y3))
+            g?.closePath()
+        }
     }
 
     func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-        g?.beginPath()
-        g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addLine(to: CGPoint(x: x2, y: y2))
-        g?.addLine(to: CGPoint(x: x3, y: y3))
-        g?.addLine(to: CGPoint(x: x4, y: y4))
-        g?.closePath()
-        g?.drawPath(using: .fillStroke)
-        g?.restoreGState()
+        drawing(mode: .fillStroke) {
+            g?.beginPath()
+            g?.move(to: CGPoint(x: x1, y: y1))
+            g?.addLine(to: CGPoint(x: x2, y: y2))
+            g?.addLine(to: CGPoint(x: x3, y: y3))
+            g?.addLine(to: CGPoint(x: x4, y: y4))
+            g?.closePath()
+        }
     }
 
     func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
@@ -133,22 +134,20 @@ struct ShapeModel: ShapeModelContract {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-        g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
-        g?.drawPath(using: .fillStroke)
-        g?.restoreGState()
+        drawing(mode: .fillStroke) {
+            g?.move(to: CGPoint(x: x1, y: y1))
+            g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
+        }
     }
 
     func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
         setGraphicsConfiguration(context: g)
 
-        g?.saveGState()
-        g?.move(to: CGPoint(x: x1, y: y1))
-        g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
-        g?.drawPath(using: .fillStroke)
-        g?.restoreGState()
+        drawing(mode: .fillStroke) {
+            g?.move(to: CGPoint(x: x1, y: y1))
+            g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
+        }
     }
 
     func radians(_ degrees: CGFloat) -> CGFloat {
@@ -160,6 +159,23 @@ struct ShapeModel: ShapeModelContract {
         context?.setFillColor(self.colorComponents.fill.cgColor)
         context?.setStrokeColor(self.colorComponents.stroke.cgColor)
         context?.setLineWidth(self.colorComponents.strokeWeight)
+    }
+
+    private func drawing(mode: CGPathDrawingMode, closure:() -> Void) {
+        let g = MultiplatformCommon.getCurrentContext()
+        g?.saveGState()
+        closure()
+
+        // do not execute this line when testing to protect path infomation
+        if !isTesting() {
+            g?.drawPath(using: mode)
+        }
+
+        g?.restoreGState()
+    }
+
+    private func isTesting() -> Bool {
+        return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
     }
 }
 

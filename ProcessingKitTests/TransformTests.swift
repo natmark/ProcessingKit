@@ -186,15 +186,5 @@ class TransformTests: XCTestCase {
         let description: String
         let transform: Transform
         let expect: CGAffineTransform
-
-        init(
-            description: String,
-            transform: Transform,
-            expect: CGAffineTransform
-            ) {
-            self.description = description
-            self.transform = transform
-            self.expect = expect
-        }
     }
 }
