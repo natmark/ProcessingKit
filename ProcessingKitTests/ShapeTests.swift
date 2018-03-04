@@ -17,6 +17,7 @@ enum Shape {
     case arc(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat)
     case triangle(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat)
     case quad(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat, x4: CGFloat, y4: CGFloat)
+    case curve(cpx1: CGFloat, cpy1: CGFloat, x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, cpx2: CGFloat, cpy2: CGFloat)
 }
 
 class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
@@ -47,6 +48,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
             self.view.triangle(x1, y1, x2, y2, x3, y3)
         case .quad(let x1, let y1, let x2, let y2, let x3, let y3, let x4, let y4):
             self.view.quad(x1, y1, x2, y2, x3, y3, x4, y4)
+        case .curve(let cpx1, let cpy1, let x1, let y1, let x2, let y2, let cpx2, let cpy2):
+            self.view.curve(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -257,6 +260,22 @@ class ShapeTests: XCTestCase {
                         .addLineTo(CGPoint(x: 40, y: 50))
                         .closePath()
                         .cgPath
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
+    }
+
+    func testCurve() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw curve(40, 40, 80, 60, 100, 100, 60, 120)",
+                shape: .curve(cpx1: 40, cpy1: 40, x1: 80, y1: 60, x2: 100, y2: 100, cpx2: 60, cpy2: 120),
+                expect: .right([
+                    CGPoint(x: 80, y: 60),
+                    CGPoint(x: 100, y: 100),
+                    ]
                 )
             ),
             ]
