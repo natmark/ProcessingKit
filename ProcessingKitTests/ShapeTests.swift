@@ -16,6 +16,7 @@ enum Shape {
     case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
     case arc(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat)
     case triangle(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat)
+    case quad(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat, x4: CGFloat, y4: CGFloat)
 }
 
 class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
@@ -44,6 +45,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
             self.view.arc(x, y, radius, start, stop)
         case .triangle(let x1, let y1, let x2, let y2, let x3, let y3):
             self.view.triangle(x1, y1, x2, y2, x3, y3)
+        case .quad(let x1, let y1, let x2, let y2, let x3, let y3, let x4, let y4):
+            self.view.quad(x1, y1, x2, y2, x3, y3, x4, y4)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -232,6 +235,26 @@ class ShapeTests: XCTestCase {
                         .moveTo(CGPoint(x: 50, y: 0))
                         .addLineTo(CGPoint(x: 0, y: 100))
                         .addLineTo(CGPoint(x: 100, y: 100))
+                        .closePath()
+                        .cgPath
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
+    }
+
+    func testQuad() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw triangle(0, 0, 30, 0, 100, 100, 40, 50)",
+                shape: .quad(x1: 0, y1: 0, x2: 30, y2: 0, x3: 100, y3: 100, x4: 40, y4: 50),
+                expect: .left(
+                    UIBezierPath()
+                        .moveTo(CGPoint(x: 0, y: 0))
+                        .addLineTo(CGPoint(x: 30, y: 0))
+                        .addLineTo(CGPoint(x: 100, y: 100))
+                        .addLineTo(CGPoint(x: 40, y: 50))
                         .closePath()
                         .cgPath
                 )
