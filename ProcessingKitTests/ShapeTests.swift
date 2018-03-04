@@ -18,6 +18,7 @@ enum Shape {
     case triangle(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat)
     case quad(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat, x4: CGFloat, y4: CGFloat)
     case curve(cpx1: CGFloat, cpy1: CGFloat, x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, cpx2: CGFloat, cpy2: CGFloat)
+    case bezier(x1: CGFloat, y1: CGFloat, cpx1: CGFloat, cpy1: CGFloat, cpx2: CGFloat, cpy2: CGFloat, x2: CGFloat, y2: CGFloat)
 }
 
 class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
@@ -50,6 +51,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
             self.view.quad(x1, y1, x2, y2, x3, y3, x4, y4)
         case .curve(let cpx1, let cpy1, let x1, let y1, let x2, let y2, let cpx2, let cpy2):
             self.view.curve(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
+        case .bezier(let x1, let y1, let cpx1, let cpy1, let cpx2, let cpy2, let x2, let y2):
+            self.view.bezier(x1, y1, cpx1, cpy1, cpx2, cpy2, x2, y2)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -275,6 +278,22 @@ class ShapeTests: XCTestCase {
                 expect: .right([
                     CGPoint(x: 80, y: 60),
                     CGPoint(x: 100, y: 100),
+                    ]
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
+    }
+
+    func testBezier() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw bezier(40, 40, 80, 60, 100, 100, 60, 120)",
+                shape: .bezier(x1: 40, y1: 40, cpx1: 80, cpy1: 60, cpx2: 100, cpy2: 100, x2: 60, y2: 120),
+                expect: .right([
+                    CGPoint(x: 40, y: 40),
+                    CGPoint(x: 60, y: 120),
                     ]
                 )
             ),
