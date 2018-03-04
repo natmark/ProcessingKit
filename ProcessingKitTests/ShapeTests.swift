@@ -10,6 +10,7 @@ import XCTest
 @testable import ProcessingKit
 
 enum Shape {
+    case line(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat)
     case rect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
     case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
 }
@@ -28,6 +29,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
 
     func setup() {
         switch shape {
+        case .line(let x1, let y1, let x2, let y2):
+            self.view.line(x1, y1, x2, y2)
         case .rect(let x, let y, let width, let height):
             self.view.rect(x, y, width, height)
         case .ellipse(let x, let y, let width, let height):
@@ -71,6 +74,33 @@ class ShapeTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+    }
+
+    func testLine() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw line(0, 0, 100, 100)",
+                shape: .line(x1: 0, y1: 0, x2: 100, y2: 100),
+                expect: .left(
+                    UIBezierPath()
+                        .moveTo(CGPoint(x: 0, y: 0))
+                        .addLineTo(CGPoint(x: 100, y: 100))
+                        .cgPath
+                )
+            ),
+            #line: TestCase(
+                description: "draw line(50, 50, -50, -50)",
+                shape: .line(x1: 50, y1: 50, x2: -50, y2: -50),
+                expect: .left(
+                    UIBezierPath()
+                        .moveTo(CGPoint(x: 50, y: 50))
+                        .addLineTo(CGPoint(x: -50, y: -50))
+                        .cgPath
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
     }
 
     func testRect() {
