@@ -10,6 +10,7 @@ import XCTest
 @testable import ProcessingKit
 
 enum Shape {
+    case point(x: CGFloat, y: CGFloat)
     case line(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat)
     case rect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
     case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
@@ -29,6 +30,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
 
     func setup() {
         switch shape {
+        case .point(let x, let y):
+            self.view.point(x, y)
         case .line(let x1, let y1, let x2, let y2):
             self.view.line(x1, y1, x2, y2)
         case .rect(let x, let y, let width, let height):
@@ -74,6 +77,23 @@ class ShapeTests: XCTestCase {
     
     override func tearDown() {
         super.tearDown()
+    }
+
+    func testPoint() {
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw point(50, 50)",
+                shape: .point(x: 50, y: 50),
+                expect: .right([
+                    CGPoint(x: 50, y: 50.5),
+                    CGPoint(x: 49.5, y: 50),
+                    CGPoint(x: 50, y: 49.5),
+                    CGPoint(x: 50.5, y: 50),
+                ])
+            ),
+            ]
+
+        check(testCases: testCases)
     }
 
     func testLine() {
