@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ProcessingKit"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.summary      = "Visual Designing library for iOS."
   s.description  = <<-DESC
   ProcessingKit is a Visual Designing library for iOS.
