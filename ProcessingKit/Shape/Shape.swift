@@ -36,11 +36,12 @@ struct ShapeModel: ShapeModelContract {
 
     func point(_ x: CGFloat, _ y: CGFloat) {
         let g = MultiplatformCommon.getCurrentContext()
-        setGraphicsConfiguration(context: g)
+        g?.setFillColor(self.colorComponents.stroke.cgColor)
 
         drawing(mode: .fill) {
-            g?.addRect(CGRect(x: x, y: y, width: 1.0, height: 1.0))
-            g?.drawPath(using: .fill)
+            let width = self.colorComponents.strokeWeight
+            let height = self.colorComponents.strokeWeight
+            g?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         }
     }
 
