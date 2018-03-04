@@ -14,6 +14,7 @@ enum Shape {
     case line(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat)
     case rect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
     case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
+    case arc(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat)
 }
 
 class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
@@ -38,6 +39,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
             self.view.rect(x, y, width, height)
         case .ellipse(let x, let y, let width, let height):
             self.view.ellipse(x, y, width, height)
+        case .arc(let x, let y, let radius, let start, let stop):
+            self.view.arc(x, y, radius, start, stop)
         }
         self.record(UIGraphicsGetCurrentContext())
         exception.fulfill()
@@ -177,6 +180,37 @@ class ShapeTests: XCTestCase {
                     CGPoint(x: 0, y: 50),
                     CGPoint(x: -50, y: 0),
                     CGPoint(x: 0, y: -50),
+                    ]
+                )
+            ),
+            ]
+
+        check(testCases: testCases)
+    }
+
+    func testArc() {
+        func radians(_ degrees: CGFloat) -> CGFloat {
+            let radian = (CGFloat.pi * 2) * (degrees / 360.0)
+            return radian
+        }
+
+        let testCases: [UInt: TestCase] = [
+            #line: TestCase(
+                description: "draw arc(50, 50, 50, 0°, 90°)",
+                shape: .arc(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(90.0)),
+                expect: .right([
+                    CGPoint(x: 100, y: 50),
+                    CGPoint(x: 50, y: 100),
+                    ]
+                )
+            ),
+            #line: TestCase(
+                description: "draw arc(50, 50, 50, 0°, 270°)",
+                shape: .arc(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(270.0)),
+                expect: .right([
+                    CGPoint(x: 100, y: 50),
+                    CGPoint(x: 50, y: 100),
+                    CGPoint(x: 0, y: 50),
                     ]
                 )
             ),
