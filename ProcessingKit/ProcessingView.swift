@@ -96,6 +96,11 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     // Flag for setup function (setup function execute only once)
     private var firstcall: Bool = true
 
+    // Store trackingArea for calling mouseMove
+    #if os(OSX)
+    private var trackingArea : NSTrackingArea?
+    #endif
+
     // MARK: - Initializer
     public init() {
         super.init(frame: CGRect.zero)
@@ -265,3 +270,18 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.timer = nil
     }
 }
+
+#if os(OSX)
+extension ProcessingView {
+    override open func updateTrackingAreas() {
+        if trackingArea != nil {
+            self.removeTrackingArea(trackingArea!)
+        }
+        let options : NSTrackingArea.Options =
+            [.activeWhenFirstResponder, .mouseMoved ]
+        trackingArea = NSTrackingArea(rect: self.bounds, options: options,
+                                      owner: self, userInfo: nil)
+        self.addTrackingArea(trackingArea!)
+    }
+}
+#endif
