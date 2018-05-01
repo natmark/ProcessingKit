@@ -36,7 +36,7 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 - iOS 10.0 or later
 - OSX 10.11 or later
 
-If you use Swift 3.x, try [ProcessingKit 0.6.0](https://github.com/ishkawa/APIKit/tree/2.0.5).
+If you use Swift 3.x, try [ProcessingKit 0.6.0](https://github.com/natmark/ProcessingKit/releases/tag/0.6.0).
 
 Future release version 1.0.0 will supports Swift4 
 
