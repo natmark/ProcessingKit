@@ -35,8 +35,7 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
 ## Example
-|OS|gif|code|
-|:---:|:------:|:------:|
+|OS|gif|code| |:---:|:------:|:------:|
 |iOS| <img src="https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_Example.gif" alt="gif"  height="50%"> | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_ExampleCode.png)|
 |OSX| ![gif](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_Example.gif) | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_ExampleCode.png)|
 
@@ -105,6 +104,12 @@ Add the following to your `Cartfile`:
 ```
 
 - (Example project here: [PKExample](https://github.com/natmark/PKExample))
+
+## Xcode File Template
+- `ProcessingKit.xctemplate` is available.
+- Use [Donut](https://github.com/natmark/Donut)(Xcode file template manager) to install.
+
+`$ donut install https://github.com/natmark/ProcessingKit`
 
 ## License
 ProcessingKit is available under the MIT license. See the LICENSE file for more info.
