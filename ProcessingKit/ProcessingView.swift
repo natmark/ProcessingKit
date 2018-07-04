@@ -57,7 +57,8 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     lazy var eventModel: EventModelContract = {
         return EventModel(
             frameComponents: self.frameComponents,
-            eventComponents: self.eventComponents
+            eventComponents: self.eventComponents,
+            superView: self.superview
         )
     }()
     lazy var dateModel: DateModelContract = {

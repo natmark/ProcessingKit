@@ -59,13 +59,30 @@ protocol EventModelContract {
 struct EventModel: EventModelContract {
     private var eventComponents: EventComponents
     private var frameComponents: FrameComponents
+    var superView: UIView?
     lazy var dummyView: UIView = {
-        return UIView(frame: self.frameComponents.frame)
+        var parent = superView
+        var point = CGPoint.zero
+
+        while parent != nil {
+            point.x += parent?.frame.origin.x ?? 0.0
+            point.y += parent?.frame.origin.y ?? 0.0
+            parent = parent?.superview
+        }
+        let frame = CGRect(
+            x: self.frameComponents.frame.origin.x + point.x,
+            y: self.frameComponents.frame.origin.y + point.y,
+            width: self.frameComponents.frame.size.width,
+            height: self.frameComponents.frame.size.height
+        )
+
+        return UIView(frame: frame)
     }()
 
-    init(frameComponents: FrameComponents, eventComponents: EventComponents) {
+    init(frameComponents: FrameComponents, eventComponents: EventComponents, superView: UIView?) {
         self.frameComponents = frameComponents
         self.eventComponents = eventComponents
+        self.superView = superView
     }
 
     #if os(iOS)
