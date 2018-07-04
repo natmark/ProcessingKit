@@ -118,19 +118,25 @@ struct EventModel: EventModelContract {
         self.storeTouches(touches)
         self.eventComponents.fingerTapped = false
         self.eventComponents.fingerReleased = true
+
+        if touchesX.isEmpty {
+            self.eventComponents.fingerPressed = false
+        }
     }
 
     private mutating func storeTouches(_ touches: Set<UITouch>) {
         self.eventComponents.touchesX.removeAll()
         self.eventComponents.touchesY.removeAll()
         for (index, touch) in touches.enumerated() {
-            let touchX = touch.location(in: self.dummyView).x
-            let touchY = touch.location(in: self.dummyView).y
-            self.eventComponents.touchesX.insert(touchX)
-            self.eventComponents.touchesY.insert(touchY)
-            if index == 0 {
-                self.eventComponents.touchX = touchX
-                self.eventComponents.touchY = touchY
+            if touch.phase != UITouchPhase.ended && touch.phase != UITouchPhase.cancelled {
+                let touchX = touch.location(in: self.dummyView).x
+                let touchY = touch.location(in: self.dummyView).y
+                self.eventComponents.touchesX.insert(touchX)
+                self.eventComponents.touchesY.insert(touchY)
+                if index == 0 {
+                    self.eventComponents.touchX = touchX
+                    self.eventComponents.touchY = touchY
+                }
             }
         }
     }
