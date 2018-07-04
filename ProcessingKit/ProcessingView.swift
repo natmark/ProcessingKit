@@ -98,7 +98,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
 
     // Store trackingArea for calling mouseMove
     #if os(OSX)
-    private var trackingArea : NSTrackingArea?
+    private var trackingArea: NSTrackingArea?
     #endif
 
     // MARK: - Initializer
@@ -277,7 +277,7 @@ extension ProcessingView {
         if trackingArea != nil {
             self.removeTrackingArea(trackingArea!)
         }
-        let options : NSTrackingArea.Options =
+        let options: NSTrackingArea.Options =
             [.activeWhenFirstResponder, .mouseMoved ]
         trackingArea = NSTrackingArea(rect: self.bounds, options: options,
                                       owner: self, userInfo: nil)
