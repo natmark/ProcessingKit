@@ -34,6 +34,11 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 ## Demo
 ![Demo](https://github.com/natmark/ProcessingKit/blob/master/Resources/demo.gif?raw=true)
 
+### Demo Apps
+- [iOS Official Demo](https://github.com/natmark/ProcessingKit/tree/master/ProcessingKitExample)
+- [OSX Official Demo](https://github.com/natmark/ProcessingKit/tree/master/ProcessingKitOSXExample)
+- [iPad Demo App (Developed for Open Source Conference)](https://github.com/natmark/OSCProcessingKitDemo)
+
 ## Example
 |OS|gif|code| 
 |:---:|:------:|:------:|
