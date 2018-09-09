@@ -75,6 +75,8 @@ public class EventComponents: EventComponentsContract {
     public var mouseX: CGFloat = 0.0
     public var mouseY: CGFloat = 0.0
     #endif
+
+    public init() {}
 }
 
 public struct EventModel: EventModelContract {

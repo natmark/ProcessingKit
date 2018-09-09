@@ -37,6 +37,8 @@ public class ColorComponents: ColorComponentsContract {
     public var fill: UIColor = UIColor.white
     public var stroke: UIColor = UIColor.clear
     public var strokeWeight: CGFloat = 1.0
+
+    public init() {}
 }
 
 public struct ColorModel: ColorModelContract {

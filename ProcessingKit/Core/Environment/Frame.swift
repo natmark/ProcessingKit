@@ -33,6 +33,8 @@ public class FrameComponents: FrameComponentsContract {
     public var frame: CGRect = CGRect.zero
     public var frameRate: CGFloat = 60.0
     public var frameCount: UInt64 = 0
+
+    public init() {}
 }
 
 public struct FrameModel: FrameModelContract {
