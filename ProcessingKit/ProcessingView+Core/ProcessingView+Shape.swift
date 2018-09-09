@@ -10,10 +10,8 @@ import Foundation
 
 #if os(iOS)
 import UIKit
-import ProcessingKitCore
 #elseif os(OSX)
 import Cocoa
-import ProcessingKitCoreOSX
 #endif
 
 extension ProcessingView: ShapeModelContract {
