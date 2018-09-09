@@ -14,27 +14,35 @@ import UIKit
 import Cocoa
 #endif
 
-class TextComponents {
+public protocol TextComponentsContract {
+    var textSize: CGFloat { get set }
+    var textFont: UIFont { get set }
+    var textAlignX: NSTextAlignment { get set }
+}
+
+class TextComponents: TextComponentsContract {
     var textSize: CGFloat = 20.0
     var textFont: UIFont = UIFont.systemFont(ofSize: 20.0)
     var textAlignX: NSTextAlignment = .left
 }
 
-protocol TextModelContract {
+public protocol TextModelContract {
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat)
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func textWidth(_ str: String) -> CGFloat
-    func textSize(_ size: CGFloat)
-    func textFont(_ font: UIFont)
-    func textAlign(_ allignX: NSTextAlignment)
+    mutating func textSize(_ size: CGFloat)
+    mutating func textFont(_ font: UIFont)
+    mutating func textAlign(_ allignX: NSTextAlignment)
 }
 
 struct TextModel: TextModelContract {
-    private var textComponents: TextComponents
-    private var colorComponents: ColorComponents
-    private var frameComponents: FrameComponents
+    private var contextComponents: ContextComponenetsContract
+    private var textComponents: TextComponentsContract
+    private var colorComponents: ColorComponentsContract
+    private var frameComponents: FrameComponentsContract
 
-    init(frameComponents: FrameComponents, textComponents: TextComponents, colorComponents: ColorComponents) {
+    init(contextComponents: ContextComponenetsContract, frameComponents: FrameComponentsContract, textComponents: TextComponentsContract, colorComponents: ColorComponentsContract) {
+        self.contextComponents = contextComponents
         self.frameComponents = frameComponents
         self.textComponents = textComponents
         self.colorComponents = colorComponents
@@ -51,7 +59,7 @@ struct TextModel: TextModelContract {
     }
 
     func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
 
         g?.saveGState()
 
@@ -90,44 +98,17 @@ struct TextModel: TextModelContract {
         return size.width
     }
 
-    func textSize(_ size: CGFloat) {
+    mutating func textSize(_ size: CGFloat) {
         self.textComponents.textSize = size
         self.textComponents.textFont = UIFont.systemFont(ofSize: size)
     }
 
-    func textFont(_ font: UIFont) {
+    mutating func textFont(_ font: UIFont) {
         self.textComponents.textFont = font
         self.textComponents.textSize = font.pointSize
     }
 
-    func textAlign(_ allignX: NSTextAlignment) {
+    mutating func textAlign(_ allignX: NSTextAlignment) {
         self.textComponents.textAlignX = allignX
-    }
-}
-
-// MARK: - ProcessingView Public APIs
-extension ProcessingView: TextModelContract {
-    public func text(_ str: String, _ x: CGFloat, _ y: CGFloat) {
-        self.textModel.text(str, x, y)
-    }
-
-    public func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        self.textModel.text(str, x, y, width, height)
-    }
-
-    public func textWidth(_ str: String) -> CGFloat {
-        return self.textModel.textWidth(str)
-    }
-
-    public func textSize(_ size: CGFloat) {
-        self.textModel.textSize(size)
-    }
-
-    public func textFont(_ font: UIFont) {
-        self.textModel.textFont(font)
-    }
-
-    public func textAlign(_ allignX: NSTextAlignment) {
-        self.textModel.textAlign(allignX)
     }
 }

@@ -23,9 +23,15 @@ public protocol ImageModelContract {
 }
 
 struct ImageModel: ImageModelContract {
+    private var contextComponents: ContextComponenetsContract
+
+    init(contextComponents: ContextComponenetsContract) {
+        self.contextComponents = contextComponents
+    }
+
     #if os(iOS)
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: img.size.height)
         g?.scaleBy(x: 1.0, y: -1.0)
@@ -36,7 +42,7 @@ struct ImageModel: ImageModelContract {
     }
 
     func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
         g?.scaleBy(x: 1.0, y: -1.0)
@@ -47,7 +53,7 @@ struct ImageModel: ImageModelContract {
     }
     #elseif os(OSX)
     func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: img.size.height)
         g?.scaleBy(x: 1.0, y: -1.0)
@@ -58,7 +64,7 @@ struct ImageModel: ImageModelContract {
     }
 
     func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
         g?.scaleBy(x: 1.0, y: -1.0)
@@ -66,27 +72,6 @@ struct ImageModel: ImageModelContract {
             g?.draw(cgImg, in: CGRect(x: x, y: -y, width: width, height: height))
         }
         g?.restoreGState()
-    }
-    #endif
-}
-
-// MARK: - ProcessingView Public APIs
-extension ProcessingView: ImageModelContract {
-    #if os(iOS)
-    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
-        self.imageModel.image(img, x, y)
-    }
-
-    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        self.imageModel.image(img, x, y, width, height)
-    }
-    #elseif os(OSX)
-    public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
-        self.imageModel.drawImage(img, x, y)
-    }
-
-    public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        self.imageModel.drawImage(img, x, y, width, height)
     }
     #endif
 }

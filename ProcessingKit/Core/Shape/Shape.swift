@@ -14,7 +14,7 @@ import UIKit
 import Cocoa
 #endif
 
-protocol ShapeModelContract {
+public protocol ShapeModelContract {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
@@ -28,14 +28,16 @@ protocol ShapeModelContract {
 }
 
 struct ShapeModel: ShapeModelContract {
-    private var colorComponents: ColorComponents
+    private var colorComponents: ColorComponentsContract
+    private var contextComponents: ContextComponenetsContract
 
-    init(colorComponents: ColorComponents) {
+    init(contextComponents: ContextComponenetsContract, colorComponents: ColorComponentsContract) {
+        self.contextComponents = contextComponents
         self.colorComponents = colorComponents
     }
 
     func point(_ x: CGFloat, _ y: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.setFillColor(self.colorComponents.stroke.cgColor)
 
         drawing(mode: .fill) {
@@ -46,7 +48,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .stroke) {
@@ -56,7 +58,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -65,7 +67,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -74,7 +76,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -83,7 +85,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -96,7 +98,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -131,7 +133,7 @@ struct ShapeModel: ShapeModelContract {
         b2 = b2.addTo(p2.multiplyBy(2 * pow(d3, 2 * alpha) + 3 * pow(d3, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
         b2 = b2.multiplyBy(1.0 / (3 * pow(d3, alpha) * (pow(d3, alpha) + pow(d2, alpha))))
 
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -141,7 +143,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         drawing(mode: .fillStroke) {
@@ -162,7 +164,7 @@ struct ShapeModel: ShapeModelContract {
     }
 
     private func drawing(mode: CGPathDrawingMode, closure:() -> Void) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         g?.saveGState()
         closure()
 
@@ -176,48 +178,5 @@ struct ShapeModel: ShapeModelContract {
 
     private func isTesting() -> Bool {
         return ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] != nil
-    }
-}
-
-// MARK: - ProcessingView Public APIs
-extension ProcessingView: ShapeModelContract {
-    public func point(_ x: CGFloat, _ y: CGFloat) {
-        self.shapeModel.point(x, y)
-    }
-
-    public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        self.shapeModel.line(x1, y1, x2, y2)
-    }
-
-    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        self.shapeModel.rect(x, y, width, height)
-    }
-
-    public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        self.shapeModel.ellipse(x, y, width, height)
-    }
-
-    public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        self.shapeModel.arc(x, y, radius, start, stop)
-    }
-
-    public func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
-        self.shapeModel.triangle(x1, y1, x2, y2, x3, y3)
-    }
-
-    public func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
-        self.shapeModel.quad(x1, y1, x2, y2, x3, y3, x4, y4)
-    }
-
-    public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
-        self.shapeModel.curve(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
-    }
-
-    public func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        self.shapeModel.bezier(x1, y1, cpx1, cpy1, cpx2, cpy2, x2, y2)
-    }
-
-    public func radians(_ degrees: CGFloat) -> CGFloat {
-        return self.shapeModel.radians(degrees)
     }
 }

@@ -72,6 +72,20 @@
 			remoteGlobalIDString = E7212F3F1F34B5A600173CD8;
 			remoteInfo = ProcessingKit;
 		};
+		E7B2F728214555F2003B642A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E747DD881F432E9B006BAC6A /* ProcessingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E7B2F67A21454010003B642A;
+			remoteInfo = ProcessingKitCore;
+		};
+		E7B2F72A214555F2003B642A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E747DD881F432E9B006BAC6A /* ProcessingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E7B2F70F214553BF003B642A;
+			remoteInfo = ProcessingKitCoreOSX;
+		};
 		E7E79BD92008674B003CDAC5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E747DD881F432E9B006BAC6A /* ProcessingKit.xcodeproj */;
@@ -202,6 +216,8 @@
 				E747DD8E1F432E9C006BAC6A /* ProcessingKit.framework */,
 				E747DD901F432E9C006BAC6A /* ProcessingKitTests.xctest */,
 				E7E79BDA2008674B003CDAC5 /* ProcessingKit.framework */,
+				E7B2F729214555F2003B642A /* ProcessingKitCore.framework */,
+				E7B2F72B214555F2003B642A /* ProcessingKitCoreOSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,7 +313,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Atsuya Sato";
 				TargetAttributes = {
 					E74331061F34C6AB00D20482 = {
@@ -344,6 +360,20 @@
 			fileType = wrapper.cfbundle;
 			path = ProcessingKitTests.xctest;
 			remoteRef = E747DD8F1F432E9C006BAC6A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7B2F729214555F2003B642A /* ProcessingKitCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ProcessingKitCore.framework;
+			remoteRef = E7B2F728214555F2003B642A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7B2F72B214555F2003B642A /* ProcessingKitCoreOSX.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ProcessingKitCoreOSX.framework;
+			remoteRef = E7B2F72A214555F2003B642A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E7E79BDA2008674B003CDAC5 /* ProcessingKit.framework */ = {
@@ -458,6 +488,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -465,6 +496,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -514,6 +546,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -521,6 +554,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

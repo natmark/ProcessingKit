@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ProcessingKit"
-  s.version      = "1.0.6"
+  s.version      = "1.0.7"
   s.summary      = "Visual Designing library for iOS."
   s.description  = <<-DESC
   ProcessingKit is a Visual Designing library for iOS.
@@ -17,4 +17,8 @@ Pod::Spec.new do |s|
   s.exclude_files = "ProcessingKit/Demo.playground/*"
   s.ios.exclude_files = "ProcessingKit/Extensions/NSImage.swift", "ProcessingKit/Extensions/NSView.swift"
   s.requires_arc = true
+
+  s.subspec "Core" do |subspec|
+    subspec.source_files = "ProcessingKit/Core/**/*.swift"
+  end
 end

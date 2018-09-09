@@ -10,7 +10,7 @@
 import UIKit
 #elseif os(OSX)
 import Cocoa
-typealias CGPoint = NSPoint
+public typealias CGPoint = NSPoint
 #endif
 
 extension CGPoint {
