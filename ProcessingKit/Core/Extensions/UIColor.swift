@@ -13,7 +13,7 @@ import Cocoa
 #endif
 
 extension UIColor {
-    open class func hexStr (hexStr: NSString, alpha: CGFloat) -> UIColor {
+    class func hexStr (hexStr: NSString, alpha: CGFloat) -> UIColor {
         let alpha = alpha
         var hexStr = hexStr
         hexStr = hexStr.replacingOccurrences(of: "#", with: "") as NSString

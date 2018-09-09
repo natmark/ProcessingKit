@@ -45,11 +45,13 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }()
     lazy var shapeModel: ShapeModelContract = {
         return ShapeModel(
+            contextComponents: self.contextComponents,
             colorComponents: self.colorComponents
         )
     }()
     lazy var vertexModel: VertexModelContract = {
         return VertexModel(
+            contextComponents: self.contextComponents,
             vertexComponents: self.vertexComponents,
             colorComponents: self.colorComponents
         )
@@ -66,28 +68,31 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }()
     lazy var colorModel: ColorModelContract = {
         return ColorModel(
+            contextComponents: self.contextComponents,
             colorComponents: self.colorComponents,
             frameComponents: self.frameComponents
         )
     }()
     lazy var textModel: TextModelContract = {
         return TextModel(
+            contextComponents: self.contextComponents,
             frameComponents: self.frameComponents,
             textComponents: self.textComponents,
             colorComponents: self.colorComponents
         )
     }()
     lazy var imageModel: ImageModelContract = {
-        return ImageModel()
+        return ImageModel(contextComponents: self.contextComponents)
     }()
 
     lazy var transformModel: TransformModelContract = {
-        return TransformModel()
+        return TransformModel(contextComponents: self.contextComponents)
     }()
 
     lazy var timer: Timer? = nil
 
     // MARK: Private properties
+    private var contextComponents = ContextComponents()
     private var colorComponents = ColorComponents()
     private var eventComponents = EventComponents()
     private var vertexComponents = VertexComponents()
@@ -171,7 +176,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
 
         // MARK: Coordinate systems are different between iOS and OS X
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
         g?.scaleBy(x: 1.0, y: -1.0)

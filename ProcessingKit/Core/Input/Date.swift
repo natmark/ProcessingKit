@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DateModelContract {
+public protocol DateModelContract {
     func millis() -> Int
     func second() -> Int
     func minute() -> Int
@@ -67,35 +67,5 @@ struct DateModel: DateModelContract {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month, .day, .hour, .minute, .second], from: currentDate ?? Date())
         return components
-    }
-}
-
-extension ProcessingView: DateModelContract {
-    public func millis() -> Int {
-        return self.dateModel.millis()
-    }
-
-    public func second() -> Int {
-        return self.dateModel.second()
-    }
-
-    public func minute() -> Int {
-        return self.dateModel.minute()
-    }
-
-    public func hour() -> Int {
-        return self.dateModel.hour()
-    }
-
-    public func day() -> Int {
-        return self.dateModel.day()
-    }
-
-    public func month() -> Int {
-        return self.dateModel.month()
-    }
-
-    public func year() -> Int {
-        return self.dateModel.year()
     }
 }

@@ -1,19 +1,21 @@
 //
-//  Structure.swift
+//  ProcessingView+Loop.swift
 //  ProcessingKit
 //
-//  Created by AtsuyaSato on 2017/08/13.
-//  Copyright © 2017年 Atsuya Sato. All rights reserved.
+//  Created by AtsuyaSato on 2018/09/09.
+//  Copyright © 2018年 Atsuya Sato. All rights reserved.
 //
 
 import Foundation
 
-protocol LoopModelContract {
-    func loop()
-    func noLoop()
-}
+#if os(iOS)
+import UIKit
+import ProcessingKitCore
+#elseif os(OSX)
+import Cocoa
+import ProcessingKitCoreOSX
+#endif
 
-// MARK: - ProcessingView Public APIs
 extension ProcessingView: LoopModelContract {
     public func loop() {
         self.timer?.fire()

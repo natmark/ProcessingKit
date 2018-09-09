@@ -14,7 +14,28 @@ import UIKit
 import Cocoa
 #endif
 
-class EventComponents {
+public protocol EventComponentsContract {
+    #if os(iOS)
+    var fingerTapped: Bool { get set }
+    var fingerDragged: Bool { get set }
+    var fingerPressed: Bool { get set }
+    var fingerReleased: Bool { get set }
+    var touchX: CGFloat { get set }
+    var touchY: CGFloat { get set }
+    var touchesX: Set<CGFloat> { get set }
+    var touchesY: Set<CGFloat> { get set }
+    #elseif os(OSX)
+    var mouseClicked: Bool { get set }
+    var mouseDragged: Bool { get set }
+    var mouseMoved: Bool { get set }
+    var mousePressed: Bool { get set }
+    var mouseReleased: Bool { get set }
+    var mouseX: CGFloat { get set }
+    var mouseY: CGFloat { get set }
+    #endif
+}
+
+class EventComponents: EventComponentsContract {
     #if os(iOS)
     var fingerTapped = false
     var fingerDragged = false
@@ -35,7 +56,7 @@ class EventComponents {
     #endif
 }
 
-protocol EventModelContract {
+public protocol EventModelContract {
     #if os(iOS)
     var fingerPressed: Bool { get }
     var touchX: CGFloat { get }
@@ -57,8 +78,8 @@ protocol EventModelContract {
 }
 
 struct EventModel: EventModelContract {
-    private var eventComponents: EventComponents
-    private var frameComponents: FrameComponents
+    private var eventComponents: EventComponentsContract
+    private var frameComponents: FrameComponentsContract
     var superView: UIView?
     lazy var dummyView: UIView = {
         var parent = superView
@@ -79,7 +100,7 @@ struct EventModel: EventModelContract {
         return UIView(frame: frame)
     }()
 
-    init(frameComponents: FrameComponents, eventComponents: EventComponents, superView: UIView?) {
+    init(frameComponents: FrameComponentsContract, eventComponents: EventComponentsContract, superView: UIView?) {
         self.frameComponents = frameComponents
         self.eventComponents = eventComponents
         self.superView = superView
@@ -188,74 +209,6 @@ struct EventModel: EventModelContract {
         self.eventComponents.mouseX = point.x
         // MARK: Coordinate systems are different between iOS and OS X
         self.eventComponents.mouseY = self.frameComponents.bounds.height - point.y
-    }
-    #endif
-}
-
-// MARK: - ProcessingView Public APIs
-extension ProcessingView: EventModelContract {
-    #if os(iOS)
-    public var fingerPressed: Bool {
-        return self.eventModel.fingerPressed
-    }
-
-    public var touchX: CGFloat {
-        return self.eventModel.touchX
-    }
-
-    public var touchY: CGFloat {
-        return self.eventModel.touchY
-    }
-
-    public var touchesX: Set<CGFloat> {
-        return self.eventModel.touchesX
-    }
-
-    public var touchesY: Set<CGFloat> {
-        return self.eventModel.touchesY
-    }
-    #elseif os(OSX)
-    public var mousePressed: Bool {
-        return self.eventModel.mousePressed
-    }
-
-    public var mouseX: CGFloat {
-        return self.eventModel.mouseX
-    }
-
-    public var mouseY: CGFloat {
-        return self.eventModel.mouseY
-    }
-
-    #endif
-
-    #if os(iOS)
-    open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.eventModel.touchesBegan(touches, with: event)
-    }
-
-    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.eventModel.touchesMoved(touches, with: event)
-    }
-
-    open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.eventModel.touchesEnded(touches, with: event)
-    }
-    #elseif os(OSX)
-    open override func mouseDown(with event: NSEvent) {
-        self.eventModel.mouseDown(with: event)
-    }
-
-    open override func mouseDragged(with event: NSEvent) {
-        self.eventModel.mouseDragged(with: event)
-    }
-
-    open override func mouseUp(with event: NSEvent) {
-        self.eventModel.mouseUp(with: event)
-    }
-
-    open override func mouseMoved(with event: NSEvent) {
-        self.eventModel.mouseMoved(with: event)
     }
     #endif
 }

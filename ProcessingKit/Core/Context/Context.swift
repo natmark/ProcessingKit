@@ -1,5 +1,5 @@
 //
-//  MultiplatformCommon.swift
+//  Context.swift
 //  ProcessingKit
 //
 //  Created by AtsuyaSato on 2017/12/31.
@@ -23,12 +23,16 @@ public typealias UIView = NSView
 public typealias UIResponder = NSResponder
 #endif
 
-public class MultiplatformCommon {
-    public class func getCurrentContext() -> CGContext? {
+public protocol ContextComponenetsContract {
+    func context() -> CGContext?
+}
+
+class ContextComponents: ContextComponenetsContract {
+    func context() -> CGContext? {
         #if os(iOS)
-            return UIGraphicsGetCurrentContext()
+        return UIGraphicsGetCurrentContext()
         #elseif os(OSX)
-            return NSGraphicsContext.current?.cgContext
+        return NSGraphicsContext.current?.cgContext
         #endif
     }
 }

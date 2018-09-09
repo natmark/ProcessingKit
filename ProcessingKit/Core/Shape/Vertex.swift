@@ -27,39 +27,46 @@ public enum EndShapeMode {
     case none
 }
 
-class VertexComponents {
+public protocol VertexComponentsContract {
+    var vertexes: [CGPoint] { get set }
+    var kind: BeginShapeKind { get set }
+}
+
+class VertexComponents: VertexComponentsContract {
     var vertexes: [CGPoint] = []
     var kind: BeginShapeKind = .none
 }
 
-protocol VertexModelContract {
-    func beginShape(_ kind: BeginShapeKind)
-    func endShape(_ mode: EndShapeMode)
-    func vertex(_ x: CGFloat, _ y: CGFloat)
+public protocol VertexModelContract {
+    mutating func beginShape(_ kind: BeginShapeKind)
+    mutating func endShape(_ mode: EndShapeMode)
+    mutating func vertex(_ x: CGFloat, _ y: CGFloat)
 }
 
 struct VertexModel: VertexModelContract {
-    private var vertexComponents: VertexComponents
-    private var colorComponents: ColorComponents
+    private var contextComponents: ContextComponenetsContract
+    private var vertexComponents: VertexComponentsContract
+    private var colorComponents: ColorComponentsContract
 
-    init(vertexComponents: VertexComponents, colorComponents: ColorComponents) {
+    init(contextComponents: ContextComponenetsContract, vertexComponents: VertexComponentsContract, colorComponents: ColorComponentsContract) {
+        self.contextComponents = contextComponents
         self.vertexComponents = vertexComponents
         self.colorComponents = colorComponents
     }
 
-    func beginShape(_ kind: BeginShapeKind) {
+    mutating func beginShape(_ kind: BeginShapeKind) {
         self.vertexComponents.kind = kind
         self.vertexComponents.vertexes.removeAll()
     }
 
-    func endShape(_ mode: EndShapeMode) {
+    mutating func endShape(_ mode: EndShapeMode) {
         guard self.vertexComponents.vertexes.count > 0 else {
             return
         }
 
         switch self.vertexComponents.kind {
         case .points:
-            let g = MultiplatformCommon.getCurrentContext()
+            let g = self.contextComponents.context()
             g?.setFillColor(self.colorComponents.stroke.cgColor)
             for vertex in self.vertexComponents.vertexes {
                 g?.fill(CGRect(x: vertex.x, y: vertex.y, width: self.colorComponents.strokeWeight, height: self.colorComponents.strokeWeight))
@@ -92,12 +99,12 @@ struct VertexModel: VertexModelContract {
         self.vertexComponents.vertexes.removeAll()
     }
 
-    func vertex(_ x: CGFloat, _ y: CGFloat) {
+    mutating func vertex(_ x: CGFloat, _ y: CGFloat) {
         self.vertexComponents.vertexes.append(CGPoint(x: x, y: y))
     }
 
     private func addLineToPoints(vertexes: [CGPoint], isClosed: Bool) {
-        let g = MultiplatformCommon.getCurrentContext()
+        let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
         for (index, vertex) in vertexes.enumerated() {
@@ -117,19 +124,5 @@ struct VertexModel: VertexModelContract {
         context?.setFillColor(self.colorComponents.fill.cgColor)
         context?.setStrokeColor(self.colorComponents.stroke.cgColor)
         context?.setLineWidth(self.colorComponents.strokeWeight)
-    }
-}
-
-extension ProcessingView: VertexModelContract {
-    public func beginShape(_ kind: BeginShapeKind = .none) {
-        self.vertexModel.beginShape(kind)
-    }
-
-    public func endShape(_ mode: EndShapeMode = .none) {
-        self.vertexModel.endShape(mode)
-    }
-
-    public func vertex(_ x: CGFloat, _ y: CGFloat) {
-        self.vertexModel.vertex(x, y)
     }
 }
