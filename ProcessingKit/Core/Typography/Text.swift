@@ -33,6 +33,8 @@ public class TextComponents: TextComponentsContract {
     public var textSize: CGFloat = 20.0
     public var textFont: UIFont = UIFont.systemFont(ofSize: 20.0)
     public var textAlignX: NSTextAlignment = .left
+
+    public init() {}
 }
 
 public struct TextModel: TextModelContract {

@@ -41,6 +41,8 @@ public protocol VertexModelContract {
 public class VertexComponents: VertexComponentsContract {
     public var vertexes: [CGPoint] = []
     public var kind: BeginShapeKind = .none
+
+    public init() {}
 }
 
 public struct VertexModel: VertexModelContract {

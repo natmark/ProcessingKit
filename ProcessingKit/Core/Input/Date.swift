@@ -25,8 +25,7 @@ public struct DateModel: DateModelContract {
         self.currentDate = currentDate
     }
 
-    init() {
-    }
+    public init() {}
 
     public func millis() -> Int {
         return self.getMillis()
