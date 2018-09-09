@@ -27,16 +27,16 @@ public protocol ShapeModelContract {
     func radians(_ degrees: CGFloat) -> CGFloat
 }
 
-struct ShapeModel: ShapeModelContract {
+public struct ShapeModel: ShapeModelContract {
     private var colorComponents: ColorComponentsContract
     private var contextComponents: ContextComponenetsContract
 
-    init(contextComponents: ContextComponenetsContract, colorComponents: ColorComponentsContract) {
+    public init(contextComponents: ContextComponenetsContract, colorComponents: ColorComponentsContract) {
         self.contextComponents = contextComponents
         self.colorComponents = colorComponents
     }
 
-    func point(_ x: CGFloat, _ y: CGFloat) {
+    public func point(_ x: CGFloat, _ y: CGFloat) {
         let g = self.contextComponents.context()
         g?.setFillColor(self.colorComponents.stroke.cgColor)
 
@@ -47,7 +47,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+    public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -57,7 +57,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -66,7 +66,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -75,7 +75,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
+    public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -84,7 +84,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
+    public func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -97,7 +97,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
+    public func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -111,7 +111,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
+    public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
 
         let alpha: CGFloat = 1.0
         let p0 = CGPoint(x: cpx1, y: cpy1)
@@ -142,7 +142,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
+    public func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
 
@@ -152,7 +152,7 @@ struct ShapeModel: ShapeModelContract {
         }
     }
 
-    func radians(_ degrees: CGFloat) -> CGFloat {
+    public func radians(_ degrees: CGFloat) -> CGFloat {
         let radian = (CGFloat.pi * 2) * (degrees / 360.0)
         return radian
     }

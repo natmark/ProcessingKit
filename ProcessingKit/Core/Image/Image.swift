@@ -22,15 +22,15 @@ public protocol ImageModelContract {
     #endif
 }
 
-struct ImageModel: ImageModelContract {
+public struct ImageModel: ImageModelContract {
     private var contextComponents: ContextComponenetsContract
 
-    init(contextComponents: ContextComponenetsContract) {
+    public init(contextComponents: ContextComponenetsContract) {
         self.contextComponents = contextComponents
     }
 
     #if os(iOS)
-    func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
+    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
         let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: img.size.height)
@@ -41,7 +41,7 @@ struct ImageModel: ImageModelContract {
         g?.restoreGState()
     }
 
-    func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
@@ -52,7 +52,7 @@ struct ImageModel: ImageModelContract {
         g?.restoreGState()
     }
     #elseif os(OSX)
-    func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
+    public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
         let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: img.size.height)
@@ -63,7 +63,7 @@ struct ImageModel: ImageModelContract {
         g?.restoreGState()
     }
 
-    func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
+    public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         let g = self.contextComponents.context()
         g?.saveGState()
         g?.translateBy(x: 0.0, y: height)
