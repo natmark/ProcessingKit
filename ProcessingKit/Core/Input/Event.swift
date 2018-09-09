@@ -35,27 +35,6 @@ public protocol EventComponentsContract {
     #endif
 }
 
-class EventComponents: EventComponentsContract {
-    #if os(iOS)
-    var fingerTapped = false
-    var fingerDragged = false
-    var fingerPressed = false
-    var fingerReleased = false
-    var touchX: CGFloat = 0.0
-    var touchY: CGFloat = 0.0
-    var touchesX: Set<CGFloat> = []
-    var touchesY: Set<CGFloat> = []
-    #elseif os(OSX)
-    var mouseClicked = false
-    var mouseDragged = false
-    var mouseMoved = false
-    var mousePressed = false
-    var mouseReleased = false
-    var mouseX: CGFloat = 0.0
-    var mouseY: CGFloat = 0.0
-    #endif
-}
-
 public protocol EventModelContract {
     #if os(iOS)
     var fingerPressed: Bool { get }
@@ -77,11 +56,32 @@ public protocol EventModelContract {
     #endif
 }
 
-struct EventModel: EventModelContract {
+public class EventComponents: EventComponentsContract {
+    #if os(iOS)
+    public var fingerTapped = false
+    public var fingerDragged = false
+    public var fingerPressed = false
+    public var fingerReleased = false
+    public var touchX: CGFloat = 0.0
+    public var touchY: CGFloat = 0.0
+    public var touchesX: Set<CGFloat> = []
+    public var touchesY: Set<CGFloat> = []
+    #elseif os(OSX)
+    public var mouseClicked = false
+    public var mouseDragged = false
+    public var mouseMoved = false
+    public var mousePressed = false
+    public var mouseReleased = false
+    public var mouseX: CGFloat = 0.0
+    public var mouseY: CGFloat = 0.0
+    #endif
+}
+
+public struct EventModel: EventModelContract {
     private var eventComponents: EventComponentsContract
     private var frameComponents: FrameComponentsContract
-    var superView: UIView?
-    lazy var dummyView: UIView = {
+    private var superView: UIView?
+    private lazy var dummyView: UIView = {
         var parent = superView
         var point = CGPoint.zero
 
@@ -100,59 +100,59 @@ struct EventModel: EventModelContract {
         return UIView(frame: frame)
     }()
 
-    init(frameComponents: FrameComponentsContract, eventComponents: EventComponentsContract, superView: UIView?) {
+    public init(frameComponents: FrameComponentsContract, eventComponents: EventComponentsContract, superView: UIView?) {
         self.frameComponents = frameComponents
         self.eventComponents = eventComponents
         self.superView = superView
     }
 
     #if os(iOS)
-    var fingerPressed: Bool {
+    public var fingerPressed: Bool {
         return self.eventComponents.fingerPressed
     }
 
-    var touchX: CGFloat {
+    public var touchX: CGFloat {
         return self.eventComponents.touchX
     }
 
-    var touchY: CGFloat {
+    public var touchY: CGFloat {
         return self.eventComponents.touchY
     }
 
-    var touchesX: Set<CGFloat> {
+    public var touchesX: Set<CGFloat> {
         return self.eventComponents.touchesX
     }
 
-    var touchesY: Set<CGFloat> {
+    public var touchesY: Set<CGFloat> {
         return self.eventComponents.touchesY
     }
     #elseif os(OSX)
-    var mousePressed: Bool {
+    public var mousePressed: Bool {
         return self.eventComponents.mousePressed
     }
 
-    var mouseX: CGFloat {
+    public var mouseX: CGFloat {
         return self.eventComponents.mouseX
     }
 
-    var mouseY: CGFloat {
+    public var mouseY: CGFloat {
         return self.eventComponents.mouseY
     }
     #endif
 
     #if os(iOS)
-    mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public mutating func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.storeTouches(touches)
         self.eventComponents.fingerPressed = true
         self.eventComponents.fingerTapped = true
     }
 
-    mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public mutating func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.storeTouches(touches)
         self.eventComponents.fingerDragged = true
     }
 
-    mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public mutating func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.storeTouches(touches)
         self.eventComponents.fingerTapped = false
         self.eventComponents.fingerReleased = true
@@ -179,27 +179,27 @@ struct EventModel: EventModelContract {
         }
     }
     #elseif os(OSX)
-    mutating func mouseDown(with event: NSEvent) {
+    public mutating func mouseDown(with event: NSEvent) {
         self.storeTouch(event.locationInWindow)
 
         self.eventComponents.mousePressed = true
         self.eventComponents.mouseClicked = true
     }
 
-    mutating func mouseDragged(with event: NSEvent) {
+    public mutating func mouseDragged(with event: NSEvent) {
         self.storeTouch(event.locationInWindow)
 
         self.eventComponents.mouseDragged = true
     }
 
-    mutating func mouseUp(with event: NSEvent) {
+    public mutating func mouseUp(with event: NSEvent) {
         self.storeTouch(event.locationInWindow)
 
         self.eventComponents.mousePressed = false
         self.eventComponents.mouseReleased = true
     }
 
-    mutating func mouseMoved(with event: NSEvent) {
+    public mutating func mouseMoved(with event: NSEvent) {
         self.storeTouch(event.locationInWindow)
 
         self.eventComponents.mouseMoved = true

@@ -27,8 +27,8 @@ public protocol ContextComponenetsContract {
     func context() -> CGContext?
 }
 
-class ContextComponents: ContextComponenetsContract {
-    func context() -> CGContext? {
+public class ContextComponents: ContextComponenetsContract {
+    public func context() -> CGContext? {
         #if os(iOS)
         return UIGraphicsGetCurrentContext()
         #elseif os(OSX)

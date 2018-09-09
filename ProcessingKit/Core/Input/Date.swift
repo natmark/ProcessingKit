@@ -18,41 +18,41 @@ public protocol DateModelContract {
     func year() -> Int
 }
 
-struct DateModel: DateModelContract {
-    var currentDate: Date?
+public struct DateModel: DateModelContract {
+    private var currentDate: Date?
     // for test
-    init(currentDate: Date) {
+    public init(currentDate: Date) {
         self.currentDate = currentDate
     }
 
     init() {
     }
 
-    func millis() -> Int {
+    public func millis() -> Int {
         return self.getMillis()
     }
 
-    func second() -> Int {
+    public func second() -> Int {
         return self.getComponents().second ?? 0
     }
 
-    func minute() -> Int {
+    public func minute() -> Int {
         return self.getComponents().minute ?? 0
     }
 
-    func hour() -> Int {
+    public func hour() -> Int {
         return self.getComponents().hour ?? 0
     }
 
-    func day() -> Int {
+    public func day() -> Int {
         return self.getComponents().day ?? 0
     }
 
-    func month() -> Int {
+    public func month() -> Int {
         return self.getComponents().month ?? 0
     }
 
-    func year() -> Int {
+    public func year() -> Int {
         return self.getComponents().year ?? 0
     }
 

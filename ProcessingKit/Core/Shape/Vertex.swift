@@ -32,34 +32,34 @@ public protocol VertexComponentsContract {
     var kind: BeginShapeKind { get set }
 }
 
-class VertexComponents: VertexComponentsContract {
-    var vertexes: [CGPoint] = []
-    var kind: BeginShapeKind = .none
-}
-
 public protocol VertexModelContract {
     mutating func beginShape(_ kind: BeginShapeKind)
     mutating func endShape(_ mode: EndShapeMode)
     mutating func vertex(_ x: CGFloat, _ y: CGFloat)
 }
 
-struct VertexModel: VertexModelContract {
+public class VertexComponents: VertexComponentsContract {
+    public var vertexes: [CGPoint] = []
+    public var kind: BeginShapeKind = .none
+}
+
+public struct VertexModel: VertexModelContract {
     private var contextComponents: ContextComponenetsContract
     private var vertexComponents: VertexComponentsContract
     private var colorComponents: ColorComponentsContract
 
-    init(contextComponents: ContextComponenetsContract, vertexComponents: VertexComponentsContract, colorComponents: ColorComponentsContract) {
+    public init(contextComponents: ContextComponenetsContract, vertexComponents: VertexComponentsContract, colorComponents: ColorComponentsContract) {
         self.contextComponents = contextComponents
         self.vertexComponents = vertexComponents
         self.colorComponents = colorComponents
     }
 
-    mutating func beginShape(_ kind: BeginShapeKind) {
+    public mutating func beginShape(_ kind: BeginShapeKind) {
         self.vertexComponents.kind = kind
         self.vertexComponents.vertexes.removeAll()
     }
 
-    mutating func endShape(_ mode: EndShapeMode) {
+    public mutating func endShape(_ mode: EndShapeMode) {
         guard self.vertexComponents.vertexes.count > 0 else {
             return
         }
@@ -99,7 +99,7 @@ struct VertexModel: VertexModelContract {
         self.vertexComponents.vertexes.removeAll()
     }
 
-    mutating func vertex(_ x: CGFloat, _ y: CGFloat) {
+    public mutating func vertex(_ x: CGFloat, _ y: CGFloat) {
         self.vertexComponents.vertexes.append(CGPoint(x: x, y: y))
     }
 

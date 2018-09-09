@@ -21,13 +21,6 @@ public protocol FrameComponentsContract {
     var frameCount: UInt64 { get set }
 }
 
-class FrameComponents: FrameComponentsContract {
-    var bounds: CGRect = CGRect.zero
-    var frame: CGRect = CGRect.zero
-    var frameRate: CGFloat = 60.0
-    var frameCount: UInt64 = 0
-}
-
 public protocol FrameModelContract {
     var width: CGFloat { get }
     var height: CGFloat { get }
@@ -35,28 +28,35 @@ public protocol FrameModelContract {
     mutating func frameRate(_ fps: CGFloat)
 }
 
-struct FrameModel: FrameModelContract {
+public class FrameComponents: FrameComponentsContract {
+    public var bounds: CGRect = CGRect.zero
+    public var frame: CGRect = CGRect.zero
+    public var frameRate: CGFloat = 60.0
+    public var frameCount: UInt64 = 0
+}
+
+public struct FrameModel: FrameModelContract {
     private var frameComponents: FrameComponentsContract
     private var timer: Timer?
 
-    init(frameComponents: FrameComponentsContract, timer: Timer?) {
+    public init(frameComponents: FrameComponentsContract, timer: Timer?) {
         self.frameComponents = frameComponents
         self.timer = timer
     }
 
-    var width: CGFloat {
+    public var width: CGFloat {
         return self.frameComponents.bounds.size.width
     }
 
-    var height: CGFloat {
+    public var height: CGFloat {
         return self.frameComponents.bounds.size.height
     }
 
-    var frameRate: CGFloat {
+    public var frameRate: CGFloat {
         return self.frameComponents.frameRate
     }
 
-    mutating func frameRate(_ fps: CGFloat) {
+    public mutating func frameRate(_ fps: CGFloat) {
         self.frameComponents.frameRate = fps
     }
 }
