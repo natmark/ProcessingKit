@@ -53,6 +53,20 @@
 			remoteGlobalIDString = E7B77DD21FF7E02900CE691A;
 			remoteInfo = "ProcessingKit OSX";
 		};
+		E7B2F7322145586C003B642A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E72410731FF89A3300FBF78D /* ProcessingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E7B2F67A21454010003B642A;
+			remoteInfo = ProcessingKitCore;
+		};
+		E7B2F7342145586C003B642A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E72410731FF89A3300FBF78D /* ProcessingKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E7B2F70F214553BF003B642A;
+			remoteInfo = ProcessingKitCoreOSX;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -151,6 +165,8 @@
 				E724107A1FF89A3400FBF78D /* ProcessingKit.framework */,
 				E724107C1FF89A3400FBF78D /* ProcessingKitTests.xctest */,
 				E724107E1FF89A3400FBF78D /* ProcessingKit.framework */,
+				E7B2F7332145586C003B642A /* ProcessingKitCore.framework */,
+				E7B2F7352145586C003B642A /* ProcessingKitCoreOSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,7 +218,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Atsuya Sato";
 				TargetAttributes = {
 					E72410511FF89A2200FBF78D = {
@@ -261,6 +277,20 @@
 			fileType = wrapper.framework;
 			path = ProcessingKit.framework;
 			remoteRef = E724107D1FF89A3400FBF78D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7B2F7332145586C003B642A /* ProcessingKitCore.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ProcessingKitCore.framework;
+			remoteRef = E7B2F7322145586C003B642A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		E7B2F7352145586C003B642A /* ProcessingKitCoreOSX.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ProcessingKitCoreOSX.framework;
+			remoteRef = E7B2F7342145586C003B642A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -344,6 +374,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -351,6 +382,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -401,6 +433,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -408,6 +441,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
