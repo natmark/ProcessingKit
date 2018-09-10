@@ -28,7 +28,6 @@
 		E7B2F66F21454010003B642A /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820181F7B32B8009E8FD2 /* Date.swift */; };
 		E7B2F67021454010003B642A /* CGPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77DCC1FF7D30500CE691A /* CGPoint.swift */; };
 		E7B2F67121454010003B642A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046C01F408B2E00921B1A /* Constants.swift */; };
-		E7B2F681214543FB003B642A /* ProcessingKitCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B2F67A21454010003B642A /* ProcessingKitCore.framework */; };
 		E7B2F6852145447B003B642A /* ProcessingView+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2F6842145447B003B642A /* ProcessingView+Color.swift */; };
 		E7B2F687214544A8003B642A /* ProcessingView+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2F686214544A8003B642A /* ProcessingView+Constants.swift */; };
 		E7B2F689214544C7003B642A /* ProcessingView+Frame.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B2F688214544C6003B642A /* ProcessingView+Frame.swift */; };
@@ -100,7 +99,6 @@
 		E7B2F72021455448003B642A /* Loop.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76046B71F4088FB00921B1A /* Loop.swift */; };
 		E7B2F72121455448003B642A /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820231F7B647A009E8FD2 /* Transform.swift */; };
 		E7B2F72221455448003B642A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BB6881F408FAB00E0372D /* Text.swift */; };
-		E7B2F72321455530003B642A /* ProcessingKitCoreOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B2F70F214553BF003B642A /* ProcessingKitCoreOSX.framework */; };
 		E7B77E221FF7E1B300CE691A /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */; };
 		E7D14AFB20ED138400906F04 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14AFA20ED138400906F04 /* EventTests.swift */; };
 		E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E1830C200A7D0D009C32ED /* TransformTests.swift */; };
@@ -169,7 +167,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B2F681214543FB003B642A /* ProcessingKitCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +196,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7B2F72321455530003B642A /* ProcessingKitCoreOSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
