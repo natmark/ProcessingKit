@@ -95,6 +95,12 @@
 		E7B2F72221455448003B642A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BB6881F408FAB00E0372D /* Text.swift */; };
 		E7B77E221FF7E1B300CE691A /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */; };
 		E7D14AFB20ED138400906F04 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14AFA20ED138400906F04 /* EventTests.swift */; };
+		E7D14B4C2169F35A001E152C /* ProcessingView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */; };
+		E7D14B50216A0AEC001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
+		E7D14B5E216A5A87001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
+		E7D14B5F216A5A88001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
+		E7D14B60216A5A89001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
+		E7D14B61216A5BD6001E152C /* ProcessingView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */; };
 		E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E1830C200A7D0D009C32ED /* TransformTests.swift */; };
 		E7F57866201E26ED0042C30F /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F57865201E26ED0042C30F /* ShapeTests.swift */; };
 /* End PBXBuildFile section */
@@ -150,6 +156,8 @@
 		E7B77E291FF7EBFF00CE691A /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		E7B77E2C1FF7F19700CE691A /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
 		E7D14AFA20ED138400906F04 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessingView+Gesture.swift"; sourceTree = "<group>"; };
+		E7D14B4F216A0AEC001E152C /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 		E7E1830C200A7D0D009C32ED /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		E7F57865201E26ED0042C30F /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -638,6 +646,7 @@
 				E7B2F687214544A8003B642A /* ProcessingView+Constants.swift in Sources */,
 				E7B2F6A121454F86003B642A /* Constants.swift in Sources */,
 				E7B2F6A521454F95003B642A /* CGPoint.swift in Sources */,
+				E7D14B50216A0AEC001E152C /* Gesture.swift in Sources */,
 				E7B2F699214545B4003B642A /* ProcessingView+Text.swift in Sources */,
 				E7B2F6A621454F99003B642A /* Image.swift in Sources */,
 				E7054AD41F34CCB200EA0C0F /* ProcessingView.swift in Sources */,
@@ -679,6 +688,7 @@
 				E7B2F66521454010003B642A /* Context.swift in Sources */,
 				E7B2F66721454010003B642A /* String.swift in Sources */,
 				E7B2F66821454010003B642A /* Color.swift in Sources */,
+				E7D14B5F216A5A88001E152C /* Gesture.swift in Sources */,
 				E7B2F66921454010003B642A /* Loop.swift in Sources */,
 				E7B2F66A21454010003B642A /* Vertex.swift in Sources */,
 				E7B2F66B21454010003B642A /* UIColor.swift in Sources */,
@@ -697,6 +707,7 @@
 				E7B2F71A21455442003B642A /* NSView.swift in Sources */,
 				E7B2F71921455442003B642A /* NSImage.swift in Sources */,
 				E7B2F72021455448003B642A /* Loop.swift in Sources */,
+				E7D14B60216A5A89001E152C /* Gesture.swift in Sources */,
 				E7B2F7122145542F003B642A /* Context.swift in Sources */,
 				E7B2F71721455437003B642A /* UIColor.swift in Sources */,
 				E7B2F71521455437003B642A /* Frame.swift in Sources */,
@@ -720,6 +731,7 @@
 				E7B2F6CC21455079003B642A /* ProcessingView+Transform.swift in Sources */,
 				E7B2F6C321455079003B642A /* ProcessingView+Color.swift in Sources */,
 				E7B2F6C421455079003B642A /* ProcessingView+Constants.swift in Sources */,
+				E7D14B61216A5BD6001E152C /* ProcessingView+Gesture.swift in Sources */,
 				E7B2F6B221454FC9003B642A /* NSImage.swift in Sources */,
 				E7B2F6B421454FDE003B642A /* Context.swift in Sources */,
 				E7B2F6CB21455079003B642A /* ProcessingView+Loop.swift in Sources */,
