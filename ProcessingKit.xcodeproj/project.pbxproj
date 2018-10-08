@@ -101,6 +101,8 @@
 		E7D14B5F216A5A88001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
 		E7D14B60216A5A89001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
 		E7D14B61216A5BD6001E152C /* ProcessingView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */; };
+		E7D14B66216AFE7F001E152C /* CGPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B65216AFE7F001E152C /* CGPath.swift */; };
+		E7D14B68216B0481001E152C /* CGPathElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B67216B0481001E152C /* CGPathElement.swift */; };
 		E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E1830C200A7D0D009C32ED /* TransformTests.swift */; };
 		E7F57866201E26ED0042C30F /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7F57865201E26ED0042C30F /* ShapeTests.swift */; };
 /* End PBXBuildFile section */
@@ -158,6 +160,8 @@
 		E7D14AFA20ED138400906F04 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
 		E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessingView+Gesture.swift"; sourceTree = "<group>"; };
 		E7D14B4F216A0AEC001E152C /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
+		E7D14B65216AFE7F001E152C /* CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPath.swift; sourceTree = "<group>"; };
+		E7D14B67216B0481001E152C /* CGPathElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPathElement.swift; sourceTree = "<group>"; };
 		E7E1830C200A7D0D009C32ED /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		E7F57865201E26ED0042C30F /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,6 +252,7 @@
 		E7212F4D1F34B5A600173CD8 /* ProcessingKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				E7D14B69216B04A9001E152C /* Extensions */,
 				E768201A1F7B38A3009E8FD2 /* Input */,
 				E7212F501F34B5A600173CD8 /* Info.plist */,
 				E71388DC1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift */,
@@ -394,6 +399,15 @@
 				E7B2F698214545B4003B642A /* ProcessingView+Text.swift */,
 			);
 			path = "ProcessingView+Core";
+			sourceTree = "<group>";
+		};
+		E7D14B69216B04A9001E152C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E7D14B65216AFE7F001E152C /* CGPath.swift */,
+				E7D14B67216B0481001E152C /* CGPathElement.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,10 +684,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7212F4F1F34B5A600173CD8 /* ProcessingViewTests.swift in Sources */,
+				E7D14B68216B0481001E152C /* CGPathElement.swift in Sources */,
 				E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */,
 				E71388DD1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift in Sources */,
 				E7F57866201E26ED0042C30F /* ShapeTests.swift in Sources */,
 				E7D14AFB20ED138400906F04 /* EventTests.swift in Sources */,
+				E7D14B66216AFE7F001E152C /* CGPath.swift in Sources */,
 				E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
