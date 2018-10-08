@@ -100,6 +100,85 @@ open class ProcessingView: UIImageView {
 
     var timer: Timer?
 
+    // MARK: Gesture Recognizers
+    #if os(iOS)
+    lazy var tapGestureWithSingleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 1
+        return recognizer
+    }()
+    lazy var tapGestureWithDoubleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 2
+        return recognizer
+    }()
+    lazy var tapGestureWithTripleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 3
+        return recognizer
+    }()
+    lazy var tapGestureWithQuadTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 4
+        return recognizer
+    }()
+    lazy var tapGestureWithQuintTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 5
+        return recognizer
+    }()
+    lazy var swipeUpGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .up
+        return recognizer
+    }()
+    lazy var swipeDownGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .down
+        return recognizer
+    }()
+    lazy var swipeLeftGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .left
+        return recognizer
+    }()
+    lazy var swipeRightGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .right
+        return recognizer
+    }()
+    lazy var pinchGesture: UIPinchGestureRecognizer = {
+        let pinch =  UIPinchGestureRecognizer(target: self, action: #selector(didPinch(recognizer:)))
+        return pinch
+    }()
+    lazy var panGesture: UIPanGestureRecognizer = {
+        return UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
+    }()
+    lazy var rotationGesture: UIRotationGestureRecognizer = {
+        let rotate =  UIRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
+        return rotate
+    }()
+    lazy var longPressGesture: UILongPressGestureRecognizer = {
+        return UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(recognizer:)))
+    }()
+    #elseif os(OSX)
+    lazy var clickGesture: NSClickGestureRecognizer = {
+        return NSClickGestureRecognizer(target: self, action: #selector(didClick(recognizer:)))
+    }()
+    lazy var magnificationGesture: NSMagnificationGestureRecognizer = {
+        return NSMagnificationGestureRecognizer(target: self, action: #selector(didMagnify(recognizer:)))
+    }()
+    lazy var panGesture: NSPanGestureRecognizer = {
+        return NSPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
+    }()
+    lazy var pressGesture: NSPressGestureRecognizer = {
+        return NSPressGestureRecognizer(target: self, action: #selector(didPress(recognizer:)))
+    }()
+    lazy var rotationGesture: NSRotationGestureRecognizer = {
+        return NSRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
+    }()
+    #endif
+
     // MARK: Private properties
     private var contextComponents = ContextComponents()
     private var colorComponents = ColorComponents()
@@ -107,85 +186,6 @@ open class ProcessingView: UIImageView {
     private var vertexComponents = VertexComponents()
     private var textComponents = TextComponents()
     private var frameComponents = FrameComponents()
-
-    // MARK: Gesture Recognizers
-    #if os(iOS)
-    private lazy var tapGestureWithSingleTouch: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
-        recognizer.numberOfTouchesRequired = 1
-        return recognizer
-    }()
-    private lazy var tapGestureWithDoubleTouch: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
-        recognizer.numberOfTouchesRequired = 2
-        return recognizer
-    }()
-    private lazy var tapGestureWithTripleTouch: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
-        recognizer.numberOfTouchesRequired = 3
-        return recognizer
-    }()
-    private lazy var tapGestureWithQuadTouch: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
-        recognizer.numberOfTouchesRequired = 4
-        return recognizer
-    }()
-    private lazy var tapGestureWithQuintTouch: UITapGestureRecognizer = {
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
-        recognizer.numberOfTouchesRequired = 5
-        return recognizer
-    }()
-    private lazy var swipeUpGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
-        recognizer.direction = .up
-        return recognizer
-    }()
-    private lazy var swipeDownGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
-        recognizer.direction = .down
-        return recognizer
-    }()
-    private lazy var swipeLeftGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
-        recognizer.direction = .left
-        return recognizer
-    }()
-    private lazy var swipeRightGesture: UISwipeGestureRecognizer = {
-        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
-        recognizer.direction = .right
-        return recognizer
-    }()
-    private lazy var pinchGesture: UIPinchGestureRecognizer = {
-        let pinch =  UIPinchGestureRecognizer(target: self, action: #selector(didPinch(recognizer:)))
-        return pinch
-    }()
-    private lazy var panGesture: UIPanGestureRecognizer = {
-        return UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
-    }()
-    private lazy var rotationGesture: UIRotationGestureRecognizer = {
-        let rotate =  UIRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
-        return rotate
-    }()
-    private lazy var longPressGesture: UILongPressGestureRecognizer = {
-        return UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(recognizer:)))
-    }()
-    #elseif os(OSX)
-    private lazy var clickGesture: NSClickGestureRecognizer = {
-        return NSClickGestureRecognizer(target: self, action: #selector(didClick(recognizer:)))
-    }()
-    private lazy var magnificationGesture: NSMagnificationGestureRecognizer = {
-        return NSMagnificationGestureRecognizer(target: self, action: #selector(didMagnify(recognizer:)))
-    }()
-    private lazy var panGesture: NSPanGestureRecognizer = {
-        return NSPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
-    }()
-    private lazy var pressGesture: NSPressGestureRecognizer = {
-        return NSPressGestureRecognizer(target: self, action: #selector(didPress(recognizer:)))
-    }()
-    private lazy var rotationGesture: NSRotationGestureRecognizer = {
-        return NSRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
-    }()
-    #endif
 
     // Flag for setup function (setup function execute only once)
     private var firstcall = true

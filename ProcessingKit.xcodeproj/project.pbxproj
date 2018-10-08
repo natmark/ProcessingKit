@@ -94,7 +94,7 @@
 		E7B2F72121455448003B642A /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76820231F7B647A009E8FD2 /* Transform.swift */; };
 		E7B2F72221455448003B642A /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70BB6881F408FAB00E0372D /* Text.swift */; };
 		E7B77E221FF7E1B300CE691A /* ProcessingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7054AD31F34CCB200EA0C0F /* ProcessingView.swift */; };
-		E7D14AFB20ED138400906F04 /* EventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14AFA20ED138400906F04 /* EventTests.swift */; };
+		E7D14AFB20ED138400906F04 /* GestureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14AFA20ED138400906F04 /* GestureTests.swift */; };
 		E7D14B4C2169F35A001E152C /* ProcessingView+Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */; };
 		E7D14B50216A0AEC001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
 		E7D14B5E216A5A87001E152C /* Gesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D14B4F216A0AEC001E152C /* Gesture.swift */; };
@@ -157,7 +157,7 @@
 		E7B77E231FF7E30C00CE691A /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		E7B77E291FF7EBFF00CE691A /* NSImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSImage.swift; sourceTree = "<group>"; };
 		E7B77E2C1FF7F19700CE691A /* NSView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSView.swift; sourceTree = "<group>"; };
-		E7D14AFA20ED138400906F04 /* EventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTests.swift; sourceTree = "<group>"; };
+		E7D14AFA20ED138400906F04 /* GestureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureTests.swift; sourceTree = "<group>"; };
 		E7D14B4B2169F35A001E152C /* ProcessingView+Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProcessingView+Gesture.swift"; sourceTree = "<group>"; };
 		E7D14B4F216A0AEC001E152C /* Gesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gesture.swift; sourceTree = "<group>"; };
 		E7D14B65216AFE7F001E152C /* CGPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGPath.swift; sourceTree = "<group>"; };
@@ -259,7 +259,7 @@
 				E7212F4E1F34B5A600173CD8 /* ProcessingViewTests.swift */,
 				E7F57865201E26ED0042C30F /* ShapeTests.swift */,
 				E7E1830C200A7D0D009C32ED /* TransformTests.swift */,
-				E7D14AFA20ED138400906F04 /* EventTests.swift */,
+				E7D14AFA20ED138400906F04 /* GestureTests.swift */,
 			);
 			path = ProcessingKitTests;
 			sourceTree = "<group>";
@@ -688,7 +688,7 @@
 				E768201C1F7B38BC009E8FD2 /* DateTests.swift in Sources */,
 				E71388DD1F7A1F5500A45FA6 /* ProcessingViewDelegateSpy.swift in Sources */,
 				E7F57866201E26ED0042C30F /* ShapeTests.swift in Sources */,
-				E7D14AFB20ED138400906F04 /* EventTests.swift in Sources */,
+				E7D14AFB20ED138400906F04 /* GestureTests.swift in Sources */,
 				E7D14B66216AFE7F001E152C /* CGPath.swift in Sources */,
 				E7E1830D200A7D0D009C32ED /* TransformTests.swift in Sources */,
 			);
