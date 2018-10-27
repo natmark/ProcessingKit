@@ -96,10 +96,10 @@ extension ProcessingView {
     @objc func didRotate(recognizer: NSRotationGestureRecognizer) {
         self.gestureModel.didRotate(recognizer: recognizer)
     }
-    open func scrollWheel(with event: NSEvent) {
+    open override func scrollWheel(with event: NSEvent) {
         self.gestureModel.scrollWheel(with: event)
     }
-    open func mouseMoved(with event: NSEvent) {
+    open override func mouseMoved(with event: NSEvent) {
         self.gestureModel.mouseMoved(with: event)
     }
     #endif
