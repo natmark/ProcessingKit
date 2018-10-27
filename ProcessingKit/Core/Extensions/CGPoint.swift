@@ -10,7 +10,6 @@
 import UIKit
 #elseif os(OSX)
 import Cocoa
-public typealias CGPoint = NSPoint
 #endif
 
 extension CGPoint: Hashable {

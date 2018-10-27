@@ -70,7 +70,7 @@ open class ProcessingView: UIImageView {
     lazy var gestureModel: GestureModelContract = {
         return GestureModel(
             gestureComponents: self.gestureComponents,
-            processingView: self
+            frameComponents: self.frameComponents
         )
     }()
     lazy var dateModel: DateModelContract = {
@@ -318,6 +318,9 @@ open class ProcessingView: UIImageView {
             self.delegate?.setup?()
         }
 
+        // Gesture events
+        self.callDelegatesIfNeeded()
+
         // Draw
         self.frameComponents.frameCount += 1
         self.delegate?.draw?()
@@ -362,6 +365,58 @@ open class ProcessingView: UIImageView {
             frameComponents.bounds = self.bounds
         }
     }
+
+    private func callDelegatesIfNeeded() {
+        for event in self.gestureComponents.delegateEvents {
+            #if os(iOS)
+            sendDelegateEventTo(event: event)
+            #elseif os(OSX)
+            sendDelegateEventToOSX(event: event)
+            #endif
+        }
+    }
+
+    #if os(iOS)
+    private func sendDelegateEventTo(event: GestureEvent) {
+        switch event {
+        case .didTap:
+            self.gesture?.didTap?()
+        case .didRelease:
+            self.gesture?.didRelease?()
+        case .didDrag:
+            self.gesture?.didDrag?()
+        case .didSwipe(let direction):
+            self.gesture?.didSwipe?(direction: direction)
+        case .didPinch(let scale, let velocity):
+            self.gesture?.didPinch?(scale: scale, velocity: velocity)
+        case .didRotate(let rotation, let velocity):
+            self.gesture?.didRotate?(rotation: rotation, velocity: velocity)
+        case .didLongPress:
+            self.gesture?.didLongPress?()
+        }
+    }
+    #elseif os(OSX)
+    private func sendDelegateEventToOSX(event: GestureEvent) {
+        switch event {
+        case .didClick:
+            self.gesture?.didClick?()
+        case .didRelease:
+            self.gesture?.didRelease?()
+        case .didDrag:
+            self.gesture?.didDrag?()
+        case .didMove:
+            self.gesture?.didMove?()
+        case .didMagnify(let magnification):
+            self.gesture?.didMagnify?(magnification: magnification)
+        case .didRotate(let rotation, let inDegrees):
+            self.gesture?.didRotate?(rotation: rotation, inDegrees: inDegrees)
+        case .didPress:
+            self.gesture?.didPress?()
+        case .didScroll(let x, let y):
+            self.gesture?.didScroll?(x: x, y: y)
+        }
+    }
+    #endif
 
     // MARK: - deinit
     deinit {

@@ -14,7 +14,29 @@ import UIKit
 import Cocoa
 #endif
 
+public enum GestureEvent {
+    #if os(iOS)
+    case didTap
+    case didRelease
+    case didDrag
+    case didSwipe(direction: UISwipeGestureRecognizerDirection)
+    case didPinch(scale: CGFloat, velocity: CGFloat)
+    case didRotate(rotation: CGFloat, velocity: CGFloat)
+    case didLongPress
+    #elseif os(OSX)
+    case didClick
+    case didRelease
+    case didDrag
+    case didMove
+    case didMagnify(magnification: CGFloat)
+    case didRotate(rotation: CGFloat, inDegrees: CGFloat)
+    case didPress
+    case didScroll(x: CGFloat, y: CGFloat)
+    #endif
+}
+
 public protocol GestureComponentsContract {
+    var delegateEvents: [GestureEvent] { get set }
     #if os(iOS)
     var isPressed: Bool { get set }
     var touchX: CGFloat { get set }
@@ -58,7 +80,7 @@ public protocol GestureModelContract {
     mutating func didPress(recognizer: NSPressGestureRecognizer)
     mutating func didRotate(recognizer: NSRotationGestureRecognizer)
 
-    func scrollWheel(with event: NSEvent)
+    mutating func scrollWheel(with event: NSEvent)
     mutating func mouseMoved(with event: NSEvent)
 
     mutating func mouseDown(_ location: NSPoint)
@@ -69,6 +91,8 @@ public protocol GestureModelContract {
 }
 
 public class GestureComponents: GestureComponentsContract {
+    public var delegateEvents: [GestureEvent] = []
+
     #if os(iOS)
     public var isPressed = false
     public var touchX: CGFloat = 0.0
@@ -85,11 +109,12 @@ public class GestureComponents: GestureComponentsContract {
 
 public struct GestureModel: GestureModelContract {
     private var gestureComponents: GestureComponentsContract
-    private weak var processingView: ProcessingView?
+    private var frameComponents: FrameComponentsContract
+
     public init(gestureComponents: GestureComponentsContract,
-                processingView: ProcessingView) {
+                frameComponents: FrameComponentsContract) {
         self.gestureComponents = gestureComponents
-        self.processingView = processingView
+        self.frameComponents = frameComponents
     }
 
     #if os(iOS)
@@ -139,29 +164,29 @@ public struct GestureModel: GestureModelContract {
 
     public mutating func didTap(recognizer: UITapGestureRecognizer) {
         self.touchesBegan(self.touchesFrom(recognizer: recognizer))
-        self.processingView?.gesture?.didTap?()
+        self.gestureComponents.delegateEvents.append(.didTap)
     }
     public mutating func didTapExit(recognizer: UITapGestureRecognizer) {
         self.touchesEnded(self.touchesFrom(recognizer: recognizer))
     }
     public mutating func didPan(recognizer: UIPanGestureRecognizer) {
         self.handleTap(recognizer: recognizer)
-        self.processingView?.gesture?.didDrag?()
+        self.gestureComponents.delegateEvents.append(.didDrag)
     }
     public mutating func didSwipe(recognizer: UISwipeGestureRecognizer) {
-        self.processingView?.gesture?.didSwipe?(direction: recognizer.direction)
+        self.gestureComponents.delegateEvents.append(.didSwipe(direction: recognizer.direction))
     }
     public mutating func didPinch(recognizer: UIPinchGestureRecognizer) {
         self.handleTap(recognizer: recognizer)
-        self.processingView?.gesture?.didPinch?(scale: recognizer.scale, velocity: recognizer.velocity)
+        self.gestureComponents.delegateEvents.append(.didPinch(scale: recognizer.scale, velocity: recognizer.velocity))
     }
     public mutating func didRotate(recognizer: UIRotationGestureRecognizer) {
         self.handleTap(recognizer: recognizer)
-        self.processingView?.gesture?.didRotate?(rotation: recognizer.rotation, velocity: recognizer.velocity)
+        self.gestureComponents.delegateEvents.append(.didRotate(rotation: recognizer.rotation, velocity: recognizer.velocity))
     }
     public mutating func didLongPress(recognizer: UILongPressGestureRecognizer) {
         self.handleTap(recognizer: recognizer)
-        self.processingView?.gesture?.didLongPress?()
+        self.gestureComponents.delegateEvents.append(.didLongPress)
     }
 
     private mutating func handleTap(recognizer: UIGestureRecognizer) {
@@ -182,8 +207,9 @@ public struct GestureModel: GestureModelContract {
 
     private func touchesFrom(recognizer: UIGestureRecognizer) -> Set<CGPoint> {
         var touches = Set<CGPoint>()
+        let dummyView = UIView(frame: frameComponents.frame)
         for i in 0..<recognizer.numberOfTouches {
-            touches.insert(recognizer.location(ofTouch: i, in: processingView))
+            touches.insert(recognizer.location(ofTouch: i, in: dummyView))
         }
         return touches
     }
@@ -210,38 +236,37 @@ public struct GestureModel: GestureModelContract {
         self.gestureComponents.mouseY = self.convertCoordinateSystem(location: location).y
     }
 
-    public func scrollWheel(with event: NSEvent) {
-        self.processingView?.gesture?.didScroll?(x: event.deltaX, y: event.deltaY)
+    public mutating func scrollWheel(with event: NSEvent) {
+        self.gestureComponents.delegateEvents.append(.didScroll(x: event.deltaX, y: event.deltaY))
     }
     public mutating func mouseMoved(with event: NSEvent) {
-        self.processingView?.gesture?.didMove?()
+        self.gestureComponents.delegateEvents.append(.didMove)
 
-        guard let location = processingView?.convert(event.locationInWindow, to: nil) else {
-            return
-        }
+        let dummyView = NSView(frame: frameComponents.frame)
+        let location = dummyView.convert(event.locationInWindow, to: nil)
         self.mouseMoved(location)
     }
 
     public mutating func didClick(recognizer: NSClickGestureRecognizer) {
         self.mouseDown(touchesFrom(recognizer: recognizer))
-        self.processingView?.gesture?.didClick?()
+        self.gestureComponents.delegateEvents.append(.didClick)
     }
     public mutating func didClickExit(recognizer: NSClickGestureRecognizer) {
         self.mouseUp(touchesFrom(recognizer: recognizer))
     }
     public mutating func didMagnify(recognizer: NSMagnificationGestureRecognizer) {
-        self.processingView?.gesture?.didMagnify?(magnification: recognizer.magnification)
+        self.gestureComponents.delegateEvents.append(.didMagnify(magnification: recognizer.magnification))
     }
     public mutating func didPan(recognizer: NSPanGestureRecognizer) {
         handlePress(recognizer: recognizer)
-        self.processingView?.gesture?.didDrag?()
+        self.gestureComponents.delegateEvents.append(.didDrag)
     }
     public mutating func didPress(recognizer: NSPressGestureRecognizer) {
         handlePress(recognizer: recognizer)
-        self.processingView?.gesture?.didPress?()
+        self.gestureComponents.delegateEvents.append(.didPress)
     }
     public mutating func didRotate(recognizer: NSRotationGestureRecognizer) {
-        self.processingView?.gesture?.didRotate?(rotation: recognizer.rotation, inDegrees: recognizer.rotationInDegrees)
+        self.gestureComponents.delegateEvents.append(.didRotate(rotation: recognizer.rotation, inDegrees: recognizer.rotationInDegrees))
     }
 
     private mutating func handlePress(recognizer: NSGestureRecognizer) {
@@ -261,12 +286,12 @@ public struct GestureModel: GestureModelContract {
     }
 
     private func touchesFrom(recognizer: NSGestureRecognizer) -> NSPoint {
-        // MARK: Coordinate systems are different between iOS and OS X
-        return recognizer.location(in: processingView)
+        let dummyView = NSView(frame: frameComponents.frame)
+        return recognizer.location(in: dummyView)
     }
 
     private func convertCoordinateSystem(location: NSPoint) -> NSPoint {
-        let height = processingView?.frame.size.height ?? 0.0
+        let height = frameComponents.frame.size.height
         // MARK: Coordinate systems are different between iOS and OS X
         return NSPoint(x: location.x, y: height - location.y)
     }
