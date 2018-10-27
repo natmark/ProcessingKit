@@ -377,6 +377,8 @@ open class ProcessingView: UIImageView {
             sendDelegateEventToOSX(event: event)
             #endif
         }
+
+        self.gestureComponents.delegateEvents.removeAll()
     }
 
     #if os(iOS)
