@@ -17,24 +17,35 @@ import Cocoa
 @objc public protocol ProcessingViewDelegate {
     @objc optional func setup()
     @objc optional func draw()
+}
 
+@objc public protocol ProcessingViewGestureDelegate {
     #if os(iOS)
-    @objc optional func fingerTapped()
-    @objc optional func fingerDragged()
-    @objc optional func fingerReleased()
+    @objc optional func didTap()
+    @objc optional func didRelease()
+    @objc optional func didDrag() //Pan
+    @objc optional func didSwipe(direction: UISwipeGestureRecognizerDirection)
+    @objc optional func didPinch(scale: CGFloat, velocity: CGFloat)
+    @objc optional func didRotate(rotation: CGFloat, velocity: CGFloat)
+    @objc optional func didLongPress()
     #elseif os(OSX)
-    @objc optional func mouseClicked()
-    @objc optional func mouseDragged()
-    @objc optional func mouseMoved()
-    @objc optional func mouseReleased()
+    @objc optional func didClick()
+    @objc optional func didRelease()
+    @objc optional func didDrag()
+    @objc optional func didMove()
+    @objc optional func didMagnify(magnification: CGFloat)
+    @objc optional func didRotate(rotation: CGFloat, inDegrees: CGFloat)
+    @objc optional func didPress()
+    @objc optional func didScroll(x: CGFloat, y: CGFloat)
     #endif
 }
 
-open class ProcessingView: UIImageView, ProcessingViewDelegate {
-
+open class ProcessingView: UIImageView {
     public weak var delegate: ProcessingViewDelegate?
-    public var autoRelease: Bool = true
-    public var isPlayground: Bool = false
+    public weak var gesture: ProcessingViewGestureDelegate?
+
+    public var autoRelease = true
+    public var isPlayground = false
 
     // MARK: Internal properties
     lazy var frameModel: FrameModelContract = {
@@ -56,11 +67,10 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
             colorComponents: self.colorComponents
         )
     }()
-    lazy var eventModel: EventModelContract = {
-        return EventModel(
-            frameComponents: self.frameComponents,
-            eventComponents: self.eventComponents,
-            superView: self.superview
+    lazy var gestureModel: GestureModelContract = {
+        return GestureModel(
+            gestureComponents: self.gestureComponents,
+            frameComponents: self.frameComponents
         )
     }()
     lazy var dateModel: DateModelContract = {
@@ -84,23 +94,101 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     lazy var imageModel: ImageModelContract = {
         return ImageModel(contextComponents: self.contextComponents)
     }()
-
     lazy var transformModel: TransformModelContract = {
         return TransformModel(contextComponents: self.contextComponents)
     }()
 
-    lazy var timer: Timer? = nil
+    var timer: Timer?
+
+    // MARK: Gesture Recognizers
+    #if os(iOS)
+    lazy var tapGestureWithSingleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 1
+        return recognizer
+    }()
+    lazy var tapGestureWithDoubleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 2
+        return recognizer
+    }()
+    lazy var tapGestureWithTripleTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 3
+        return recognizer
+    }()
+    lazy var tapGestureWithQuadTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 4
+        return recognizer
+    }()
+    lazy var tapGestureWithQuintTouch: UITapGestureRecognizer = {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(didTap(recognizer:)))
+        recognizer.numberOfTouchesRequired = 5
+        return recognizer
+    }()
+    lazy var swipeUpGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .up
+        return recognizer
+    }()
+    lazy var swipeDownGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .down
+        return recognizer
+    }()
+    lazy var swipeLeftGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .left
+        return recognizer
+    }()
+    lazy var swipeRightGesture: UISwipeGestureRecognizer = {
+        let recognizer = UISwipeGestureRecognizer(target: self, action: #selector(didSwipe(recognizer:)))
+        recognizer.direction = .right
+        return recognizer
+    }()
+    lazy var pinchGesture: UIPinchGestureRecognizer = {
+        let pinch =  UIPinchGestureRecognizer(target: self, action: #selector(didPinch(recognizer:)))
+        return pinch
+    }()
+    lazy var panGesture: UIPanGestureRecognizer = {
+        return UIPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
+    }()
+    lazy var rotationGesture: UIRotationGestureRecognizer = {
+        let rotate =  UIRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
+        return rotate
+    }()
+    lazy var longPressGesture: UILongPressGestureRecognizer = {
+        return UILongPressGestureRecognizer(target: self, action: #selector(didLongPress(recognizer:)))
+    }()
+    #elseif os(OSX)
+    lazy var clickGesture: NSClickGestureRecognizer = {
+        return NSClickGestureRecognizer(target: self, action: #selector(didClick(recognizer:)))
+    }()
+    lazy var magnificationGesture: NSMagnificationGestureRecognizer = {
+        return NSMagnificationGestureRecognizer(target: self, action: #selector(didMagnify(recognizer:)))
+    }()
+    lazy var panGesture: NSPanGestureRecognizer = {
+        return NSPanGestureRecognizer(target: self, action: #selector(didPan(recognizer:)))
+    }()
+    lazy var pressGesture: NSPressGestureRecognizer = {
+        return NSPressGestureRecognizer(target: self, action: #selector(didPress(recognizer:)))
+    }()
+    lazy var rotationGesture: NSRotationGestureRecognizer = {
+        return NSRotationGestureRecognizer(target: self, action: #selector(didRotate(recognizer:)))
+    }()
+    #endif
 
     // MARK: Private properties
     private var contextComponents = ContextComponents()
     private var colorComponents = ColorComponents()
-    private var eventComponents = EventComponents()
+    private var gestureComponents = GestureComponents()
     private var vertexComponents = VertexComponents()
     private var textComponents = TextComponents()
     private var frameComponents = FrameComponents()
 
     // Flag for setup function (setup function execute only once)
-    private var firstcall: Bool = true
+    private var firstcall = true
 
     // Store trackingArea for calling mouseMove
     #if os(OSX)
@@ -110,20 +198,23 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     // MARK: - Initializer
     public init() {
         super.init(frame: CGRect.zero)
-        self.configuration()
-        self.run()
+        self.commonInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.configuration()
-        self.run()
+        self.commonInit()
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        self.commonInit()
+    }
+
+    private func commonInit() {
         self.configuration()
         self.run()
+        self.addGestureRecognizers()
     }
 
     private func configuration() {
@@ -137,6 +228,45 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         }
         #endif
         self.delegate = self
+        self.gesture = self
+    }
+
+    func addGestureRecognizers() {
+        #if os(iOS)
+        tapGestureWithSingleTouch.delegate = self
+        tapGestureWithDoubleTouch.delegate = self
+        tapGestureWithTripleTouch.delegate = self
+        tapGestureWithQuadTouch.delegate = self
+        tapGestureWithQuintTouch.delegate = self
+        panGesture.delegate = self
+        swipeUpGesture.delegate = self
+        swipeDownGesture.delegate = self
+        swipeLeftGesture.delegate = self
+        swipeRightGesture.delegate = self
+        pinchGesture.delegate = self
+        rotationGesture.delegate = self
+        longPressGesture.delegate = self
+
+        self.addGestureRecognizer(tapGestureWithSingleTouch)
+        self.addGestureRecognizer(tapGestureWithDoubleTouch)
+        self.addGestureRecognizer(tapGestureWithTripleTouch)
+        self.addGestureRecognizer(tapGestureWithQuadTouch)
+        self.addGestureRecognizer(tapGestureWithQuintTouch)
+        self.addGestureRecognizer(panGesture)
+        self.addGestureRecognizer(swipeUpGesture)
+        self.addGestureRecognizer(swipeDownGesture)
+        self.addGestureRecognizer(swipeLeftGesture)
+        self.addGestureRecognizer(swipeRightGesture)
+        self.addGestureRecognizer(pinchGesture)
+        self.addGestureRecognizer(rotationGesture)
+        self.addGestureRecognizer(longPressGesture)
+        #elseif os(OSX)
+        self.addGestureRecognizer(clickGesture)
+        self.addGestureRecognizer(magnificationGesture)
+        self.addGestureRecognizer(panGesture)
+        self.addGestureRecognizer(pressGesture)
+        self.addGestureRecognizer(rotationGesture)
+        #endif
     }
 
     private func run() {
@@ -188,7 +318,7 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
             self.delegate?.setup?()
         }
 
-        // Touch events
+        // Gesture events
         self.callDelegatesIfNeeded()
 
         // Draw
@@ -223,40 +353,6 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
         }
     }
 
-    private func callDelegatesIfNeeded() {
-        #if os(iOS)
-        if self.eventComponents.fingerTapped {
-            self.eventComponents.fingerTapped = false
-            self.delegate?.fingerTapped?()
-        }
-        if self.eventComponents.fingerDragged {
-            self.eventComponents.fingerDragged = false
-            self.delegate?.fingerDragged?()
-        }
-        if self.eventComponents.fingerReleased {
-            self.eventComponents.fingerReleased = false
-            self.delegate?.fingerReleased?()
-        }
-        #elseif os(OSX)
-        if self.eventComponents.mouseClicked {
-            self.eventComponents.mouseClicked = false
-            self.delegate?.mouseClicked?()
-        }
-        if self.eventComponents.mouseDragged {
-            self.eventComponents.mouseDragged = false
-            self.delegate?.mouseDragged?()
-        }
-        if self.eventComponents.mouseMoved {
-            self.eventComponents.mouseMoved = false
-            self.delegate?.mouseMoved?()
-        }
-        if self.eventComponents.mouseReleased {
-            self.eventComponents.mouseReleased = false
-            self.delegate?.mouseReleased?()
-        }
-        #endif
-    }
-
     // MARK: - Update view bounds
     open override var frame: CGRect {
         didSet {
@@ -266,9 +362,62 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }
     open override var bounds: CGRect {
         didSet {
-            frameComponents.bounds = self.bounds
+            if frameComponents.frame == CGRect.zero {
+                frameComponents.frame = self.frame
+                frameComponents.bounds = self.bounds
+            }
         }
     }
+
+    private func callDelegatesIfNeeded() {
+        for event in self.gestureComponents.delegateEvents {
+            sendDelegate(event: event)
+        }
+
+        self.gestureComponents.delegateEvents.removeAll()
+    }
+
+    #if os(iOS)
+    private func sendDelegate(event: GestureEvent) {
+        switch event {
+        case .didTap:
+            self.gesture?.didTap?()
+        case .didRelease:
+            self.gesture?.didRelease?()
+        case .didDrag:
+            self.gesture?.didDrag?()
+        case .didSwipe(let direction):
+            self.gesture?.didSwipe?(direction: direction)
+        case .didPinch(let scale, let velocity):
+            self.gesture?.didPinch?(scale: scale, velocity: velocity)
+        case .didRotate(let rotation, let velocity):
+            self.gesture?.didRotate?(rotation: rotation, velocity: velocity)
+        case .didLongPress:
+            self.gesture?.didLongPress?()
+        }
+    }
+    #elseif os(OSX)
+    private func sendDelegate(event: GestureEvent) {
+        switch event {
+        case .didClick:
+            self.gesture?.didClick?()
+        case .didRelease:
+            self.gesture?.didRelease?()
+        case .didDrag:
+            self.gesture?.didDrag?()
+        case .didMove:
+            self.gesture?.didMove?()
+        case .didMagnify(let magnification):
+            self.gesture?.didMagnify?(magnification: magnification)
+        case .didRotate(let rotation, let inDegrees):
+            self.gesture?.didRotate?(rotation: rotation, inDegrees: inDegrees)
+        case .didPress:
+            self.gesture?.didPress?()
+        case .didScroll(let x, let y):
+            self.gesture?.didScroll?(x: x, y: y)
+        }
+    }
+    #endif
 
     // MARK: - deinit
     deinit {
@@ -277,6 +426,17 @@ open class ProcessingView: UIImageView, ProcessingViewDelegate {
     }
 }
 
+extension ProcessingView: ProcessingViewGestureDelegate {}
+extension ProcessingView: ProcessingViewDelegate {}
+
+#if os(iOS)
+extension ProcessingView: UIGestureRecognizerDelegate {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+}
+#endif
+
 #if os(OSX)
 extension ProcessingView {
     override open func updateTrackingAreas() {
@@ -284,7 +444,7 @@ extension ProcessingView {
             self.removeTrackingArea(trackingArea!)
         }
         let options: NSTrackingArea.Options =
-            [.activeWhenFirstResponder, .mouseMoved ]
+            [.mouseEnteredAndExited, .mouseMoved, .activeInKeyWindow]
         trackingArea = NSTrackingArea(rect: self.bounds, options: options,
                                       owner: self, userInfo: nil)
         self.addTrackingArea(trackingArea!)

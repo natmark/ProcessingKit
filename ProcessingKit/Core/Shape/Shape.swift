@@ -112,29 +112,10 @@ public struct ShapeModel: ShapeModelContract {
     }
 
     public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
-
-        let alpha: CGFloat = 1.0
-        let p0 = CGPoint(x: cpx1, y: cpy1)
-        let p1 = CGPoint(x: x1, y: y1)
-        let p2 = CGPoint(x: x2, y: y2)
-        let p3 = CGPoint(x: cpx2, y: cpy2)
-
-        let d1 = p1.deltaTo(p0).length()
-        let d2 = p2.deltaTo(p1).length()
-        let d3 = p3.deltaTo(p2).length()
-
-        var b1 = p2.multiplyBy(pow(d1, 2 * alpha))
-        b1 = b1.deltaTo(p0.multiplyBy(pow(d2, 2 * alpha)))
-        b1 = b1.addTo(p1.multiplyBy(2 * pow(d1, 2 * alpha) + 3 * pow(d1, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
-        b1 = b1.multiplyBy(1.0 / (3 * pow(d1, alpha) * (pow(d1, alpha) + pow(d2, alpha))))
-
-        var b2 = p1.multiplyBy(pow(d3, 2 * alpha))
-        b2 = b2.deltaTo(p3.multiplyBy(pow(d2, 2 * alpha)))
-        b2 = b2.addTo(p2.multiplyBy(2 * pow(d3, 2 * alpha) + 3 * pow(d3, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
-        b2 = b2.multiplyBy(1.0 / (3 * pow(d3, alpha) * (pow(d3, alpha) + pow(d2, alpha))))
-
         let g = self.contextComponents.context()
         setGraphicsConfiguration(context: g)
+
+        let (b1, b2) = ShapeModel.convertCurvePoint(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
 
         drawing(mode: .fillStroke) {
             g?.move(to: CGPoint(x: x1, y: y1))
@@ -155,6 +136,31 @@ public struct ShapeModel: ShapeModelContract {
     public func radians(_ degrees: CGFloat) -> CGFloat {
         let radian = (CGFloat.pi * 2) * (degrees / 360.0)
         return radian
+    }
+
+    // For testing
+    static func convertCurvePoint(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) -> (CGPoint, CGPoint) {
+        let alpha: CGFloat = 1.0
+        let p0 = CGPoint(x: cpx1, y: cpy1)
+        let p1 = CGPoint(x: x1, y: y1)
+        let p2 = CGPoint(x: x2, y: y2)
+        let p3 = CGPoint(x: cpx2, y: cpy2)
+
+        let d1 = p1.deltaTo(p0).length()
+        let d2 = p2.deltaTo(p1).length()
+        let d3 = p3.deltaTo(p2).length()
+
+        var b1 = p2.multiplyBy(pow(d1, 2 * alpha))
+        b1 = b1.deltaTo(p0.multiplyBy(pow(d2, 2 * alpha)))
+        b1 = b1.addTo(p1.multiplyBy(2 * pow(d1, 2 * alpha) + 3 * pow(d1, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
+        b1 = b1.multiplyBy(1.0 / (3 * pow(d1, alpha) * (pow(d1, alpha) + pow(d2, alpha))))
+
+        var b2 = p1.multiplyBy(pow(d3, 2 * alpha))
+        b2 = b2.deltaTo(p3.multiplyBy(pow(d2, 2 * alpha)))
+        b2 = b2.addTo(p2.multiplyBy(2 * pow(d3, 2 * alpha) + 3 * pow(d3, alpha) * pow(d2, alpha) + pow(d2, 2 * alpha)))
+        b2 = b2.multiplyBy(1.0 / (3 * pow(d3, alpha) * (pow(d3, alpha) + pow(d2, alpha))))
+
+        return (b1, b2)
     }
 
     private func setGraphicsConfiguration(context: CGContext?) {

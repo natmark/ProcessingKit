@@ -21,6 +21,8 @@ public typealias UIFont = NSFont
 public typealias UIEvent = NSEvent
 public typealias UIView = NSView
 public typealias UIResponder = NSResponder
+public typealias CGRect = NSRect
+public typealias CGPoint = NSPoint
 #endif
 
 public protocol ContextComponenetsContract {
