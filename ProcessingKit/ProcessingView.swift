@@ -371,18 +371,14 @@ open class ProcessingView: UIImageView {
 
     private func callDelegatesIfNeeded() {
         for event in self.gestureComponents.delegateEvents {
-            #if os(iOS)
-            sendDelegateEventTo(event: event)
-            #elseif os(OSX)
-            sendDelegateEventToOSX(event: event)
-            #endif
+            sendDelegate(event: event)
         }
 
         self.gestureComponents.delegateEvents.removeAll()
     }
 
     #if os(iOS)
-    private func sendDelegateEventTo(event: GestureEvent) {
+    private func sendDelegate(event: GestureEvent) {
         switch event {
         case .didTap:
             self.gesture?.didTap?()
@@ -401,7 +397,7 @@ open class ProcessingView: UIImageView {
         }
     }
     #elseif os(OSX)
-    private func sendDelegateEventToOSX(event: GestureEvent) {
+    private func sendDelegate(event: GestureEvent) {
         switch event {
         case .didClick:
             self.gesture?.didClick?()
