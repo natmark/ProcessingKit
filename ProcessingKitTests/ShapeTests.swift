@@ -42,7 +42,6 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
     func setup() {
         switch shape {
         case .point(let x, let y):
-            self.view.strokeWeight(10)
             self.view.point(x, y)
         case .line(let x1, let y1, let x2, let y2):
             self.view.line(x1, y1, x2, y2)
@@ -106,7 +105,7 @@ class ShapeTests: XCTestCase {
             #line: TestCase(
                 description: "draw point(50, 50)",
                 shape: .point(x: 50, y: 50),
-                expect: ellipsePathBuilder(x: 50, y: 50, width: 10, height: 10)
+                expect: UIBezierPath(ovalIn: CGRect(x: 49.5, y: 49.5, width: 1, height: 1)).cgPath
             ),
         ]
 
@@ -141,24 +140,12 @@ class ShapeTests: XCTestCase {
             #line: TestCase(
                 description: "draw rect(0, 0, 50, 50)",
                 shape: .rect(x: 0, y: 0, width: 50, height: 50),
-                expect: UIBezierPath()
-                    .moveTo(CGPoint(x: 0, y: 0))
-                    .addLineTo(CGPoint(x: 50, y: 0))
-                    .addLineTo(CGPoint(x: 50, y: 50))
-                    .addLineTo(CGPoint(x: 0, y: 50))
-                    .closePath()
-                    .cgPath
+                expect: UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50)).cgPath
             ),
             #line: TestCase(
                 description: "draw rect(20, 20, 30, 50)",
                 shape: .rect(x: 20, y: 20, width: 30, height: 50),
-                expect: UIBezierPath()
-                    .moveTo(CGPoint(x: 20, y: 20))
-                    .addLineTo(CGPoint(x: 50, y: 20))
-                    .addLineTo(CGPoint(x: 50, y: 70))
-                    .addLineTo(CGPoint(x: 20, y: 70))
-                    .closePath()
-                    .cgPath
+                expect: UIBezierPath(rect: CGRect(x: 20, y: 20, width: 30, height: 50)).cgPath
             ),
         ]
 
@@ -170,12 +157,12 @@ class ShapeTests: XCTestCase {
             #line: TestCase(
                 description: "draw ellipse(100, 100, 100, 100)",
                 shape: .ellipse(x: 100, y: 100, width: 100, height: 100),
-                expect: ellipsePathBuilder(x: 100, y: 100, width: 100, height: 100)
+                expect: UIBezierPath(ovalIn: CGRect(x: 50, y: 50, width: 100, height: 100)).cgPath
             ),
             #line: TestCase(
                 description: "draw ellipse(0, 0, 100, 100)",
                 shape: .ellipse(x: 0, y: 0, width: 100, height: 100),
-                expect: ellipsePathBuilder(x: 0, y: 0, width: 100, height: 100)
+                expect: UIBezierPath(ovalIn: CGRect(x: -50, y: -50, width: 100, height: 100)).cgPath
             ),
         ]
         check(testCases: testCases)
@@ -194,9 +181,9 @@ class ShapeTests: XCTestCase {
                 expect: arcPathBuilder(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(90.0))
             ),
             #line: TestCase(
-                description: "draw arc(50, 50, 50, 0°, 270°)",
-                shape: .arc(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(270.0)),
-                expect: arcPathBuilder(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(270))
+                description: "draw arc(50, 50, 30, 30°, 120°)",
+                shape: .arc(x: 50, y: 50, radius: 30, start: radians(30.0), stop: radians(120.0)),
+                expect: arcPathBuilder(x: 50, y: 50, radius: 30, start: radians(30.0), stop: radians(120.0))
             ),
         ]
 
@@ -291,7 +278,7 @@ class ShapeTests: XCTestCase {
     private func curvePathBuilder(cpx1: CGFloat, cpy1: CGFloat, x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, cpx2: CGFloat, cpy2: CGFloat) -> CGPath? {
         let context = CGContext(data: nil, width: 100, height: 100, bitsPerComponent: 8, bytesPerRow: 1664, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: 8194)!
 
-        let (b1, b2) = ShapeModel.convertCurvePoint(cpx1, cpy1, x1, y1, x2, y2, cpx1, cpx2)
+        let (b1, b2) = ShapeModel.convertCurvePoint(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
         context.move(to: CGPoint(x: x1, y: y1))
         context.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
         return context.path
@@ -302,12 +289,6 @@ class ShapeTests: XCTestCase {
 
         context.move(to: CGPoint(x: x1, y: y1))
         context.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
-        return context.path
-    }
-
-    private func ellipsePathBuilder(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat) -> CGPath? {
-        let context = CGContext(data: nil, width: 100, height: 100, bitsPerComponent: 8, bytesPerRow: 1664, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: 8194)!
-        context.addEllipse(in: CGRect(x: x, y: y, width: width, height: height))
         return context.path
     }
 }
