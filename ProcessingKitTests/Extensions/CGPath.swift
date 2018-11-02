@@ -27,35 +27,6 @@ extension CGPath {
         }
         return elements
     }
-//    func getPathElementsPointsAndTypes() -> ([CGPoint],[CGPathElementType]) {
-//        var arrayPoints : [CGPoint]! = [CGPoint]()
-//        var arrayTypes : [CGPathElementType]! = [CGPathElementType]()
-//        self.forEach { element in
-//            switch (element.type) {
-//            case CGPathElementType.moveToPoint:
-//                arrayPoints.append(element.points[0])
-//                arrayTypes.append(element.type)
-//            case .addLineToPoint:
-//                arrayPoints.append(element.points[0])
-//                arrayTypes.append(element.type)
-//            case .addQuadCurveToPoint:
-//                arrayPoints.append(element.points[0])
-//                arrayPoints.append(element.points[1])
-//                arrayTypes.append(element.type)
-//                arrayTypes.append(element.type)
-//            case .addCurveToPoint:
-//                arrayPoints.append(element.points[0])
-//                arrayPoints.append(element.points[1])
-//                arrayPoints.append(element.points[2])
-//                arrayTypes.append(element.type)
-//                arrayTypes.append(element.type)
-//                arrayTypes.append(element.type)
-//            case .closeSubpath:
-//                arrayTypes.append(element.type)
-//            }
-//        }
-//        return (arrayPoints,arrayTypes)
-//    }
 }
 extension CGPath: Equatable {}
 
