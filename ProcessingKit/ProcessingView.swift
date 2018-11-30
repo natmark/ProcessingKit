@@ -24,7 +24,7 @@ import Cocoa
     @objc optional func didTap()
     @objc optional func didRelease()
     @objc optional func didDrag() //Pan
-    @objc optional func didSwipe(direction: UISwipeGestureRecognizerDirection)
+    @objc optional func didSwipe(direction: UISwipeGestureRecognizer.Direction)
     @objc optional func didPinch(scale: CGFloat, velocity: CGFloat)
     @objc optional func didRotate(rotation: CGFloat, velocity: CGFloat)
     @objc optional func didLongPress()
