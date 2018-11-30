@@ -19,7 +19,7 @@ public enum GestureEvent {
     case didTap
     case didRelease
     case didDrag
-    case didSwipe(direction: UISwipeGestureRecognizerDirection)
+    case didSwipe(direction: UISwipeGestureRecognizer.Direction)
     case didPinch(scale: CGFloat, velocity: CGFloat)
     case didRotate(rotation: CGFloat, velocity: CGFloat)
     case didLongPress
