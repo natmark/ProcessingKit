@@ -66,7 +66,7 @@ import ProcessingKit
 
 class SampleView: ProcessingView {
     func setup() {
-        // The setup() function is run once, when the program starts.
+        // The setup() function is run once, when the view instantiated.
     }
     func draw() {
         // Called directly after setup(), the draw() function continuously executes the lines of code contained inside its block until the program is stopped or noLoop() is called.
@@ -122,6 +122,9 @@ Add the following to your `Cartfile`:
 - Use [Donut](https://github.com/natmark/Donut)(Xcode file template manager) to install.
 
 `$ donut install https://github.com/natmark/ProcessingKit`
+
+## Documentation
+- [ProcessingKit/wiki](https://github.com/natmark/ProcessingKit/wiki)
 
 ## License
 ProcessingKit is available under the MIT license. See the LICENSE file for more info.
