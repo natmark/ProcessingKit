@@ -18,6 +18,7 @@ public protocol ShapeModelContract {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
+    func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ radius: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat)
@@ -63,6 +64,16 @@ public struct ShapeModel: ShapeModelContract {
 
         drawing(mode: .fillStroke) {
             g?.addRect(CGRect(x: x, y: y, width: width, height: height))
+        }
+    }
+
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ radius: CGFloat) {
+        let g = self.contextComponents.context()
+        setGraphicsConfiguration(context: g)
+
+        drawing(mode: .fillStroke) {
+            let path = UIBezierPath(roundedRect: CGRect(x: x, y: y, width: width, height: height), byRoundingCorners: .allCorners, cornerRadii: CGSize(width: radius, height: radius)).cgPath
+            g?.addPath(path)
         }
     }
 
