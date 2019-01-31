@@ -32,38 +32,38 @@ public struct TransformModel: TransformModelContract {
     }
 
     public func pushMatrix() {
-        let g = self.contextComponents.context()
-        g?.saveGState()
+        let context = self.contextComponents.context
+        context?.saveGState()
     }
 
     public func popMatrix() {
-        let g = self.contextComponents.context()
-        g?.restoreGState()
+        let context = self.contextComponents.context
+        context?.restoreGState()
     }
 
     public func scale(_ s: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.scaleBy(x: s, y: s)
+        let context = self.contextComponents.context
+        context?.scaleBy(x: s, y: s)
 
     }
 
     public func scale(_ x: CGFloat, _ y: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.scaleBy(x: x, y: y)
+        let context = self.contextComponents.context
+        context?.scaleBy(x: x, y: y)
     }
 
     public func shear(_ angleX: CGFloat, _ angleY: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.concatenate(CGAffineTransform(a: 1, b: tan(angleY), c: tan(angleX), d: 1, tx: 0, ty: 0))
+        let context = self.contextComponents.context
+        context?.concatenate(CGAffineTransform(a: 1, b: tan(angleY), c: tan(angleX), d: 1, tx: 0, ty: 0))
     }
 
     public func rotate(_ angle: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.rotate(by: angle)
+        let context = self.contextComponents.context
+        context?.rotate(by: angle)
     }
 
     public func translate(_ x: CGFloat, _ y: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.translateBy(x: x, y: y)
+        let context = self.contextComponents.context
+        context?.translateBy(x: x, y: y)
     }
 }

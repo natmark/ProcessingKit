@@ -61,13 +61,13 @@ public struct TextModel: TextModelContract {
     }
 
     public func text(_ str: String, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = self.contextComponents.context()
+        let context = self.contextComponents.context
 
-        g?.saveGState()
+        context?.saveGState()
 
-        g?.translateBy(x: 0, y: frameComponents.bounds.size.height)
-        g?.scaleBy(x: 1.0, y: -1.0)
-        g?.textMatrix = CGAffineTransform.identity
+        context?.translateBy(x: 0, y: frameComponents.bounds.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
+        context?.textMatrix = CGAffineTransform.identity
 
         let path: CGMutablePath = CGMutablePath()
         let bounds: CGRect = CGRect(x: x, y: -y + frameComponents.bounds.size.height, width: width, height: height)
@@ -90,9 +90,9 @@ public struct TextModel: TextModelContract {
         let frame: CTFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
 
         // 上記の内容を描画します。
-        CTFrameDraw(frame, g!)
+        CTFrameDraw(frame, context!)
 
-        g?.restoreGState()
+        context?.restoreGState()
     }
 
     public func textWidth(_ str: String) -> CGFloat {

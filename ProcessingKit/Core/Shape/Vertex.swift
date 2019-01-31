@@ -68,10 +68,10 @@ public struct VertexModel: VertexModelContract {
 
         switch self.vertexComponents.kind {
         case .points:
-            let g = self.contextComponents.context()
-            g?.setFillColor(self.colorComponents.stroke.cgColor)
+            let context = self.contextComponents.context
+            context?.setFillColor(self.colorComponents.stroke.cgColor)
             for vertex in self.vertexComponents.vertexes {
-                g?.fill(CGRect(x: vertex.x, y: vertex.y, width: self.colorComponents.strokeWeight, height: self.colorComponents.strokeWeight))
+                context?.fill(CGRect(x: vertex.x, y: vertex.y, width: self.colorComponents.strokeWeight, height: self.colorComponents.strokeWeight))
             }
         case .lines:
             while self.vertexComponents.vertexes.count >= 2 {
@@ -106,20 +106,20 @@ public struct VertexModel: VertexModelContract {
     }
 
     private func addLineToPoints(vertexes: [CGPoint], isClosed: Bool) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         for (index, vertex) in vertexes.enumerated() {
             if index == 0 {
-                g?.move(to: vertex)
+                context?.move(to: vertex)
             } else {
-                g?.addLine(to: vertex)
+                context?.addLine(to: vertex)
             }
         }
         if isClosed {
-            g?.addLine(to: vertexes.first!)
+            context?.addLine(to: vertexes.first!)
         }
-        g?.drawPath(using: .fillStroke)
+        context?.drawPath(using: .fillStroke)
     }
 
     private func setGraphicsConfiguration(context: CGContext?) {

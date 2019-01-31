@@ -306,10 +306,10 @@ open class ProcessingView: UIImageView {
         self.image?.draw(at: NSPoint.zero, from: NSRect.zero, operation: .copy, fraction: 1.0)
 
         // MARK: Coordinate systems are different between iOS and OS X
-        let g = contextComponents.context()
-        g?.saveGState()
-        g?.translateBy(x: 0.0, y: height)
-        g?.scaleBy(x: 1.0, y: -1.0)
+        let context = contextComponents.context
+        context?.saveGState()
+        context?.translateBy(x: 0.0, y: height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         #endif
 
         // Setup
@@ -336,7 +336,7 @@ open class ProcessingView: UIImageView {
                 self.setNeedsDisplay()
             }
         }
-        g?.restoreGState()
+        context?.restoreGState()
         #endif
 
         // Only setup

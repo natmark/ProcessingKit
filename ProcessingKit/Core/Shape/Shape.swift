@@ -39,32 +39,32 @@ public struct ShapeModel: ShapeModelContract {
     }
 
     public func point(_ x: CGFloat, _ y: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.setFillColor(self.colorComponents.stroke.cgColor)
+        let context = self.contextComponents.context
+        context?.setFillColor(self.colorComponents.stroke.cgColor)
 
         drawing(mode: .fill) {
             let width = self.colorComponents.strokeWeight
             let height = self.colorComponents.strokeWeight
-            g?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+            context?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         }
     }
 
     public func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .stroke) {
-            g?.move(to: CGPoint(x: x1, y: y1))
-            g?.addLine(to: CGPoint(x: x2, y: y2))
+            context?.move(to: CGPoint(x: x1, y: y1))
+            context?.addLine(to: CGPoint(x: x2, y: y2))
         }
     }
 
     public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.addRect(CGRect(x: x, y: y, width: width, height: height))
+            context?.addRect(CGRect(x: x, y: y, width: width, height: height))
         }
     }
 
@@ -73,8 +73,8 @@ public struct ShapeModel: ShapeModelContract {
     }
 
     public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ topLeftRadius: CGFloat, _ topRightRadius: CGFloat, _ bottomLeftRadius: CGFloat, _ bottomRightRadius: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         var topLeftRadius = topLeftRadius
         var topRightRadius = topRightRadius
@@ -94,89 +94,89 @@ public struct ShapeModel: ShapeModelContract {
         }
 
         drawing(mode: .fillStroke) {
-            g?.beginPath()
-            g?.move(to: CGPoint(x: x + topLeftRadius, y: y))
+            context?.beginPath()
+            context?.move(to: CGPoint(x: x + topLeftRadius, y: y))
 
-            g?.addLine(to: CGPoint(x: x + width - topRightRadius, y: y))
-            g?.addArc(center: CGPoint(x: x + width - topRightRadius, y: y + topRightRadius), radius: topRightRadius, startAngle: radians(-90), endAngle: radians(0), clockwise: false)
+            context?.addLine(to: CGPoint(x: x + width - topRightRadius, y: y))
+            context?.addArc(center: CGPoint(x: x + width - topRightRadius, y: y + topRightRadius), radius: topRightRadius, startAngle: radians(-90), endAngle: radians(0), clockwise: false)
 
-            g?.addLine(to: CGPoint(x: x + width, y: y + height - bottomRightRadius))
-            g?.addArc(center: CGPoint(x: x + width - bottomRightRadius, y: y + height - bottomRightRadius), radius: bottomRightRadius, startAngle: radians(0), endAngle: radians(90), clockwise: false)
+            context?.addLine(to: CGPoint(x: x + width, y: y + height - bottomRightRadius))
+            context?.addArc(center: CGPoint(x: x + width - bottomRightRadius, y: y + height - bottomRightRadius), radius: bottomRightRadius, startAngle: radians(0), endAngle: radians(90), clockwise: false)
 
-            g?.addLine(to: CGPoint(x: x + bottomLeftRadius, y: y + height))
-            g?.addArc(center: CGPoint(x: x + bottomLeftRadius, y: y + height - bottomLeftRadius), radius: bottomLeftRadius, startAngle: radians(90), endAngle: radians(180), clockwise: false)
+            context?.addLine(to: CGPoint(x: x + bottomLeftRadius, y: y + height))
+            context?.addArc(center: CGPoint(x: x + bottomLeftRadius, y: y + height - bottomLeftRadius), radius: bottomLeftRadius, startAngle: radians(90), endAngle: radians(180), clockwise: false)
 
-            g?.addLine(to: CGPoint(x: x, y: y + topLeftRadius))
-            g?.addArc(center: CGPoint(x: x + topLeftRadius, y: y + topLeftRadius), radius: topLeftRadius, startAngle: radians(180), endAngle: radians(270), clockwise: false)
+            context?.addLine(to: CGPoint(x: x, y: y + topLeftRadius))
+            context?.addArc(center: CGPoint(x: x + topLeftRadius, y: y + topLeftRadius), radius: topLeftRadius, startAngle: radians(180), endAngle: radians(270), clockwise: false)
 
-            g?.closePath()
+            context?.closePath()
         }
     }
 
     public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
+            context?.addEllipse(in: CGRect(x: x - width / 2, y: y - height / 2, width: width, height: height))
         }
     }
 
     public func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
+            context?.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
         }
     }
 
     public func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.beginPath()
-            g?.move(to: CGPoint(x: x1, y: y1))
-            g?.addLine(to: CGPoint(x: x2, y: y2))
-            g?.addLine(to: CGPoint(x: x3, y: y3))
-            g?.closePath()
+            context?.beginPath()
+            context?.move(to: CGPoint(x: x1, y: y1))
+            context?.addLine(to: CGPoint(x: x2, y: y2))
+            context?.addLine(to: CGPoint(x: x3, y: y3))
+            context?.closePath()
         }
     }
 
     public func quad(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat, _ x4: CGFloat, _ y4: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.beginPath()
-            g?.move(to: CGPoint(x: x1, y: y1))
-            g?.addLine(to: CGPoint(x: x2, y: y2))
-            g?.addLine(to: CGPoint(x: x3, y: y3))
-            g?.addLine(to: CGPoint(x: x4, y: y4))
-            g?.closePath()
+            context?.beginPath()
+            context?.move(to: CGPoint(x: x1, y: y1))
+            context?.addLine(to: CGPoint(x: x2, y: y2))
+            context?.addLine(to: CGPoint(x: x3, y: y3))
+            context?.addLine(to: CGPoint(x: x4, y: y4))
+            context?.closePath()
         }
     }
 
     public func curve(_ cpx1: CGFloat, _ cpy1: CGFloat, _ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         let (b1, b2) = ShapeModel.convertCurvePoint(cpx1, cpy1, x1, y1, x2, y2, cpx2, cpy2)
 
         drawing(mode: .fillStroke) {
-            g?.move(to: CGPoint(x: x1, y: y1))
-            g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
+            context?.move(to: CGPoint(x: x1, y: y1))
+            context?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: b1.x, y: b1.y), control2: CGPoint(x: b2.x, y: b2.y))
         }
     }
 
     public func bezier(_ x1: CGFloat, _ y1: CGFloat, _ cpx1: CGFloat, _ cpy1: CGFloat, _ cpx2: CGFloat, _ cpy2: CGFloat, _ x2: CGFloat, _ y2: CGFloat) {
-        let g = self.contextComponents.context()
-        setGraphicsConfiguration(context: g)
+        let context = self.contextComponents.context
+        setGraphicsConfiguration(context: context)
 
         drawing(mode: .fillStroke) {
-            g?.move(to: CGPoint(x: x1, y: y1))
-            g?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
+            context?.move(to: CGPoint(x: x1, y: y1))
+            context?.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
         }
     }
 
@@ -217,16 +217,16 @@ public struct ShapeModel: ShapeModelContract {
     }
 
     private func drawing(mode: CGPathDrawingMode, closure:() -> Void) {
-        let g = self.contextComponents.context()
-        g?.saveGState()
+        let context = self.contextComponents.context
+        context?.saveGState()
         closure()
 
         // do not execute this line when testing to protect path infomation
         if !isTesting() {
-            g?.drawPath(using: mode)
+            context?.drawPath(using: mode)
         }
 
-        g?.restoreGState()
+        context?.restoreGState()
     }
 
     private func isTesting() -> Bool {
