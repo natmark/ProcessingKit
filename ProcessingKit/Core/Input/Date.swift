@@ -20,12 +20,17 @@ public protocol DateModelContract {
 
 public struct DateModel: DateModelContract {
     private var currentDate: Date?
+    private var startDate: Date
+
     // for test
-    public init(currentDate: Date) {
+    public init(startDate: Date, currentDate: Date) {
+        self.startDate = startDate
         self.currentDate = currentDate
     }
 
-    public init() {}
+    public init(startDate: Date) {
+        self.startDate = startDate
+    }
 
     public func millis() -> Int {
         return self.getMillis()
@@ -56,10 +61,13 @@ public struct DateModel: DateModelContract {
     }
 
     private func getMillis() -> Int {
-        let format = DateFormatter()
-        format.dateFormat = "SSS"
-        let millsStr = format.string(from: currentDate ?? Date())
-        return Int(millsStr) ?? 0
+        let date = Date().timeIntervalSince(startDate)
+
+        let intMax = Double(Int.max)
+        if intMax <= date * 1000 {
+            return -1
+        }
+        return Int(date * 1000)
     }
 
     private func getComponents() -> DateComponents {

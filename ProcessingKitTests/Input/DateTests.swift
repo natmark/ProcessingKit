@@ -36,7 +36,7 @@ class DateTests: XCTestCase {
             return
         }
 
-        let dateModel = DateModel(currentDate: currentDate)
+        let dateModel = DateModel(startDate: Date(), currentDate: currentDate)
 
         XCTAssertEqual(dateModel.year(), 2017)
         XCTAssertEqual(dateModel.month(), 5)
@@ -44,6 +44,5 @@ class DateTests: XCTestCase {
         XCTAssertEqual(dateModel.hour(), 22)
         XCTAssertEqual(dateModel.minute(), 50)
         XCTAssertEqual(dateModel.second(), 10)
-        XCTAssertEqual(dateModel.millis(), 0)
     }
 }
