@@ -56,7 +56,11 @@ public struct TextModel: TextModelContract {
         if self.textComponents.textAlignX == .center {
             self.text(str, x - width / 2, y, width, height)
             return
+        } else if self.textComponents.textAlignX == .right {
+            self.text(str, x - width, y, width, height)
+            return
         }
+
         self.text(str, x, y, width, height)
     }
 
