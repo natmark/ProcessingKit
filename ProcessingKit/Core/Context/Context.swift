@@ -26,14 +26,14 @@ public typealias CGPoint = NSPoint
 #endif
 
 public protocol ContextComponenetsContract {
-    func context() -> CGContext?
+    var context: CGContext? { get }
 }
 
 public class ContextComponents: ContextComponenetsContract {
     public init() {
     }
 
-    public func context() -> CGContext? {
+    public var context: CGContext? {
         #if os(iOS)
         return UIGraphicsGetCurrentContext()
         #elseif os(OSX)

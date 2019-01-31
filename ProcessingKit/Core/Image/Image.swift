@@ -31,47 +31,47 @@ public struct ImageModel: ImageModelContract {
 
     #if os(iOS)
     public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.saveGState()
-        g?.translateBy(x: 0.0, y: img.size.height)
-        g?.scaleBy(x: 1.0, y: -1.0)
+        let context = self.contextComponents.context
+        context?.saveGState()
+        context?.translateBy(x: 0.0, y: img.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         if let cgImg = img.cgImage {
-            g?.draw(cgImg, in: CGRect(x: x, y: y, width: img.size.width, height: img.size.height))
+            context?.draw(cgImg, in: CGRect(x: x, y: y, width: img.size.width, height: img.size.height))
         }
-        g?.restoreGState()
+        context?.restoreGState()
     }
 
     public func image(_ img: UIImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.saveGState()
-        g?.translateBy(x: 0.0, y: height)
-        g?.scaleBy(x: 1.0, y: -1.0)
+        let context = self.contextComponents.context
+        context?.saveGState()
+        context?.translateBy(x: 0.0, y: height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         if let cgImg = img.cgImage {
-            g?.draw(cgImg, in: CGRect(x: x, y: -y, width: width, height: height))
+            context?.draw(cgImg, in: CGRect(x: x, y: -y, width: width, height: height))
         }
-        g?.restoreGState()
+        context?.restoreGState()
     }
     #elseif os(OSX)
     public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.saveGState()
-        g?.translateBy(x: 0.0, y: img.size.height)
-        g?.scaleBy(x: 1.0, y: -1.0)
+        let context = self.contextComponents.context
+        context?.saveGState()
+        context?.translateBy(x: 0.0, y: img.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         if let cgImg = img.cgImage {
-            g?.draw(cgImg, in: CGRect(x: x, y: y, width: img.size.width, height: img.size.height))
+            context?.draw(cgImg, in: CGRect(x: x, y: y, width: img.size.width, height: img.size.height))
         }
-        g?.restoreGState()
+        context?.restoreGState()
     }
 
     public func drawImage(_ img: NSImage, _ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
-        let g = self.contextComponents.context()
-        g?.saveGState()
-        g?.translateBy(x: 0.0, y: height)
-        g?.scaleBy(x: 1.0, y: -1.0)
+        let context = self.contextComponents.context
+        context?.saveGState()
+        context?.translateBy(x: 0.0, y: height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         if let cgImg = img.cgImage {
-            g?.draw(cgImg, in: CGRect(x: x, y: -y, width: width, height: height))
+            context?.draw(cgImg, in: CGRect(x: x, y: -y, width: width, height: height))
         }
-        g?.restoreGState()
+        context?.restoreGState()
     }
     #endif
 }

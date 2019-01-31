@@ -53,8 +53,8 @@ public struct ColorModel: ColorModelContract {
     }
 
     public func background(_ color: UIColor) {
-        let g = self.contextComponents.context()
-        g?.clear(self.frameComponents.bounds)
+        let context = self.contextComponents.context
+        context?.clear(self.frameComponents.bounds)
     }
 
     public func background(_ r: CGFloat, _ g: CGFloat, _ b: CGFloat, _ a: CGFloat) {
@@ -62,8 +62,8 @@ public struct ColorModel: ColorModelContract {
     }
 
     public func clear() {
-        let g = self.contextComponents.context()
-        g?.clear(self.frameComponents.bounds)
+        let context = self.contextComponents.context
+        context?.clear(self.frameComponents.bounds)
     }
 
     public mutating func fill(_ color: UIColor) {
