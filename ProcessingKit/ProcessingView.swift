@@ -74,7 +74,7 @@ open class ProcessingView: UIImageView {
         )
     }()
     lazy var dateModel: DateModelContract = {
-        return DateModel()
+        return DateModel(startDate: Date())
     }()
     lazy var colorModel: ColorModelContract = {
         return ColorModel(
