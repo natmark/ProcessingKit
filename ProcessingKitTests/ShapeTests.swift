@@ -19,6 +19,7 @@ enum Shape {
     case point(x: CGFloat, y: CGFloat)
     case line(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat)
     case rect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
+    case roundedRect(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, topLeftRadius: CGFloat, topRightRadius: CGFloat, bottomLeftRadius: CGFloat, bottomRightRadius: CGFloat)
     case ellipse(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat)
     case arc(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat)
     case triangle(x1: CGFloat, y1: CGFloat, x2: CGFloat, y2: CGFloat, x3: CGFloat, y3: CGFloat)
@@ -47,6 +48,8 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
             self.view.line(x1, y1, x2, y2)
         case .rect(let x, let y, let width, let height):
             self.view.rect(x, y, width, height)
+        case .roundedRect(let x, let y, let width, let height, let topLeftRadius, let topRightRadius, let bottomLeftRadius, let bottomRightRadius):
+            self.view.rect(x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius)
         case .ellipse(let x, let y, let width, let height):
             self.view.ellipse(x, y, width, height)
         case .arc(let x, let y, let radius, let start, let stop):
@@ -66,28 +69,6 @@ class ProcessingViewDelegateShapeSpy: ProcessingViewDelegate {
 
     private func record(_ arg: CGContext?) {
         self.context = arg
-    }
-}
-
-extension UIBezierPath {
-    open func moveTo(_ point: CGPoint) -> UIBezierPath {
-        self.move(to: point)
-        return self
-    }
-
-    open func addLineTo(_ point: CGPoint) -> UIBezierPath {
-        self.addLine(to: point)
-        return self
-    }
-
-    open func addCurveTo(_ points: (to: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)) -> UIBezierPath {
-        self.addCurve(to: points.to, controlPoint1: points.controlPoint1, controlPoint2: points.controlPoint2)
-        return self
-    }
-
-    open func closePath() -> UIBezierPath {
-        self.close()
-        return self
     }
 }
 
@@ -147,8 +128,17 @@ class ShapeTests: XCTestCase {
                 shape: .rect(x: 20, y: 20, width: 30, height: 50),
                 expect: UIBezierPath(rect: CGRect(x: 20, y: 20, width: 30, height: 50)).cgPath
             ),
+            #line: TestCase(
+                description: "draw rounded rect(10, 10, 50, 50, 10, 0, 0, 0)",
+                shape: .roundedRect(x: 10, y: 10, width: 50, height: 50, topLeftRadius: 5, topRightRadius: 0, bottomLeftRadius: 0, bottomRightRadius: 0),
+                expect: roundedRectPathBuilder(x: 10, y: 10, width: 50, height: 50, topLeftRadius: 5, topRightRadius: 0, bottomLeftRadius: 0, bottomRightRadius: 0)
+            ),
+            #line: TestCase(
+                description: "draw rounded rect(10, 10, 50, 50, 50, 10, 10, 10)",
+                shape: .roundedRect(x: 10, y: 10, width: 50, height: 50, topLeftRadius: 50, topRightRadius: 10, bottomLeftRadius: 10, bottomRightRadius: 10),
+                expect: roundedRectPathBuilder(x: 10, y: 10, width: 50, height: 50, topLeftRadius: 25, topRightRadius: 10, bottomLeftRadius: 10, bottomRightRadius: 10)
+            ),
         ]
-
         check(testCases: testCases)
     }
 
@@ -169,21 +159,16 @@ class ShapeTests: XCTestCase {
     }
 
     func testArc() {
-        func radians(_ degrees: CGFloat) -> CGFloat {
-            let radian = (CGFloat.pi * 2) * (degrees / 360.0)
-            return radian
-        }
-
         let testCases: [UInt: TestCase] = [
             #line: TestCase(
                 description: "draw arc(50, 50, 50, 0°, 90°)",
                 shape: .arc(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(90.0)),
-                expect: arcPathBuilder(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(90.0))
+                expect: arcPathBuilder(x: 50, y: 50, radius: 50, start: radians(0), stop: radians(90.0), clockwise: false)
             ),
             #line: TestCase(
                 description: "draw arc(50, 50, 30, 30°, 120°)",
                 shape: .arc(x: 50, y: 50, radius: 30, start: radians(30.0), stop: radians(120.0)),
-                expect: arcPathBuilder(x: 50, y: 50, radius: 30, start: radians(30.0), stop: radians(120.0))
+                expect: arcPathBuilder(x: 50, y: 50, radius: 30, start: radians(30.0), stop: radians(120.0), clockwise: false)
             ),
         ]
 
@@ -264,14 +249,41 @@ class ShapeTests: XCTestCase {
 
             let actual = transformDelegateSpy.context?.path
             let expected = testCase.expect
+
             XCTAssertEqual(actual, expected, String(line))
 
         }
     }
 
-    private func arcPathBuilder(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat) -> CGPath? {
+    private func radians(_ degrees: CGFloat) -> CGFloat {
+        let radian = (CGFloat.pi * 2) * (degrees / 360.0)
+        return radian
+    }
+
+    private func roundedRectPathBuilder(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat, topLeftRadius: CGFloat, topRightRadius: CGFloat, bottomLeftRadius: CGFloat, bottomRightRadius: CGFloat) -> CGPath? {
         let context = CGContext(data: nil, width: 100, height: 100, bitsPerComponent: 8, bytesPerRow: 1664, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: 8194)!
-        context.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: false)
+
+        context.beginPath()
+        context.move(to: CGPoint(x: x + topLeftRadius, y: y))
+
+        context.addLine(to: CGPoint(x: x + width - topRightRadius, y: y))
+        context.addArc(center: CGPoint(x: x + width - topRightRadius, y: y + topRightRadius), radius: topRightRadius, startAngle: radians(-90.0), endAngle: radians(0.0), clockwise: false)
+
+        context.addLine(to: CGPoint(x: x + width, y: y + height - bottomRightRadius))
+        context.addArc(center: CGPoint(x: x + width - bottomRightRadius, y: y + height - bottomRightRadius), radius: bottomRightRadius, startAngle: radians(0.0), endAngle: radians(90.0), clockwise: false)
+
+        context.addLine(to: CGPoint(x: x + bottomLeftRadius, y: y + height))
+        context.addArc(center: CGPoint(x: x + bottomLeftRadius, y: y + height - bottomLeftRadius), radius: bottomLeftRadius, startAngle: radians(90.0), endAngle: radians(180.0), clockwise: false)
+
+        context.addLine(to: CGPoint(x: x, y: y + topLeftRadius))
+        context.addArc(center: CGPoint(x: x + topLeftRadius, y: y + topLeftRadius), radius: topLeftRadius, startAngle: radians(180.0), endAngle: radians(270.0), clockwise: false)
+        context.closePath()
+        return context.path
+    }
+
+    private func arcPathBuilder(x: CGFloat, y: CGFloat, radius: CGFloat, start: CGFloat, stop: CGFloat, clockwise: Bool) -> CGPath? {
+        let context = CGContext(data: nil, width: 100, height: 100, bitsPerComponent: 8, bytesPerRow: 1664, space: CGColorSpaceCreateDeviceRGB(), bitmapInfo: 8194)!
+        context.addArc(center: CGPoint(x: x, y: y), radius: radius, startAngle: start, endAngle: stop, clockwise: clockwise)
         return context.path
     }
 
@@ -290,5 +302,32 @@ class ShapeTests: XCTestCase {
         context.move(to: CGPoint(x: x1, y: y1))
         context.addCurve(to: CGPoint(x: x2, y: y2), control1: CGPoint(x: cpx1, y: cpy1), control2: CGPoint(x: cpx2, y: cpy2))
         return context.path
+    }
+}
+
+extension UIBezierPath {
+    open func moveTo(_ point: CGPoint) -> UIBezierPath {
+        self.move(to: point)
+        return self
+    }
+
+    open func addLineTo(_ point: CGPoint) -> UIBezierPath {
+        self.addLine(to: point)
+        return self
+    }
+
+    open func addArcTo(_ center: CGPoint, radius: CGFloat, startAngle: CGFloat, endAngle: CGFloat, clockwise: Bool) -> UIBezierPath {
+        self.addArc(withCenter: center, radius: radius, startAngle: startAngle, endAngle: endAngle, clockwise: clockwise)
+        return self
+    }
+
+    open func addCurveTo(_ points: (to: CGPoint, controlPoint1: CGPoint, controlPoint2: CGPoint)) -> UIBezierPath {
+        self.addCurve(to: points.to, controlPoint1: points.controlPoint1, controlPoint2: points.controlPoint2)
+        return self
+    }
+
+    open func closePath() -> UIBezierPath {
+        self.close()
+        return self
     }
 }

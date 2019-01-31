@@ -27,6 +27,14 @@ extension ProcessingView: ShapeModelContract {
         self.shapeModel.rect(x, y, width, height)
     }
 
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ radius: CGFloat) {
+        self.shapeModel.rect(x, y, width, height, radius)
+    }
+
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ topLeftRadius: CGFloat, _ topRightRadius: CGFloat, _ bottomLeftRadius: CGFloat, _ bottomRightRadius: CGFloat) {
+        self.shapeModel.rect(x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius)
+    }
+
     public func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) {
         self.shapeModel.ellipse(x, y, width, height)
     }

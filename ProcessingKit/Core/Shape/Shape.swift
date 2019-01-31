@@ -18,6 +18,8 @@ public protocol ShapeModelContract {
     func point(_ x: CGFloat, _ y: CGFloat)
     func line(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat)
     func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
+    func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ radius: CGFloat)
+    func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ topLeftRadius: CGFloat, _ topRightRadius: CGFloat, _ bottomLeftRadius: CGFloat, _ bottomRightRadius: CGFloat)
     func ellipse(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat)
     func arc(_ x: CGFloat, _ y: CGFloat, _ radius: CGFloat, _ start: CGFloat, _ stop: CGFloat)
     func triangle(_ x1: CGFloat, _ y1: CGFloat, _ x2: CGFloat, _ y2: CGFloat, _ x3: CGFloat, _ y3: CGFloat)
@@ -63,6 +65,51 @@ public struct ShapeModel: ShapeModelContract {
 
         drawing(mode: .fillStroke) {
             g?.addRect(CGRect(x: x, y: y, width: width, height: height))
+        }
+    }
+
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ radius: CGFloat) {
+        self.rect(x, y, width, height, radius, radius, radius, radius)
+    }
+
+    public func rect(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat, _ topLeftRadius: CGFloat, _ topRightRadius: CGFloat, _ bottomLeftRadius: CGFloat, _ bottomRightRadius: CGFloat) {
+        let g = self.contextComponents.context()
+        setGraphicsConfiguration(context: g)
+
+        var topLeftRadius = topLeftRadius
+        var topRightRadius = topRightRadius
+        var bottomLeftRadius = bottomLeftRadius
+        var bottomRightRadius = bottomRightRadius
+        if topLeftRadius > min(width, height) / 2 {
+            topLeftRadius = min(width, height) / 2
+        }
+        if topRightRadius > min(width, height) / 2 {
+            topRightRadius = min(width, height) / 2
+        }
+        if bottomLeftRadius > min(width, height) / 2 {
+            bottomLeftRadius = min(width, height) / 2
+        }
+        if bottomRightRadius > min(width, height) / 2 {
+            bottomRightRadius = min(width, height) / 2
+        }
+
+        drawing(mode: .fillStroke) {
+            g?.beginPath()
+            g?.move(to: CGPoint(x: x + topLeftRadius, y: y))
+
+            g?.addLine(to: CGPoint(x: x + width - topRightRadius, y: y))
+            g?.addArc(center: CGPoint(x: x + width - topRightRadius, y: y + topRightRadius), radius: topRightRadius, startAngle: radians(-90), endAngle: radians(0), clockwise: false)
+
+            g?.addLine(to: CGPoint(x: x + width, y: y + height - bottomRightRadius))
+            g?.addArc(center: CGPoint(x: x + width - bottomRightRadius, y: y + height - bottomRightRadius), radius: bottomRightRadius, startAngle: radians(0), endAngle: radians(90), clockwise: false)
+
+            g?.addLine(to: CGPoint(x: x + bottomLeftRadius, y: y + height))
+            g?.addArc(center: CGPoint(x: x + bottomLeftRadius, y: y + height - bottomLeftRadius), radius: bottomLeftRadius, startAngle: radians(90), endAngle: radians(180), clockwise: false)
+
+            g?.addLine(to: CGPoint(x: x, y: y + topLeftRadius))
+            g?.addArc(center: CGPoint(x: x + topLeftRadius, y: y + topLeftRadius), radius: topLeftRadius, startAngle: radians(180), endAngle: radians(270), clockwise: false)
+
+            g?.closePath()
         }
     }
 
