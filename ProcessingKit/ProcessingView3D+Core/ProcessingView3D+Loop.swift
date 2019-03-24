@@ -1,14 +1,13 @@
 //
-//  ProcessingView+Loop.swift
+//  ProcessingView3D+Loop.swift
 //  ProcessingKit
 //
-//  Created by AtsuyaSato on 2018/09/09.
-//  Copyright © 2018年 Atsuya Sato. All rights reserved.
+//  Created by AtsuyaSato on 2019/03/24.
+//  Copyright © 2019 Atsuya Sato. All rights reserved.
 //
-
 import Foundation
 
-extension ProcessingView: LoopModelContract {
+extension ProcessingView3D: LoopModelContract {
     public func loop() {
         self.timer?.fire()
     }

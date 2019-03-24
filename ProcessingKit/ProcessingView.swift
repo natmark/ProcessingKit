@@ -14,32 +14,6 @@ import UIKit
 import Cocoa
 #endif
 
-@objc public protocol ProcessingViewDelegate {
-    @objc optional func setup()
-    @objc optional func draw()
-}
-
-@objc public protocol ProcessingViewGestureDelegate {
-    #if os(iOS)
-    @objc optional func didTap()
-    @objc optional func didRelease()
-    @objc optional func didDrag() //Pan
-    @objc optional func didSwipe(direction: UISwipeGestureRecognizer.Direction)
-    @objc optional func didPinch(scale: CGFloat, velocity: CGFloat)
-    @objc optional func didRotate(rotation: CGFloat, velocity: CGFloat)
-    @objc optional func didLongPress()
-    #elseif os(OSX)
-    @objc optional func didClick()
-    @objc optional func didRelease()
-    @objc optional func didDrag()
-    @objc optional func didMove()
-    @objc optional func didMagnify(magnification: CGFloat)
-    @objc optional func didRotate(rotation: CGFloat, inDegrees: CGFloat)
-    @objc optional func didPress()
-    @objc optional func didScroll(x: CGFloat, y: CGFloat)
-    #endif
-}
-
 open class ProcessingView: UIImageView {
     public weak var delegate: ProcessingViewDelegate?
     public weak var gesture: ProcessingViewGestureDelegate?
