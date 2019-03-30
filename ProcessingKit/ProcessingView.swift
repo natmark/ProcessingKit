@@ -362,8 +362,7 @@ open class ProcessingView: UIImageView {
     }
     open override var bounds: CGRect {
         didSet {
-            if frameComponents.frame == CGRect.zero ||
-                frameComponents.frame != self.frame {
+            if frameComponents.frame != self.frame {
                 frameComponents.frame = CGRect(x: frameComponents.frame.origin.x, y: frameComponents.frame.origin.y, width: self.frame.width, height: self.frame.height)
                 frameComponents.bounds = self.bounds
             }
