@@ -40,7 +40,7 @@ ProcessingKit written in Swift🐧 and you can write like [processing](https://g
 - [iPad Demo App (Developed for Open Source Conference)](https://github.com/natmark/OSCProcessingKitDemo)
 
 ## Example
-|OS|gif|code| 
+|OS|gif|code|
 |:---:|:------:|:------:|
 |iOS| <img src="https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_Example.gif" alt="gif"  height="50%"> | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/iOS_ExampleCode.png)|
 |OSX| ![gif](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_Example.gif) | ![code](https://raw.githubusercontent.com/natmark/ProcessingKit/master/Resources/OSX_ExampleCode.png)|
@@ -78,9 +78,12 @@ class SampleView: ProcessingView {
     }()
 ```
 
-### Use StoryBoard
+### Use InterfaceBuilder
 
-Connect the (UIImageView / NSImageView) to SampleView Class
+1. Add UIView to ViewController
+2. Select UIView & Open Identity inspector
+3. Set SampleView to Custom class field
+4. Add outlet connection
 
 ```Swift
  @IBOutlet weak var sampleView: SampleView!
@@ -97,7 +100,6 @@ Connect the (UIImageView / NSImageView) to SampleView Class
 Add the following to your `Podfile`:
 ```
   pod "ProcessingKit"
-  pod "ProcessingKit", "~> 0.6.0" # If you use Swift 3.x
 ```
 
 - (Example project here: [PKPodsExample](https://github.com/natmark/PKPodsExample))
@@ -106,7 +108,6 @@ Add the following to your `Podfile`:
 Add the following to your `Cartfile`:
 ```
   github "natmark/ProcessingKit"
-  github "natmark/ProcessingKit" ~> 0.6.0 # If you use Swift 3.x
 ```
 
 - (Example project here: [PKExample](https://github.com/natmark/PKExample))
