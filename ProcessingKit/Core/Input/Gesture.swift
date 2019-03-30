@@ -207,9 +207,8 @@ public struct GestureModel: GestureModelContract {
 
     private func touchesFrom(recognizer: UIGestureRecognizer) -> Set<CGPoint> {
         var touches = Set<CGPoint>()
-        let dummyView = UIView(frame: frameComponents.frame)
         for i in 0..<recognizer.numberOfTouches {
-            touches.insert(recognizer.location(ofTouch: i, in: dummyView))
+            touches.insert(recognizer.location(ofTouch: i, in: recognizer.view))
         }
         return touches
     }
