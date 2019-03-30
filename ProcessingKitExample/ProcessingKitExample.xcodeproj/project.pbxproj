@@ -40,6 +40,9 @@
 		E77AEFE91FF68ACB00B97406 /* QuadSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFE81FF68ACB00B97406 /* QuadSampleViewController.swift */; };
 		E77AEFEE1FF68AF300B97406 /* QuadSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E77AEFED1FF68AF300B97406 /* QuadSampleViewController.storyboard */; };
 		E77AEFF01FF68B0200B97406 /* QuadSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AEFEF1FF68B0200B97406 /* QuadSampleView.swift */; };
+		E7862308224FDEA300CA63F2 /* BoxSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7862305224FDEA300CA63F2 /* BoxSampleView.swift */; };
+		E7862309224FDEA300CA63F2 /* BoxSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7862306224FDEA300CA63F2 /* BoxSampleViewController.swift */; };
+		E786230A224FDEA300CA63F2 /* BoxSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7862307224FDEA300CA63F2 /* BoxSampleViewController.storyboard */; };
 		E7B77DC51FF7B74100CE691A /* CurveSampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77DC41FF7B74100CE691A /* CurveSampleViewController.swift */; };
 		E7B77DC81FF7B75500CE691A /* CurveSampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B77DC71FF7B75500CE691A /* CurveSampleView.swift */; };
 		E7B77DCA1FF7B76300CE691A /* CurveSampleViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7B77DC91FF7B76300CE691A /* CurveSampleViewController.storyboard */; };
@@ -145,6 +148,9 @@
 		E77AEFE81FF68ACB00B97406 /* QuadSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadSampleViewController.swift; sourceTree = "<group>"; };
 		E77AEFED1FF68AF300B97406 /* QuadSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = QuadSampleViewController.storyboard; sourceTree = "<group>"; };
 		E77AEFEF1FF68B0200B97406 /* QuadSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuadSampleView.swift; sourceTree = "<group>"; };
+		E7862305224FDEA300CA63F2 /* BoxSampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSampleView.swift; sourceTree = "<group>"; };
+		E7862306224FDEA300CA63F2 /* BoxSampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSampleViewController.swift; sourceTree = "<group>"; };
+		E7862307224FDEA300CA63F2 /* BoxSampleViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BoxSampleViewController.storyboard; sourceTree = "<group>"; };
 		E7B77DC41FF7B74100CE691A /* CurveSampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveSampleViewController.swift; sourceTree = "<group>"; };
 		E7B77DC71FF7B75500CE691A /* CurveSampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveSampleView.swift; sourceTree = "<group>"; };
 		E7B77DC91FF7B76300CE691A /* CurveSampleViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CurveSampleViewController.storyboard; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 				E747DDBA1F447D68006BAC6A /* Extensions */,
 				E7D3990D1F44A480006AF039 /* OthersSample */,
 				E747DDB31F44730D006BAC6A /* TouchSample */,
+				E7862304224FDEA300CA63F2 /* 3DSample */,
 				E743310A1F34C6AB00D20482 /* AppDelegate.swift */,
 				E74331111F34C6AB00D20482 /* Assets.xcassets */,
 				E74331161F34C6AB00D20482 /* Info.plist */,
@@ -238,6 +245,16 @@
 				E747DDB81F4473E8006BAC6A /* ViewController.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E7862304224FDEA300CA63F2 /* 3DSample */ = {
+			isa = PBXGroup;
+			children = (
+				E7862305224FDEA300CA63F2 /* BoxSampleView.swift */,
+				E7862306224FDEA300CA63F2 /* BoxSampleViewController.swift */,
+				E7862307224FDEA300CA63F2 /* BoxSampleViewController.storyboard */,
+			);
+			path = 3DSample;
 			sourceTree = "<group>";
 		};
 		E7D3990D1F44A480006AF039 /* OthersSample */ = {
@@ -404,6 +421,7 @@
 				E747DDB51F447322006BAC6A /* TouchSampleViewController.storyboard in Resources */,
 				E71779F81F4C60A2004243F2 /* ParticlesSampleViewController.storyboard in Resources */,
 				E72A2AB21F7F95F50044F879 /* ClockSampleViewController.storyboard in Resources */,
+				E786230A224FDEA300CA63F2 /* BoxSampleViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,10 +442,12 @@
 				E7D399141F44A505006AF039 /* ParticlesSampleViewController.swift in Sources */,
 				E70595211F44899E005C8856 /* EllipseSampleView.swift in Sources */,
 				E7B77DC51FF7B74100CE691A /* CurveSampleViewController.swift in Sources */,
+				E7862309224FDEA300CA63F2 /* BoxSampleViewController.swift in Sources */,
 				E77AEFE11FF684E900B97406 /* TriangleSampleViewController.swift in Sources */,
 				E70595231F4489AA005C8856 /* TextSampleView.swift in Sources */,
 				E77AEFF01FF68B0200B97406 /* QuadSampleView.swift in Sources */,
 				E76820091F7AAEE1009E8FD2 /* ImageSampleViewController.swift in Sources */,
+				E7862308224FDEA300CA63F2 /* BoxSampleView.swift in Sources */,
 				E77AEFE91FF68ACB00B97406 /* QuadSampleViewController.swift in Sources */,
 				E747DDB91F4473E8006BAC6A /* ViewController.swift in Sources */,
 				E77AEFE31FF684F600B97406 /* TriangleSampleView.swift in Sources */,

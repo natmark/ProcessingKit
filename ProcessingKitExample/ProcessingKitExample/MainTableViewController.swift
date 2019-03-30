@@ -53,6 +53,8 @@ class MainTableViewController: UITableViewController {
         case IndexPath(row: 1, section: 2): //Clock Sample
             transition(viewController: ClockSampleViewController.create())
             return
+        case IndexPath(row: 0, section: 3): //Box
+            transition(viewController: BoxSampleViewController.create())
         default:
             return
         }
