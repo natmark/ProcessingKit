@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="old-A0-rem">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="old-A0-rem">
+    <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,29 +18,30 @@
                         <viewControllerLayoutGuide type="bottom" id="tof-b7-13H"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="PDE-at-GWQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SUW-oP-GBo" customClass="CurveSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CmO-NO-xfB" customClass="CurveSampleView" customModule="ProcessingKitExample" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SUW-oP-GBo" firstAttribute="top" secondItem="RYb-Ly-Hqw" secondAttribute="bottom" id="1Mx-Jg-Azo"/>
-                            <constraint firstItem="SUW-oP-GBo" firstAttribute="leading" secondItem="PDE-at-GWQ" secondAttribute="leading" id="Ccu-uM-0eA"/>
-                            <constraint firstAttribute="trailing" secondItem="SUW-oP-GBo" secondAttribute="trailing" id="TTd-Yh-tK2"/>
-                            <constraint firstItem="tof-b7-13H" firstAttribute="top" secondItem="SUW-oP-GBo" secondAttribute="bottom" id="XBP-au-Ek0"/>
+                            <constraint firstAttribute="trailing" secondItem="CmO-NO-xfB" secondAttribute="trailing" id="1Vx-q6-MXV"/>
+                            <constraint firstItem="CmO-NO-xfB" firstAttribute="top" secondItem="RYb-Ly-Hqw" secondAttribute="bottom" id="7a9-sI-D5F"/>
+                            <constraint firstAttribute="bottom" secondItem="CmO-NO-xfB" secondAttribute="bottom" id="QZR-Vw-Uyy"/>
+                            <constraint firstItem="CmO-NO-xfB" firstAttribute="leading" secondItem="PDE-at-GWQ" secondAttribute="leading" id="uop-Ms-44u"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="curveSampleView" destination="SUW-oP-GBo" id="fFv-zp-pkA"/>
+                        <outlet property="curveSampleView" destination="CmO-NO-xfB" id="IaQ-Kg-G9p"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nof-py-bH3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="93.599999999999994" y="82.3088455772114"/>
+            <point key="canvasLocation" x="93.599999999999994" y="82.019704433497537"/>
         </scene>
     </scenes>
 </document>

@@ -207,9 +207,8 @@ public struct GestureModel: GestureModelContract {
 
     private func touchesFrom(recognizer: UIGestureRecognizer) -> Set<CGPoint> {
         var touches = Set<CGPoint>()
-        let dummyView = UIView(frame: frameComponents.frame)
         for i in 0..<recognizer.numberOfTouches {
-            touches.insert(recognizer.location(ofTouch: i, in: dummyView))
+            touches.insert(recognizer.location(ofTouch: i, in: recognizer.view))
         }
         return touches
     }
@@ -226,8 +225,6 @@ public struct GestureModel: GestureModelContract {
     }
 
     public mutating func mouseUp(_ location: NSPoint) {
-        self.gestureComponents.mouseX = self.convertCoordinateSystem(location: location).x
-        self.gestureComponents.mouseY = self.convertCoordinateSystem(location: location).y
         self.gestureComponents.isPressed = false
     }
 
@@ -286,8 +283,7 @@ public struct GestureModel: GestureModelContract {
     }
 
     private func touchesFrom(recognizer: NSGestureRecognizer) -> NSPoint {
-        let dummyView = NSView(frame: frameComponents.frame)
-        return recognizer.location(in: dummyView)
+        return recognizer.location(in: recognizer.view)
     }
 
     private func convertCoordinateSystem(location: NSPoint) -> NSPoint {
